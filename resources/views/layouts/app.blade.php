@@ -70,14 +70,14 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  
+
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                   
+
                     <ul class="navbar-nav ml-auto">
-                     
+
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -115,5 +115,8 @@
             @yield('content')
         </main>
     </div>
+
+
+
 </body>
 </html>
