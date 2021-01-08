@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Http\Helpers\AppHelper;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -37,12 +44,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'mobile' => 'required|digits:10|regex:/^[0-9]/',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        ]);
+
+        $data = $_POST;
+       
+       
         $fourRandomDigit = mt_rand(1000,9999);
+
         
         AppHelper::sendRegistrationOtp($data['name'], $data['mobile'], $fourRandomDigit);
     
@@ -59,8 +66,13 @@ class UserController extends Controller
         ]);
         $userId = $user->id;
 
-        return view('users.regOtp',compact(['userId']));
-
+        if($user){
+           echo $userId;
+        }else{
+            echo 'failed';
+        }
+        
+        //return view('users.regOtp',compact(['userId']));
         // return redirect(route('/register'))->withSuccess('Your details has been registered successfully. Your login credentials will send via SMS. !');
     }
 
@@ -107,5 +119,19 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * to check email duplication
+     */
+    public function checkEmail(Request $request){
+        if($_POST['email']!=''){
+            $isEmailExist = User::where('email',$_POST['email'])->first();
+            if($isEmailExist){
+                echo 'true';
+            }else{
+                echo 'false';
+            }
+        }
     }
 }

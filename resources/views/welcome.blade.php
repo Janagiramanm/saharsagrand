@@ -188,34 +188,112 @@
             <div class="modal-body">
 
                 <div class="row">
-                    <div class="col-md-12">
-                        <form>
+                    <div class="col-md-12 register-form">
+                        <!-- <form method="POST" action="#" id="register_form">
                             <div class="mb-3">
-                                <label class="form-label">Full Name*</label>
-                                <input type="text" class="form-control">
+                                <label class="form-label">Full Name <span class="danger-str">*</span></label>
+                                <input type="text" name="name" id="name" required class="form-control">
+                                <span class="text-danger" id="error-name"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Mobile Number*</label>
-                                <input type="number" class="form-control">
+                                <input type="number" name="mobile" id="mobile" required class="form-control">
+                                 <span class="text-danger" id="error-mobile"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email Address*</label>
-                                <input type="number" class="form-control">
+                                <input type="email" name="email" id="email" required class="form-control">
+                                <span class="text-danger" id="error-email"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Block*</label>
-                                <input type="number" class="form-control">
+                                <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
+                                    <option value="">Select Type</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                                <span class="text-danger" id="error-block"></span>
+                              
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Flat Number*</label>
-                                <input type="number" class="form-control">
+                                <input type="text" name="flat_number" id="flat_number" required class="form-control">
+                                <span class="text-danger" id="error-flat_number"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Type*</label>
-                                <input type="number" class="form-control">
+                                <select  name="type" id="type"  required class="form-control @error('type') is-invalid @enderror">
+                                    <option value="">Select Type</option>
+                                    <option value="owner">Owner</option>
+                                    <option value="tenant">Tenant </option>
+                                </select>
+                                <span class="text-danger" id="error-type"></span>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" id="user-reg-submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div> -->
+
+                    <form id="register_form" method="post" action="javascript:void(0)">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="formGroupExampleInput">Name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Please enter name">
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" name="mobile" class="form-control" id="mobile" placeholder="Please enter mobile number" maxlength="10">
+                            <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Email Address</label>
+                            <input type="text" name="email" class="form-control" id="email" placeholder="Please enter email id">
+                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                        </div>   
+                        <div class="mb-3">
+                                <label class="form-label">Block*</label>
+                                <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
+                                    <option value="">Select Type</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                                <span class="text-danger">{{ $errors->first('block') }}</span>
+                             
+                              
+                        </div>   
+                        <div class="mb-3">
+                                <label class="form-label">Flat Number*</label>
+                                <input type="text" name="flat_number" id="flat_number" required class="form-control">
+                                <span class="text-danger">{{ $errors->first('flat_number') }}</span>
+                        </div>
+                        <div class="mb-3">
+                                <label class="form-label">Type*</label>
+                                <select  name="type" id="type"  required class="form-control @error('type') is-invalid @enderror">
+                                    <option value="">Select Type</option>
+                                    <option value="owner">Owner</option>
+                                    <option value="tenant">Tenant </option>
+                                </select>
+                                <span class="text-danger">{{ $errors->first('type') }}</span>
+                        </div>
+                        
+                        <div class="alert alert-success d-none" id="msg_div">
+                        <span id="res_message"></span>
+                        </div>
+                        <div class="form-group">
+                        <button type="submit" id="user-reg-submit" class="btn btn-success">Submit</button>
+                        </div>
+                        </form>
+
+                    <div class="col-md-12 otp-form">
+                        <form method="POST" action="#" id="register_form">
+                            <div class="mb-3">
+                                <label class="form-label">Enter Your OTP * </label>
+                                <input type="text" name="otp" id="otp" required class="form-control">
+                            </div>
+                            <button type="button" id="user-reg-submit" class="btn btn-primary">Verify Mobile</button>
                         </form>
                     </div>
 
@@ -226,5 +304,9 @@
         </div>
     </div>
 </div>
+<script>
+    
+
+</script>
 @endsection
 

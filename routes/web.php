@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user-register','UserController@create');
-Route::post('/user/store','UserController@store')->name('registration');
+Route::post('/checkemail','UserController@checkEmail');
+Route::post('/user/store','UserController@store');
 
 Route::get('/booking/badminton','BookingController@create');

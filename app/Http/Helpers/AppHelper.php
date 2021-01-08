@@ -33,6 +33,7 @@ class AppHelper
             $recipientNo = $mobileNumber;
            
             $msgtxt = "Dear $name your OTP for registration is $otp Rgds SGOWA";
+           
             try {
                 $client->request('POST', $url,  ['form_params'=> [
                     'user' => $username,

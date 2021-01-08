@@ -14,8 +14,11 @@
     <!-- <title>{{ config('app.name', 'Sahasra Grand') }}</title> -->
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/bootstrap.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.js') }}" defer></script>    
+    <script src="{{ asset('js/custom.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
