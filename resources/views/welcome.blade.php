@@ -1,50 +1,8 @@
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+@extends('layouts.app')
 
-    <title>Sahasra Grand</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-</head>
-
+@section('content')
 <body>
-
-<div class="header">
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <div class="logo">
-                    <img src="images/logo.png" />
-                </div>
-            </div>
-            <div class="col-6 d-flex align-items-center justify-content-end">
-                <div class="contact">
-                    <div class="image">
-                        <img src="images/call.png"/>
-                    </div>
-                    <div class="contact-content">
-                        <h5>Call for any Assistance</h5>
-                        <h3>+91 90190 23457</h3>
-                    </div>
-                </div>
-                <div class="user">
-                    <div class="user-image">
-                        <img src="images/user.png" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="main-container">
     <div class="container">
@@ -65,7 +23,8 @@
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary w-100">Login</a>
                             </div>
                             <div class="button">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a>
+                                <input type="button" data-bs-toggle="modal" data-bs-target="#registerModal" value="Create an Account" class="btn btn-secondary w-100" />
+                                <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a> -->
                             </div>
                         </div>
                     </div>
@@ -269,11 +228,19 @@
         </div>
     </div>
 </div>
+@section('scripts')
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<!-- <script src="{{ asset('assets/js/custom.min.js') }}"></script> -->
+<script type="text/javascript">
+    // your inline script
+</script>
+@stop
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
 
-
-
-<script type="application/javascript" src="js/bootstrap.js"> </script>
+<script type="application/javascript" src="js/bootstrap.js"> </script> -->
 
 
 </body>
+@endsection
 </html>

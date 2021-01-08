@@ -1,0 +1,153 @@
+body{
+    padding:0px;
+    margin: 0px;
+    background: #FAFAFA;
+    color: #464A53;
+}
+
+.header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.contact{
+    display: flex;
+    padding-top: 16px;
+}
+.contact h3{
+    font-size: 20px;
+}
+
+.contact .image{
+    padding-right: 15px;
+}
+.contact h5{
+    font-size: 13px;
+    margin-bottom: 0px;
+    font-weight: 200;
+}
+.user-image img{
+    width: 15px;
+
+}
+.user{
+    background: #eee;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 19px;
+    margin-top: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-block{
+    background: #FFFFFF;
+    box-shadow: 0 0 44px 0 rgba(0,0,0,0.02);
+    border-radius: 30px;
+    width: 100%;
+    min-height: 600px;
+}
+
+.title{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.title h2{
+    font-weight: 100;
+}
+.title h2 span{
+    font-weight: 600;
+}
+
+.info-card{
+    background: #FAFAFA;
+    border: 1px solid #e3e9e9;
+    border-radius: 22px;
+    min-height: 298px;
+    padding: 40px;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.info-card .button{
+    padding-top: 20px;
+}
+
+.info-card-block .active{
+    background: #FFF;
+    border: 1px solid #e3e9e9;
+    box-shadow: 0 11px 14px 0 rgba(0,0,0,0.12);
+}
+
+.info-card-block{
+    width: 80%;
+    margin: auto;
+}
+
+.btn-primary{
+    border-color: #124028;
+    background: #124028;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.02);
+    border-radius: 11px;
+}
+
+.btn-primary:hover{
+    background: #10311b;
+    border-color: #10311b;
+}
+
+.btn-secondary{
+    background: #0F3A45;
+    border-color: #0F3A45;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.02);
+    border-radius: 11px;
+}
+
+.info-card .image{
+    width: 80px;
+    height: 80px;
+}
+
+.info-card span{
+    background: #FFCCC8;
+    border-radius: 12.5px;
+    padding: 4px 20px;
+    color: #000 !important;
+}
+
+.info-card h3{
+    font-size: 24px;
+}
+.info-card .image img{
+    width: 100%;
+    object-fit: cover;
+}
+
+.footer{
+    background: #0F3A45;
+    padding-top: 220px;
+    padding-bottom: 40px;
+    color: #d3d1d1;
+    min-height: 270px;
+    line-height: 8px;
+    position: absolute;
+    width: 100%;
+    transform: translateY(-180px);
+    z-index: -1;
+}
+
+@media (max-width: 575.98px) {
+    .logo{
+        text-align: center;
+        width: 100%;
+    }
+    .contact{
+        display: none;
+    }
+}
+
