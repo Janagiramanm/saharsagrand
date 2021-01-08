@@ -2,8 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-<body>
-
 <div class="main-container">
     <div class="container">
         <div class="container-block">
@@ -228,19 +226,5 @@
         </div>
     </div>
 </div>
-@section('scripts')
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<!-- <script src="{{ asset('assets/js/custom.min.js') }}"></script> -->
-<script type="text/javascript">
-    // your inline script
-</script>
-@stop
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
-
-<script type="application/javascript" src="js/bootstrap.js"> </script> -->
-
-
-</body>
 @endsection
-</html>
+
