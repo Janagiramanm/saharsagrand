@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-lg-4">
                         <div class="info-card active">
-                            <div class="image"><img src="images/login.png"/> </div>
+                            <div class="image"><img src="{{ asset('/images/login.png') }}"/> </div>
                             <div class="button">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary w-100">Login</a>
                             </div>
