@@ -16,6 +16,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.js') }}" defer></script>
+    <script src="{{ asset('js/calendar.min.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -25,9 +26,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
      <!-- Bootstrap core CSS -->
      <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -37,13 +39,13 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="logo">
-                                <img src="images/logo.png" />
+                                <img src="{{ asset('/images/logo.png') }}"/>
                             </div>
                         </div>
                         <div class="col-6 d-flex align-items-center justify-content-end">
                             <div class="contact">
                                 <div class="image">
-                                    <img src="images/call.png"/>
+                                    <img src="{{ asset('/images/call.png') }}"/>
                                 </div>
                                 <div class="contact-content">
                                     <h5>Call for any Assistance</h5>
@@ -52,7 +54,7 @@
                             </div>
                             <div class="user">
                                 <div class="user-image">
-                                    <img src="images/user.png" />
+                                    <img src="{{ asset('/images/user.png') }}"/>
                                 </div>
                             </div>
                         </div>
