@@ -17,13 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-<<<<<<< HEAD
     <script src="{{ asset('js/bootstrap.js') }}" defer></script>    
     <script src="{{ asset('js/custom.js') }}" defer></script>
-=======
-    <script src="{{ asset('js/bootstrap.js') }}" defer></script>
-    <script src="{{ asset('js/calendar.min.js') }}" defer></script>
->>>>>>> f89c08467da1be18c26845a731e6688e568a8e9b
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
