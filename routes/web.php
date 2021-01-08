@@ -23,4 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user-register','UserController@create');
 Route::post('/user/store','UserController@store')->name('registration');
 
-Route::get('/booking/badmiton','BookingController@create');
+Route::get('/booking/badminton','BookingController@create');

@@ -14,6 +14,7 @@ class BookingController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -24,6 +25,7 @@ class BookingController extends Controller
     public function create()
     {
         //
+        return view('booking.badminton');
     }
 
     /**
