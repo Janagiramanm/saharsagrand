@@ -28,7 +28,7 @@
                           @else
                             {{ Auth::user()->name }}
                             <div class="button">
-                                <a href="/admin/home" >Dashboard</a>
+                                <a data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#" >Change Password</a>
                             </div>
                             <div class="button">
                                   <a class="dropdown-item" href="{{ route('logout') }}"
@@ -184,6 +184,41 @@
                             </div>
                             <span class="text-danger invalid-login"></span><br>
                             <button type="submit" id="login-btn" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="changePasswordModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Your Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="login_form" method="post" action="javascript:void(0)">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Password</label>
+                                <input type="password" name="change_password" id="change_password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" name="confirm_password" id="confirm_password" class="form-control" id="exampleInputPassword1">
+                            </div>
+                           
+                            <span class="text-danger invalid-confirm"></span><br>
+                            <span class="alert-success confirm-success"></span><br>
+                            <button type="submit" id="change-pwd-btn" class="btn btn-primary">Change Password</button>
                         </form>
                     </div>
 

@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 // namespace Illuminate\Auth\Middleware;
 
 use Auth;
@@ -179,15 +180,19 @@ class UserController extends Controller
        
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
+            $user = User::where('email',$request->email)->first();
+           // echo $user['type'];exit;
             $msg =  array(
                 'status'=>1,
-                'message'=>'Success'
+                'message'=>'Success',
+                'type'=>$user['type']
             );
             return response()->json($msg);
         }else{
             $msg =  array(
                 'status'=>0,
-                'message'=>'Failed'
+                'message'=>'Failed',
+                'type'=>Null
             );
             return response()->json($msg);
         }
@@ -197,8 +202,35 @@ class UserController extends Controller
      * to activate
      */
     public function activate(Request $request){
-        $update = User::where('id',$_POST['userid'])->update(array('active' => 1));
-        if($update){
+        $rndString = Str::random(8);
+        $hashed_password = Hash::make($rndString);
+        $user = User::find($_POST['userid']);
+        $user->active = 1;
+        $user->password = $hashed_password;
+        $user->save();
+        //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
+       
+        AppHelper::sendActivationSms($user['name'],$user['mobile'],$user['email'], $rndString);
+     
+        if($user){
+            $msg =  array(
+                'status'=>1,
+                'message'=>'Success'
+            );
+            return response()->json($msg);
+        }
+    }
+
+    /**
+     * to change password
+     */
+    public function changePassword(Request $request){
+        $new_password = $_POST['password'];
+        $hashed_password = Hash::make($new_password);
+        $id = Auth::user()->id;
+        $user = User::find($id);
+        $user->password = $hashed_password;
+        if($user->save()){
             $msg =  array(
                 'status'=>1,
                 'message'=>'Success'

@@ -168,8 +168,6 @@ $(document).ready(function(){
        $("#login-btn").on('click',function(){
             let username =  $("#username").val();
             let password =  $("#password").val();
-            alert(username);
-            alert(password);
            
             $.ajaxSetup({
                 headers: {
@@ -206,7 +204,11 @@ $(document).ready(function(){
                    data: $('#login_form').serialize(),
                    success: function( response ) {
                     if(response.status == 1){
-                        window.location.href = "/admin/home";
+                        if(response.type =='superadmin'){
+                           window.location.href = "/admin/home";
+                        }else{
+                            location.reload();
+                        }
                     }
                     if(response.status == 0){
                         $(".invalid-login").text('Invalid Username and Password!.');
@@ -221,13 +223,12 @@ $(document).ready(function(){
 
            $(".activate-btn").on('click',function(){
               
-              alert($(this).attr('form-data'));
               let user_id = $(this).attr('form-data');
               $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
+              });
               $.ajax({
               
                 url: "/user/activate" ,
@@ -235,11 +236,37 @@ $(document).ready(function(){
                 data: { userid: user_id },
                 success: function( response ) {
                     if(response.status == 1){
-                        window.location.href = "/admin/user-list";
+                      //  window.location.href = "/admin/user-list";
                     }
                 }
               });
-           })
+           });
+
+           $("#change-pwd-btn").on('click',function(){
+            let password =  $("#change_password").val();
+            let confim_pwd =  $("#confirm_password").val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                if(password != confim_pwd){
+                    $(".invalid-confirm").text('Password does not match');
+                }else{
+                    $.ajax({
+              
+                        url: "/user/change-password" ,
+                        type: "POST",
+                        data: { password: password },
+                        success: function( response ) {
+                            if(response.status == 1){
+                                $(".confirm-success").text('Password changed successfully');
+                              //  window.location.href = "/admin/user-list";
+                            }
+                        }
+                      });
+                }
+           });
     
        
     

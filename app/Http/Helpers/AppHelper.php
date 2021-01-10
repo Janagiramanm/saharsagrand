@@ -52,4 +52,26 @@ class AppHelper
             throw new \Exception("Mobile number not available", Response::HTTP_PRECONDITION_FAILED);
         }
     }
+
+    public static function sendActivationSms($name,$receipientno,$username,$rndString){
+         
+        if ($receipientno) {
+
+            $ch = curl_init();
+            // $user=env('MVAAYOO_USERNAME'); //"manoj.p@netiapps.com:Netiapps839";
+            // $senderID = env('MVAAYOO_SENDERID');
+            $user="manoj.p@netiapps.com:Netiapps839";
+            $senderID="sahas";
+            $msgtxt = "Dear $name Welcome to Sahasra Grand your membership has been activated User name $username and Password : $rndString";
+           
+            curl_setopt($ch,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "user=$user&senderID=$senderID&receipientno=$receipientno&msgtxt=$msgtxt");
+            curl_exec($ch);
+           
+            curl_close($ch);
+            $ch = curl_init();
+        }
+    }
 }
