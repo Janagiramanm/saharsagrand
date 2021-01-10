@@ -1,39 +1,11 @@
 $(document).ready(function(){
 
     $('.otp-form').hide();
-    // $('#user-reg-submit').click(function(e){
+    $('.mobile-verified').hide();
     
-    //     let name =  $("#name").val();
-    //     let mobile =  $("#mobile").val();
-    //     let email =  $("#email").val();
-    //     let block =  $("#block").val();
-    //     let flat_number =  $("#flat_number").val();
-    //     let type =  $("#type").val();
-    //     e.preventDefault();
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $.ajax({
-    //         url: "/user/store",
-    //         method: 'post',
-    //         data: {
-    //             name: name, mobile:mobile, email:email,block:block,flat_number:flat_number,type:type
-    //         },
-    //         success: function(result){
-    //            if(result!='failed'){
-    //               $('.register-form').hide();
-    //               $('.otp-form').show();
-    //            }
-    //         }
-    //     });
-    
-    // });
 
-
-    $('#user-reg-submit').click(function(e){
-    
+    $('#user-reg-submit').click(function(){
+      
         let name =  $("#name").val();
         let mobile =  $("#mobile").val();
         let email =  $("#email").val();
@@ -45,6 +17,7 @@ $(document).ready(function(){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+       
         $("#register_form").validate({
      
          rules: {
@@ -114,7 +87,8 @@ $(document).ready(function(){
             } ,
             type: {
                 required: "Please select type",
-            }    
+            } 
+           
             
         },
         submitHandler: function(form) {
@@ -125,22 +99,128 @@ $(document).ready(function(){
             url: "/user/store" ,
             type: "POST",
             data: $('#register_form').serialize(),
-            success: function( response ) {
-                // $('#send_form').html('Submit');
-                // $('#res_message').show();
-                // $('#res_message').html(response.msg);
-                // $('#msg_div').removeClass('d-none');
-    
-                // document.getElementById("contact_us").reset(); 
-                // setTimeout(function(){
-                // $('#res_message').hide();
-                // $('#msg_div').hide();
-                // },10000);
+            success: function( resp ) {
+                if(resp.id!=''){
+                    $('.register-form').hide();
+                    $('.otp-form').show();
+                    $("#user_id").val(resp.id);
+                }
             }
           });
         }
       })
     });
+
+    $("#verify-otp-btn").on('click',function(){
+        
+        let otp_val =  $("#otp").val();
+        let user_id =  $("#user_id").val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $("#verify_mobile").validate({
+     
+            rules: {  
+                user_id:{
+                    required: true,
+                },            
+                otp: {
+                       required: true,
+                   
+               }              
+           },
+           messages: {              
+            otp: {
+                   required: "Please enter OTP",
+                //    remote: "OTP value mismatch."
+               } ,
+               user_id:{
+                    required: "User not found",
+               }     
+           },
+           submitHandler: function(form) {
+          
+             $('#verify-otp-btn').html('Verifying..');
+             $.ajax({
+              
+               url: "/user/mobileVerify" ,
+               type: "POST",
+               data: $('#verify_mobile').serialize(),
+               success: function( response ) {
+                   if(response == 'true'){
+                        $('.otp-form').hide();
+                        $('.mobile-verified').show();
+                        setTimeout(function(){
+                            location.reload();
+                        },3000)
+                   }else{
+                       $('#verify-otp-btn').html('Verify Mobile');
+                       $("#error-otp").text('OTP did not matched.')
+                   }
+               }
+             });
+           }
+         })
+       });
+
+       $("#login-btn").on('click',function(){
+            let username =  $("#username").val();
+            let password =  $("#password").val();
+            alert(username);
+            alert(password);
+           
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $("#login_form").validate({
+     
+                rules: {  
+                    username:{
+                        required: true,
+                    },            
+                    password: {
+                           required: true,
+                       
+                   }              
+               },
+               messages: {              
+                    username: {
+                        required: "Please enter Username",
+                    } ,
+                    password:{
+                            required: "Please enter Password",
+                    }     
+               },
+               submitHandler: function(form) {
+              
+                 $('#login-btn').html('Signing In..');
+                 $.ajax({
+                  
+                   url: "/login" ,
+                   type: "POST",
+                   data: $('#login_form').serialize(),
+                   success: function( response ) {
+                    if(response.status == 1){
+                        window.location.href = "/admin/home";
+                    }
+                    if(response.status == 0){
+                        $(".invalid-login").text('Invalid Username and Password!.');
+                        $('#login-btn').html('Login');
+                    }
+                   
+                   }
+                 });
+               }
+             })
+           });
+    
+       
+    
 
 
 });

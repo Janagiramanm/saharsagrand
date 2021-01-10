@@ -16,6 +16,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-lg-4">
                         <div class="info-card active">
+                          @guest
                             <div class="image"><img src="{{ asset('/images/login.png') }}"/> </div>
                             <div class="button">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary w-100">Login</a>
@@ -24,6 +25,22 @@
                                 <input type="button" data-bs-toggle="modal" data-bs-target="#registerModal" value="Create an Account" class="btn btn-secondary w-100" />
                                 <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a> -->
                             </div>
+                          @else
+                            {{ Auth::user()->name }}
+                            <div class="button">
+                                <a href="/admin/home" >Dashboard</a>
+                            </div>
+                            <div class="button">
+                                  <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            </div>
+                         @endguest
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-lg-4">
@@ -151,21 +168,22 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form id="login_form" method="post" action="javascript:void(0)">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="email" name="username" id="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Remember</label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <span class="text-danger invalid-login"></span><br>
+                            <button type="submit" id="login-btn" class="btn btn-primary">Login</button>
                         </form>
                     </div>
 
@@ -189,51 +207,7 @@
 
                 <div class="row">
                     <div class="col-md-12 register-form">
-                        <!-- <form method="POST" action="#" id="register_form">
-                            <div class="mb-3">
-                                <label class="form-label">Full Name <span class="danger-str">*</span></label>
-                                <input type="text" name="name" id="name" required class="form-control">
-                                <span class="text-danger" id="error-name"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Mobile Number*</label>
-                                <input type="number" name="mobile" id="mobile" required class="form-control">
-                                 <span class="text-danger" id="error-mobile"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email Address*</label>
-                                <input type="email" name="email" id="email" required class="form-control">
-                                <span class="text-danger" id="error-email"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Block*</label>
-                                <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
-                                    <option value="">Select Type</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                                <span class="text-danger" id="error-block"></span>
-                              
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Flat Number*</label>
-                                <input type="text" name="flat_number" id="flat_number" required class="form-control">
-                                <span class="text-danger" id="error-flat_number"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Type*</label>
-                                <select  name="type" id="type"  required class="form-control @error('type') is-invalid @enderror">
-                                    <option value="">Select Type</option>
-                                    <option value="owner">Owner</option>
-                                    <option value="tenant">Tenant </option>
-                                </select>
-                                <span class="text-danger" id="error-type"></span>
-                            </div>
-
-                            <button type="button" id="user-reg-submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div> -->
+                        
 
                     <form id="register_form" method="post" action="javascript:void(0)">
                         @csrf
@@ -244,7 +218,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="mobile">Mobile</label>
-                            <input type="text" name="mobile" class="form-control" id="mobile" placeholder="Please enter mobile number" maxlength="10">
+                            <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Please enter mobile number" maxlength="10">
                             <span class="text-danger">{{ $errors->first('mobile') }}</span>
                         </div>
                         <div class="mb-3">
@@ -286,15 +260,25 @@
                         <button type="submit" id="user-reg-submit" class="btn btn-success">Submit</button>
                         </div>
                         </form>
-
+                    </div>
                     <div class="col-md-12 otp-form">
-                        <form method="POST" action="#" id="register_form">
+                        <form id="verify_mobile" method="post" action="javascript:void(0)" >
+                           @csrf
                             <div class="mb-3">
                                 <label class="form-label">Enter Your OTP * </label>
                                 <input type="text" name="otp" id="otp" required class="form-control">
+                                <span class="text-danger" id="error-otp">{{ $errors->first('otp') }}</span>
+                                
                             </div>
-                            <button type="button" id="user-reg-submit" class="btn btn-primary">Verify Mobile</button>
+                            <input type="hidden" name="user_id" id="user_id" value="" />
+                            <button type="submit" id="verify-otp-btn" class="btn btn-primary">Verify Mobile</button>
                         </form>
+                    </div>
+                    <div class="col-md-12 mobile-verified">
+                            <div class="mb-3">
+                                <label class="form-label">Your Mobile Number has been verified. <br> Your account will be activate and send your credentials to your mobile. </label>
+                              
+                            </div>
                     </div>
 
                 </div>

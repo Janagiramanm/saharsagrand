@@ -10,6 +10,9 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// namespace Illuminate\Auth\Middleware;
+
+use Auth;
 
 class UserController extends Controller
 {
@@ -21,6 +24,11 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::where('role', '!=', 'superadmin')
+        ->paginate('10');
+        $users = User::all();
+        echo '<pre>';
+        print_r($users);
     }
 
     /**
@@ -43,31 +51,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
-        $data = $_POST;
        
-       
-        $fourRandomDigit = mt_rand(1000,9999);
-
-        
-        AppHelper::sendRegistrationOtp($data['name'], $data['mobile'], $fourRandomDigit);
+        $fourRandomDigit = mt_rand(100000,999999);
     
-       $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'mobile' => $data['mobile'],
-            'block' => $data['block'],
-            'flat_number' => $data['flat_number'],
-            'type' => $data['type'],
-            'otp'=>$fourRandomDigit,
-            'active'=>0
-           // 'password' => Hash::make($data['password']),
-        ]);
-        $userId = $user->id;
-
+        AppHelper::sendRegistrationOtp($_POST['name'], $_POST['mobile'], $fourRandomDigit);
+        $user = new User();
+        $user->name = $_POST['name'];
+        $user->email= $_POST['email'];
+        $user->mobile = $_POST['mobile'];
+        $user->block = $_POST['block'];
+        $user->flat_number = $_POST['flat_number'];
+        $user->type = $_POST['type'];
+        $user->otp = $fourRandomDigit;
+        $user->role = $_POST['type'];
+        $user->save();
+       
         if($user){
-           echo $userId;
+            return response()->json($user);
+           
         }else{
             echo 'failed';
         }
@@ -132,6 +133,66 @@ class UserController extends Controller
             }else{
                 echo 'false';
             }
+        }
+    }
+
+     /**
+     * to check otp 
+     */
+    public function checkOTP(Request $request){
+        if($_POST['otp']!=''){
+            $isOtpExist = User::where('otp',$_POST['otp'])
+            ->where('id', $_POST['user_id'])->first();
+           
+            if($isOtpExist->otp == $_POST['otp']){
+                echo 'true';
+            }else{
+                echo 'false';
+            }
+        }
+    }
+
+    /**
+     * to verify mobile
+     */
+    public function mobileVerify(Request $request){
+        
+        if($_POST['otp']!=''){
+            $user = User::where('id',$_POST['user_id'])->first();
+            if($user->otp == $_POST['otp']){
+                $user->mobile_verified_at = date('Y-m-d H:i:s');
+                if($user->save()){
+                    echo 'true';
+                }
+            }else{
+                echo 'false';
+            }
+           
+           
+        }
+    }
+
+    /**
+     * to login
+     */
+    public function login(Request $request){
+
+        $request->email = $_POST['username'];
+        $request->password = $_POST['password'];
+       
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
+            $msg =  array(
+                'status'=>1,
+                'message'=>'Success'
+            );
+            return response()->json($msg);
+        }else{
+            $msg =  array(
+                'status'=>0,
+                'message'=>'Failed'
+            );
+            return response()->json($msg);
         }
     }
 }
