@@ -10,12 +10,7 @@
                     @php
                         $user = \Illuminate\Support\Facades\Auth::user();
                     @endphp
-                    @if (Request::is('admin/*'))
-                        <div class="navigation">
-                            @component('components.nav')
-                            @endcomponent
-                        </div>
-                    @endif
+                  
 
 
 

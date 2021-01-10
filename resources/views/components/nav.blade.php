@@ -4,69 +4,82 @@
       
     <nav class="navbar side-bar">
 
-        <div class="logo">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{URL::to('/')}}/images/logo-white.png" />
-            </a>
-            @if(isset($user->username))
-              <div class="user-cls"> {{ $user->username }} </div>
-           @endif
-        </div>
-        
-        <nav class="side-bar-link w-100">
-        
-        </nav>
+<div class="logo">
+    
 
-        <nav class="side-bar-link logout w-100">
-            <a  href="{{ route('logout') }}" onclick="event.preventDefault();
-                 document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                @csrf
-            </form>
-        </nav> 
+<nav class="side-bar-link w-100">
+        <a class="nav-link active" href="/admin/home"><img src="/images/dashboard.png"> Dashboard</a>
+        <a class="nav-link " href="/admin/user-list"><img src="/images/master.png"><span class="text-capitalize"> Users</span></a>
+        <a class="nav-link " href="/admin/user-list"><img src="/images/master.png"><span class="text-capitalize"> Blocks</span></a>
+        <a class="nav-link " href="/admin/user-list"><img src="/images/master.png"><span class="text-capitalize"> Flats</span></a>
+        <a class="nav-link " href="/admin/user-list"><img src="/images/master.png"><span class="text-capitalize"> Bookings</span></a>
+        <a class="nav-link" data-toggle="collapse" href="#collapsemanifests" role="button" aria-expanded="false" aria-controls="collapsemanifests">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+</nav>
 
 
-{{--    <nav class="logout">--}}
-{{--        <!-- Left Side Of Navbar -->--}}
-{{--        <ul class="navbar-nav mr-auto ">--}}
+<style>
+nav.side-bar-link {
+    background: #EEEEEE;
+    margin-top: -351px;
+}
+.navbar {
+    float: left;
+    height: 800px;
+    background: #EEE;
+    width: 11%;
+}
+</style>
 
-{{--        </ul>--}}
 
-        <!-- Right Side Of Navbar -->
-{{--        <ul class="navbar-nav ml-auto">--}}
-{{--            <!-- Authentication Links -->--}}
-{{--            @guest--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-{{--                </li>--}}
-{{--                @if (Route::has('register'))--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-{{--                    </li>--}}
-{{--                @endif--}}
-{{--            @else--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                        {{ Auth::user()->name }} <span class="caret"></span>--}}
-{{--                    </a>--}}
 
-{{--                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                        <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                           onclick="event.preventDefault();--}}
-{{--                                                         document.getElementById('logout-form').submit();">--}}
-{{--                            {{ __('Logout') }}--}}
-{{--                        </a>--}}
 
-{{--                        <form id="logout-form" action="{{ route('logout') }}" method="POST">--}}
-{{--                            @csrf--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--            @endguest--}}
-{{--        </ul>--}}
-{{--    </div>--}}
+
+
+
+
+<!-- Right Side Of Navbar -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
 
     </nav>
     <style>

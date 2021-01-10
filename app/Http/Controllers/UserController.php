@@ -21,14 +21,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $users = User::where('role', '!=', 'superadmin')
+        $users = User::where('type', '!=', 'superadmin')
         ->paginate('10');
-        $users = User::all();
-        echo '<pre>';
-        print_r($users);
+        return view('users.index',compact(['users']));
     }
 
     /**
@@ -191,6 +188,20 @@ class UserController extends Controller
             $msg =  array(
                 'status'=>0,
                 'message'=>'Failed'
+            );
+            return response()->json($msg);
+        }
+    }
+
+    /**
+     * to activate
+     */
+    public function activate(Request $request){
+        $update = User::where('id',$_POST['userid'])->update(array('active' => 1));
+        if($update){
+            $msg =  array(
+                'status'=>1,
+                'message'=>'Success'
             );
             return response()->json($msg);
         }

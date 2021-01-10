@@ -218,6 +218,28 @@ $(document).ready(function(){
                }
              })
            });
+
+           $(".activate-btn").on('click',function(){
+              
+              alert($(this).attr('form-data'));
+              let user_id = $(this).attr('form-data');
+              $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+              $.ajax({
+              
+                url: "/user/activate" ,
+                type: "POST",
+                data: { userid: user_id },
+                success: function( response ) {
+                    if(response.status == 1){
+                        window.location.href = "/admin/user-list";
+                    }
+                }
+              });
+           })
     
        
     

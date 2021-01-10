@@ -27,6 +27,7 @@ Route::post('/checkemail','UserController@checkEmail');
 //Route::post('/checkotp','UserController@checkOTP');
 Route::post('/user/store','UserController@store');
 Route::post('/user/mobileVerify','UserController@mobileVerify');
+Route::post('/user/activate','UserController@activate');
 Route::get('/admin/user-list','UserController@index');
 
 Route::get('/booking/badminton','BookingController@create');
