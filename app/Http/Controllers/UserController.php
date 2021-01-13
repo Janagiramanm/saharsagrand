@@ -175,12 +175,21 @@ class UserController extends Controller
      */
     public function login(Request $request){
 
-        $request->email = $_POST['username'];
+        $request->username = $_POST['username'];
         $request->password = $_POST['password'];
        
-        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
-            $user = User::where('email',$request->email)->first();
+        //if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        if (Auth::attempt([
+                    'email' => $request->username,
+                    'password' => $request->password
+                ],$request->has('remember'))
+                || Auth::attempt([
+                    'mobile' => $request->username,
+                    'password' => $request->password
+                ],$request->has('remember'))){
+                
+            $user = User::where('email', '=', $request->username  )
+                       ->orWhere('mobile' , '=', $request->username)->first();
            // echo $user['type'];exit;
             $msg =  array(
                 'status'=>1,
