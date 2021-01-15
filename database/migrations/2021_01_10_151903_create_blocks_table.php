@@ -18,6 +18,7 @@ class CreateBlocksTable extends Migration
             $table->string('name');
             $table->boolean('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

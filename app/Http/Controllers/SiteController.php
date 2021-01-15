@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Flat;
 use App\Block;
+use App\Flat;
 
-class FlatController extends Controller
+class SiteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,9 @@ class FlatController extends Controller
     public function index()
     {
         //
-        $flats = Flat::paginate(10);
-        return view('flats.index',compact(['flats']));
+        $blocks = Block::All();
+        return view('welcome', compact(['blocks']));
+
     }
 
     /**
@@ -28,8 +29,6 @@ class FlatController extends Controller
     public function create()
     {
         //
-        $blocks = Block::All();
-        return view('flats.create',compact(['blocks']));
     }
 
     /**
@@ -41,12 +40,6 @@ class FlatController extends Controller
     public function store(Request $request)
     {
         //
-        $flat = new Flat();
-        $flat->block_id = $request->input('block');
-        $flat->flat_number = $request->input('flat_number');
-        $flat->active = 1;
-        $flat->save();
-        return redirect( route('flats'))->withSuccess('Flat added successfully!');
     }
 
     /**
@@ -69,11 +62,6 @@ class FlatController extends Controller
     public function edit($id)
     {
         //
-        
-       
-        $flat = Flat::where('id',$id)->first();
-        $blocks = Block::All();
-        return view('flats.edit',compact(['flat','blocks']));
     }
 
     /**
@@ -86,11 +74,6 @@ class FlatController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $flat = Flat::find($id);
-        $flat->block_id = $request->input('block');
-        $flat->flat_number = $request->input('flat_number');
-        $flat->save();
-        return redirect( route('flats'))->withSuccess('Flat updated successfully!');
     }
 
     /**

@@ -33,16 +33,18 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <th>No</th>
+                                    <th>Block</th>
                                     <th>Name</th>
                                     <th>Action</th>
                                 </tr>
                                 @php
-                                    $index = $flats->firstItem()
+                                    $index = $flats->firstItem()    
                                     @endphp
                                 @foreach ($flats as $flat)
                                     <tr>
                                         <td>{{ $index++ }}</td>
-                                        <td>{{ $flat->name }}</td>
+                                        <td>{{ $flat->block->name }}</td>
+                                        <td>{{ $flat->flat_number }}</td>
                                         <td>
                                             <div class="btn-group">
                                             <a title="Edit" href="{{ route('flat.edit',$flat->id)}}" class="btn btn-secondary btn-sm">Edit</a>

@@ -265,9 +265,12 @@
                                 <label class="form-label">Block*</label>
                                 <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
                                     <option value="">Select Type</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
+                                   @if($blocks)
+                                        @foreach($blocks as $block)
+                                            <option value="{{ $block->id }}"> {{ $block->name }}  </option>
+                                        @endforeach
+                                   @endif
+                                    
                                 </select>
                                 <span class="text-danger">{{ $errors->first('block') }}</span>
                              
@@ -275,7 +278,9 @@
                         </div>   
                         <div class="mb-3">
                                 <label class="form-label">Flat Number*</label>
-                                <input type="text" name="flat_number" id="flat_number" required class="form-control">
+                                <input type="text" name="flat_number" id="flat_number" value="" required class="form-control">
+                                <input type="hidden" name="flat_number_by_block" id="flat_number_by_block" value=""  class="form-control">
+
                                 <span class="text-danger">{{ $errors->first('flat_number') }}</span>
                         </div>
                         <div class="mb-3">

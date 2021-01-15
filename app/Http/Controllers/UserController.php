@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Flat;
 // namespace Illuminate\Auth\Middleware;
 
 use Auth;
@@ -25,6 +26,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::where('type', '!=', 'superadmin')
+        ->where('mobile_verified_at', '!=', '')
         ->paginate('10');
         return view('users.index',compact(['users']));
     }
@@ -50,9 +52,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
        
-        $fourRandomDigit = mt_rand(100000,999999);
+        $sixRandomDigit = mt_rand(100000,999999);
     
-        AppHelper::sendRegistrationOtp($_POST['name'], $_POST['mobile'], $fourRandomDigit);
+        AppHelper::sendRegistrationOtp($_POST['name'], $_POST['mobile'], $sixRandomDigit);
         $user = new User();
         $user->name = $_POST['name'];
         $user->email= $_POST['email'];
@@ -60,7 +62,7 @@ class UserController extends Controller
         $user->block = $_POST['block'];
         $user->flat_number = $_POST['flat_number'];
         $user->type = $_POST['type'];
-        $user->otp = $fourRandomDigit;
+        $user->otp = $sixRandomDigit;
         $user->role = $_POST['type'];
         $user->save();
        
@@ -121,11 +123,28 @@ class UserController extends Controller
     }
 
     /**
+     * to check mobile duplication
+     */
+ 
+    public function checkMobile(Request $request){
+        if($_POST['mobile'] != ''){
+            $isMobileExist = User::where('mobile',$_POST['mobile'])
+            ->where('mobile_verified_at','!=', '')->first();
+            if($isMobileExist){
+                echo 'true';
+            }else{
+                echo 'false';
+            }
+        }
+    }
+
+    /**
      * to check email duplication
      */
     public function checkEmail(Request $request){
         if($_POST['email']!=''){
-            $isEmailExist = User::where('email',$_POST['email'])->first();
+            $isEmailExist = User::where('email',$_POST['email'])
+            ->where('mobile_verified_at','!=', '')->first();
             if($isEmailExist){
                 echo 'true';
             }else{
@@ -211,7 +230,8 @@ class UserController extends Controller
      * to activate
      */
     public function activate(Request $request){
-        $rndString = Str::random(8);
+       //$rndString = Str::random(8);
+        $rndString = mt_rand(100000,999999);
         $hashed_password = Hash::make($rndString);
         $user = User::find($_POST['userid']);
         $user->active = 1;
@@ -219,7 +239,7 @@ class UserController extends Controller
         $user->save();
         //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
        
-        AppHelper::sendActivationSms($user['name'],$user['mobile'],$user['email'], $rndString);
+        AppHelper::sendActivationSms($user['name'],$user['mobile'], $rndString);
      
         if($user){
             $msg =  array(
@@ -246,5 +266,24 @@ class UserController extends Controller
             );
             return response()->json($msg);
         }
+    }
+
+    /**
+     * to get flats
+     */
+    public function getFlats(Request $request){
+
+         $block_id = $_POST['block_id'];
+         $flats =Flat::select('flat_number')->where('block_id',$block_id)->groupBy('flat_number')->get();
+         if($flats){
+             foreach($flats as $flat){
+                 $flat_nos[] = $flat->flat_number;
+             }
+            $msg =  array(
+                'status'=>1,
+                'data'=>$flat_nos
+            );
+            return response()->json($msg);
+         }
     }
 }

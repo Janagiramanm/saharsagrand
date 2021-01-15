@@ -53,7 +53,7 @@ class AppHelper
         }
     }
 
-    public static function sendActivationSms($name,$receipientno,$username,$rndString){
+    public static function sendActivationSms($name,$receipientno,$rndString){
          
         if ($receipientno) {
 
@@ -62,7 +62,7 @@ class AppHelper
             // $senderID = env('MVAAYOO_SENDERID');
             $user="manoj.p@netiapps.com:Netiapps839";
             $senderID="sahas";
-            $msgtxt = "Dear $name Welcome to Sahasra Grand your membership has been activated User name $username and Password : $rndString";
+            $msgtxt = "Dear $name Welcome to Sahasra Grand your membership has been activated User name $receipientno and Password : $rndString";
            
             curl_setopt($ch,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

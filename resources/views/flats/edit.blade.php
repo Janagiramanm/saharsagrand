@@ -18,8 +18,9 @@
             <div class="col-8">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
-                        <form action="{{ route('flat.store') }}" method="POST">
+                        <form action="{{ route('flat.update',$flat->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
 
                             <div class="row">
                                
@@ -31,7 +32,10 @@
                                                 <option value="">Select Type</option>
                                             @if($blocks)
                                                     @foreach($blocks as $block)
-                                                        <option value="{{ $block->id }}"> {{ $block->name }}  </option>
+                                                        <option value="{{ $block->id }}" 
+                                                             @if(isset($flat)){{ ($flat->block_id) == $block->id ? 'selected':'' }} @endif > 
+                                                             {{ $block->name }} 
+                                                       </option>
                                                     @endforeach
                                             @endif
                                                 
@@ -41,9 +45,9 @@
 
                                     <div class="form-group">
                                         <label>Flat Name</label>
-                                        <input id="flat_number" type="text" class="form-control @error('flat_number') is-invalid @enderror" name="flat_number" value="{{ old('flat_number') }}" required autocomplete="name" autofocus>
+                                        <input id="flat_number" type="text" class="form-control @error('flat_number') is-invalid @enderror" name="flat_number" value="{{ $flat->flat_number }}" required autocomplete="name" autofocus>
                                        
-                                        @error('name')
+                                        @error('flat_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

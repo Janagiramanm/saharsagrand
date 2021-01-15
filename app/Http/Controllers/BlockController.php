@@ -67,7 +67,7 @@ class BlockController extends Controller
     public function edit($id)
     {
         //
-        $block = Block::find($id)->first();
+        $block = Block::where('id',$id)->first();
         return view('blocks.edit',compact(['block']));
     }
 

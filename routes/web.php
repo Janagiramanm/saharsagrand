@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/','SiteController@index');
 
 Auth::routes();
 
@@ -39,10 +41,12 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::put('/admin/flat/update/{id}','FlatController@update')->name('flat.update');
 });
 
+Route::post('/checkmobile','UserController@checkMobile');
 Route::post('/checkemail','UserController@checkEmail');
 Route::post('/user/store','UserController@store');
 Route::post('/user/mobileVerify','UserController@mobileVerify');
 Route::post('/user/change-password','UserController@changePassword');
+Route::post('/user/get-flats','UserController@getFlats');
 
 
 Route::get('/booking/badminton','BookingController@create');

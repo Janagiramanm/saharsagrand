@@ -15,7 +15,11 @@ class CreateFlatsTable extends Migration
     {
         Schema::create('flats', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('block_id');
+            $table->string('flat_number')->nullable();
+            $table->string('active')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
