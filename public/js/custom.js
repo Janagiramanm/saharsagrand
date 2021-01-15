@@ -284,7 +284,7 @@ $(document).ready(function(){
            });
     
         $("#block").on('change',function(){
-           // alert('ji');
+           
             let block_id =  $(this).val();
             $.ajaxSetup({
                 headers: {
@@ -307,7 +307,6 @@ $(document).ready(function(){
                     }
                   });
             }
-            alert(block_id);
 
         });
 
