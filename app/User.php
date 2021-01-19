@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Block;
+use App\Flat;
 
 class User extends Authenticatable
 {
@@ -36,4 +38,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function block()
+    {
+        //return "jani";
+         return $this->hasOne(Block::class,'id','block');
+         
+    }
+   
+    public function flat()
+    {
+        //return "jani";
+         return $this->hasOne(Flat::class,'flat_number');
+    }
 }

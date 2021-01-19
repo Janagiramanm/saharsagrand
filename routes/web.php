@@ -47,6 +47,9 @@ Route::post('/user/store','UserController@store');
 Route::post('/user/mobileVerify','UserController@mobileVerify');
 Route::post('/user/change-password','UserController@changePassword');
 Route::post('/user/get-flats','UserController@getFlats');
+Route::get('/user/reg-success','UserController@regSuccess');
+// Route::post('/autocomplete','UserController@selectSearch');
+Route::get('/autocomplete', 'UserController@selectSearch')->name('autocomplete');
 
 
 Route::get('/booking/badminton','BookingController@create');

@@ -231,7 +231,7 @@
 </div>
 
 
-<div class="modal" tabindex="-1" id="registerModal">
+<div class="modal"  id="registerModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -264,7 +264,7 @@
                         <div class="mb-3">
                                 <label class="form-label">Block*</label>
                                 <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
-                                    <option value="">Select Type</option>
+                                    <option value="">Select Block</option>
                                    @if($blocks)
                                         @foreach($blocks as $block)
                                             <option value="{{ $block->id }}"> {{ $block->name }}  </option>
@@ -278,9 +278,10 @@
                         </div>   
                         <div class="mb-3">
                                 <label class="form-label">Flat Number*</label>
-                                <input type="text" name="flat_number" id="flat_number" value="" required class="form-control">
-                                <input type="hidden" name="flat_number_by_block" id="flat_number_by_block" value=""  class="form-control">
-
+                                <select class="form-control" style="width:450px;" name="flat_number" id="flat_number">
+                                    <option value="">Select a Flat </option>
+                                   
+                                </select>
                                 <span class="text-danger">{{ $errors->first('flat_number') }}</span>
                         </div>
                         <div class="mb-3">
@@ -328,9 +329,28 @@
         </div>
     </div>
 </div>
-<script>
-    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> -->
 
+<script>
+
+    // var path = "{{ route('autocomplete') }}";
+    
+    // $('input.typeahead').typeahead({
+    //     //var block = $("#block").val();
+    //     source:  function (query, process) {
+    //         return $.get(path, { flat: query,block:$("#block").val() }, function (data) {
+    //             // if (!data.length) {
+    //             //     return 'No Flats Found';
+    //             // }
+    //             return process(data);
+    //         });
+    //     }
+    // });
+
+   
+  
 </script>
+
+
 @endsection
 

@@ -28,6 +28,9 @@ class UserController extends Controller
         $users = User::where('type', '!=', 'superadmin')
         ->where('mobile_verified_at', '!=', '')
         ->paginate('10');
+        // echo '<pre>';
+        // print_r($users);
+        // exit;
         return view('users.index',compact(['users']));
     }
 
@@ -274,16 +277,60 @@ class UserController extends Controller
     public function getFlats(Request $request){
 
          $block_id = $_POST['block_id'];
-         $flats =Flat::select('flat_number')->where('block_id',$block_id)->groupBy('flat_number')->get();
+         $flats =Flat::select('id','flat_number')->where('block_id',$block_id)->groupBy('flat_number','id')->get();
          if($flats){
+             //$select = '<select name="flat_number"  >';
+             $options = '<option>Select a Flat</option>';
              foreach($flats as $flat){
-                 $flat_nos[] = $flat->flat_number;
+                 $options .='<option value="'.$flat->id.'">'.$flat->flat_number.'</option>';
+                 //$flat_nos[$flat->id] = $flat->flat_number;
              }
-            $msg =  array(
-                'status'=>1,
-                'data'=>$flat_nos
-            );
-            return response()->json($msg);
+            // // print_r($flat_nos);
+            // $msg =  array(
+            //     'status'=>1,
+            //     'data'=>$flat_nos
+            // );
+            // return response()->json($msg);
+            echo $options;
          }
+    }
+
+    /**
+     * User Registration  success 
+     */
+    public function regSuccess(Request $request){
+        return view('users.success');
+    }
+
+    /**
+     * to get flat number for ajax
+     */
+    public function selectSearch(Request $request)
+    {
+        $data =[];
+        if($request->has('block')){
+                $data = Flat::select("flat_number","id")
+                        ->where('block_id','=',$request['block'])
+                        ->where("flat_number","LIKE", "%".$request['query']."%")
+                        ->groupBy('flat_number','id')->get();
+        }
+        return response()->json($data);
+      
+        // $flat_number = null;
+        // if($data){
+         
+        //     foreach($data as $dat){
+        //         $flat_number[]= $dat->flat_number;
+        //     }
+            
+          
+        // }
+        // if(!empty($flat_number)){
+        //      return response()->json($flat_number);
+        // }else{
+        //     return 'No';
+        // }
+        
+    	
     }
 }

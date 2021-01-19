@@ -1,36 +1,35 @@
-body{
-    padding:0px;
+body {
+    padding: 0px;
     margin: 0px;
-    background: #FAFAFA;
-    color: #464A53;
+    background: #fafafa;
+    color: #464a53;
 }
 
-.header{
+.header {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.contact{
+.contact {
     display: flex;
     padding-top: 16px;
 }
-.contact h3{
+.contact h3 {
     font-size: 20px;
 }
 
-.contact .image{
+.contact .image {
     padding-right: 15px;
 }
-.contact h5{
+.contact h5 {
     font-size: 13px;
     margin-bottom: 0px;
     font-weight: 200;
 }
-.user-image img{
+.user-image img {
     width: 15px;
-
 }
-.user{
+.user {
     background: #eee;
     border-radius: 30px;
     width: 40px;
@@ -42,28 +41,28 @@ body{
     align-items: center;
 }
 
-.container-block{
-    background: #FFFFFF;
-    box-shadow: 0 0 44px 0 rgba(0,0,0,0.02);
+.container-block {
+    background: #ffffff;
+    box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.02);
     border-radius: 30px;
     width: 100%;
     min-height: 600px;
 }
 
-.title{
+.title {
     padding-top: 40px;
     padding-bottom: 40px;
 }
 
-.title h2{
+.title h2 {
     font-weight: 100;
 }
-.title h2 span{
+.title h2 span {
     font-weight: 600;
 }
 
-.info-card{
-    background: #FAFAFA;
+.info-card {
+    background: #fafafa;
     border: 1px solid #e3e9e9;
     border-radius: 22px;
     min-height: 298px;
@@ -74,62 +73,62 @@ body{
     margin-bottom: 40px;
 }
 
-.info-card .button{
+.info-card .button {
     padding-top: 20px;
 }
 
-.info-card-block .active{
-    background: #FFF;
+.info-card-block .active {
+    background: #fff;
     border: 1px solid #e3e9e9;
-    box-shadow: 0 11px 14px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 11px 14px 0 rgba(0, 0, 0, 0.12);
 }
 
-.info-card-block{
+.info-card-block {
     width: 80%;
     margin: auto;
 }
 
-.btn-primary{
+.btn-primary {
     border-color: #124028;
     background: #124028;
-    box-shadow: 0 0 0 0 rgba(0,0,0,0.02);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.02);
     border-radius: 11px;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background: #10311b;
     border-color: #10311b;
 }
 
-.btn-secondary{
-    background: #0F3A45;
-    border-color: #0F3A45;
-    box-shadow: 0 0 0 0 rgba(0,0,0,0.02);
+.btn-secondary {
+    background: #0f3a45;
+    border-color: #0f3a45;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.02);
     border-radius: 11px;
 }
 
-.info-card .image{
+.info-card .image {
     width: 80px;
     height: 80px;
 }
 
-.info-card span{
-    background: #FFCCC8;
+.info-card span {
+    background: #ffccc8;
     border-radius: 12.5px;
     padding: 4px 20px;
     color: #000 !important;
 }
 
-.info-card h3{
+.info-card h3 {
     font-size: 24px;
 }
-.info-card .image img{
+.info-card .image img {
     width: 100%;
     object-fit: cover;
 }
 
-.footer{
-    background: #0F3A45;
+.footer {
+    background: #0f3a45;
     padding-top: 220px;
     padding-bottom: 40px;
     color: #d3d1d1;
@@ -142,27 +141,41 @@ body{
 }
 
 @media (max-width: 575.98px) {
-    .logo{
+    .logo {
         text-align: center;
         width: 100%;
     }
-    .contact{
+    .contact {
         display: none;
     }
 }
 
-.inner-page{
+.inner-page {
     padding-left: 40px;
     padding-right: 40px;
 }
 
-
-.activity-member{
+.activity-member {
     padding-top: 20px;
 }
 
-.act-cont{
+.act-cont {
     background: #fafafa;
     padding: 40px;
     border-radius: 20px;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 39px;
+    width: 464px;
+}
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__rendered {
+    line-height: 37px;
+}
+.select2-container--default
+    .select2-selection--single
+    .select2-selection__arrow {
+    height: 38px;
 }
