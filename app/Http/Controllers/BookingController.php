@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Redirect;
 
 class BookingController extends Controller
 {
@@ -25,7 +26,17 @@ class BookingController extends Controller
     public function create()
     {
         //
-        return view('booking.badminton');
+        $user = auth()->user();
+        // echo '<pre>';
+       
+        if($user){
+
+            $url = "http://booking.sahasragrand.com/?type=badminton&user_id=".$user->id;
+            return Redirect::to($url);
+        }
+        
+       
+        
     }
 
     /**

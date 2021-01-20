@@ -52,4 +52,4 @@ Route::get('/user/reg-success','UserController@regSuccess');
 Route::get('/autocomplete', 'UserController@selectSearch')->name('autocomplete');
 
 
-Route::get('/booking/badminton','BookingController@create');
+Route::get('/booking/badminton','BookingController@create')->name('booking.badminton');

@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// Route::post('/login')
+Route::post('/login', 'API\UserController@login');
+// Route::get('/logged-user', 'API\UserController@loggedUser');
+Route::get('/sahasra-reg-users','UserController@index');

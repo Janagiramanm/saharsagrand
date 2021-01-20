@@ -50,7 +50,7 @@
                                 <h3>Badminton</h3>
                             </div>
                             <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
+                                <a href="{{ route('booking.badminton') }}" class="btn btn-secondary w-100">Enroll</a>
                             </div>
                         </div>
                     </div>
