@@ -248,7 +248,7 @@ $(document).ready(function(){
                 data: { userid: user_id },
                 success: function( response ) {
                     if(response.status == 1){
-                       window.location.href = "/admin/user-list";
+                       window.location.href = "/admin/user-list"; 
                     }
                 }
               });

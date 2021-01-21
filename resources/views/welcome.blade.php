@@ -49,9 +49,15 @@
                             <div class="button">
                                 <h3>Badminton</h3>
                             </div>
+                            @guest
+                            <div class="button">
+                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
+                            </div>
+                            @else
                             <div class="button">
                                 <a href="{{ route('booking.badminton') }}" class="btn btn-secondary w-100">Enroll</a>
                             </div>
+                            @endguest
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-lg-4">
