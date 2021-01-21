@@ -212,7 +212,7 @@ class UserController extends Controller
                 
             $user = User::where('email', '=', $request->username  )
                        ->orWhere('mobile' , '=', $request->username)->first();
-            $token = $user->createToken('access_token')->accessToken;
+           // $token = $user->createToken('access_token')->accessToken;
             // $user->remember_token = $token;
             $user->save();
             $msg =  array(
