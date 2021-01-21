@@ -102,12 +102,12 @@ class UserController extends Controller
                 'message' => 'Password doesn\'t match'
             ],401);
         }
-        // $token = $user->createToken('access_token')->accessToken;
+         $token = $user->createToken('access_token')->accessToken;
       
         return response()->json([
             'status' => 1,
             'message' => 'Authentication successful',
-            // 'token' => $token,
+            'token' => $token,
             'user' => $user,
             
         ],200);

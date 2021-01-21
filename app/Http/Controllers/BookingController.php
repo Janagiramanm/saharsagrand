@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+
 use Redirect;
 
 class BookingController extends Controller
@@ -27,11 +29,10 @@ class BookingController extends Controller
     {
         //
         $user = auth()->user();
-        // echo '<pre>';
-       
-        if($user){
 
-            $url = "http://booking.sahasragrand.com/?type=badminton&user_id=".$user->id;
+        if($user){
+            $token = $user->createToken('access_token')->accessToken;
+            $url = "https://booking.sahasragrand.com?bookingType=badminton&userToken=$token";
             return Redirect::to($url);
         }
         
