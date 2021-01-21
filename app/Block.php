@@ -10,6 +10,6 @@ class Block extends Model
     protected $fillable = [
         'name'
     ];
-
+  
     
 }

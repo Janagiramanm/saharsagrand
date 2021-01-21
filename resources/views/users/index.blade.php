@@ -48,8 +48,8 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->mobile }}</td>
-                                        <td>{{ $user->block }}</td>
-                                        <td>{{ $user->flat_number }}</td>
+                                        <td>{{ $user->block->name }}</td>
+                                        <td>{{ $user->flat->flat_number }}</td>
                                         <td>{{ $user->type }}</td>
                                         <td>
                                             @if($user->active == 1)

@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','mobile','block','flat_number','type','otp','role'
+        'name', 'email', 'password','mobile','block_id','flat_id','type','otp','role'
     ];
 
     /**
@@ -43,14 +43,12 @@ class User extends Authenticatable
 
     public function block()
     {
-        //return "jani";
-         return $this->hasOne(Block::class,'id','block');
-         
+         return $this->belongsTo(Block::class);
+      
     }
    
     public function flat()
     {
-        //return "jani";
-         return $this->hasOne(Flat::class,'flat_number');
+         return $this->belongsTo(Flat::class);
     }
 }

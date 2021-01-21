@@ -62,8 +62,8 @@ class UserController extends Controller
         $user->name = $_POST['name'];
         $user->email= $_POST['email'];
         $user->mobile = $_POST['mobile'];
-        $user->block = $_POST['block'];
-        $user->flat_number = $_POST['flat_number'];
+        $user->block_id = $_POST['block'];
+        $user->flat_id = $_POST['flat_number'];
         $user->type = $_POST['type'];
         $user->otp = $sixRandomDigit;
         $user->role = $_POST['type'];
