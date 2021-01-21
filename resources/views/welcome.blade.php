@@ -55,7 +55,7 @@
                             </div>
                             @else
                             <div class="button">
-                                <a href="{{ route('booking.badminton') }}" class="btn btn-secondary w-100">Enroll</a>
+                                <a href="https://booking.sahasragrand.com?bookingType=badminton&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Enroll</a>
                             </div>
                             @endguest
                         </div>

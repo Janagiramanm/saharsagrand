@@ -201,19 +201,20 @@ class UserController extends Controller
         $request->password = $_POST['password'];
        
         //if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+       
         if (Auth::attempt([
-                    'email' => $request->username,
-                    'password' => $request->password
-                ],$request->has('remember'))
-                || Auth::attempt([
-                    'mobile' => $request->username,
-                    'password' => $request->password
-                ],$request->has('remember'))){
+                        'email' => $request->username,
+                        'password' => $request->password
+                    ],true)
+                    || Auth::attempt([
+                        'mobile' => $request->username,
+                        'password' => $request->password
+                    ],true)){
                 
             $user = User::where('email', '=', $request->username  )
                        ->orWhere('mobile' , '=', $request->username)->first();
            // $token = $user->createToken('access_token')->accessToken;
-            // $user->remember_token = $token;
+            //$user->remember_token = $token;
             $user->save();
             $msg =  array(
                 'status'=>1,
