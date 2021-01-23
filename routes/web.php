@@ -28,8 +28,9 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::post('/user/activate','UserController@activate');
     Route::get('/admin/user-list','UserController@index');
     Route::get('/admin/user/edit/{id}','UserController@edit')->name('user.edit');
-    Route::get('/admin/user/edit/{id}/delete','UserController@edit')->name('user.destroy');
+    Route::delete('/admin/user/edit/{id}/delete','UserController@destroy')->name('user.destroy');
     Route::put('/admin/user/edit/{id}/update','UserController@update')->name('user.update');
+   
 
     Route::get('/admin/blocks','BlockController@index')->name('blocks');
     Route::get('/admin/block/add','BlockController@create')->name('block.create');

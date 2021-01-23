@@ -92,37 +92,37 @@
                                     </div>
                                     <div class="form-group">
                                     <button type="submit" id="user-reg-submit" class="btn btn-success">Submit</button>
-                                    <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#deleteConfirm">{{ 'Delete' }}</button>
-                                    </div>
+                                    <input type="button" data-bs-toggle="modal" data-bs-target="#deleteConfirm" value="Delete" class="btn btn-danger" />   
+                                </div>
+
                         </form>
-           
 
-            </div>
-           
-        </div>
-    </div>
+                        <div class="modal" id="deleteConfirm" tabindex="-1"  role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ "Please confirm to delete the record" }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Close' }}</button>
+                                        <form action="{{ route('user.destroy',$user->id) }}" method="POST" style="display:inline">
 
-    <div class="modal fade" id="deleteConfirm"  role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    {{ "Please confirm to delete the record" }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Close' }}</button>
-                    <form action="{{ route('user.destroy',$user->id) }}" method="POST" style="display:inline">
-
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" class="btn btn-danger btn-ok" value="{{ 'Confirm' }}" />
-                    </form>
-                </div>
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="btn btn-danger btn-ok" value="{{ 'Confirm' }}" />
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
             </div>
         </div>
     </div>
+           
+
+           
+   
 </div>
 
-</div>
 
 
 
