@@ -46,7 +46,6 @@ $(document).ready(function(){
                 }
             },
             email: {
-                    required: true,
                     maxlength: 50,
                     email: true,
                     remote: {
@@ -70,6 +69,22 @@ $(document).ready(function(){
             },
             flat_number: {
                 required: true,
+                remote: {
+
+                    url: "checkflat",
+                    type: "post",
+                    data: {
+                        block: $("#block").val(),
+                        flat: $("#flat_number").val()
+                    },
+                    dataFilter: function(data) {
+                        if (data == "true") {
+                            return  false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
             },
             type:{
                 required: true,
@@ -89,7 +104,6 @@ $(document).ready(function(){
                 remote: "Mobile Number already exist"
             },
             email: {
-                required: "Please enter valid email",
                 email: "Please enter valid email",
                 maxlength: "The email name should less than or equal to 50 characters",
                 remote: "Email is already exists",
@@ -99,6 +113,7 @@ $(document).ready(function(){
             },
             flat_number: {
                 required: "Please enter flat number",
+                remote:" Flat Number already registered",
             } ,
             type: {
                 required: "Please select type",

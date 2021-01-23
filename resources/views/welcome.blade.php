@@ -253,14 +253,14 @@
                     <form id="register_form" method="post" action="javascript:void(0)">
                         @csrf
                         <div class="mb-3">
-                            <label for="formGroupExampleInput">Name</label>
+                            <label for="formGroupExampleInput">Name<span class="text-danger">*</span></label>
                             <input type="text" name="name" class="form-control" id="name" placeholder="Please enter name">
-                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                           
                         </div>
                         <div class="mb-3">
-                            <label for="mobile">Mobile</label>
+                            <label for="mobile">Mobile<span class="text-danger">*</span></label>
                             <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Please enter mobile number" maxlength="10">
-                            <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                           
                         </div>
                         <div class="mb-3">
                             <label for="email">Email Address</label>
@@ -268,7 +268,7 @@
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>   
                         <div class="mb-3">
-                                <label class="form-label">Block*</label>
+                                <label class="form-label">Block<span class="text-danger">*</span></label>
                                 <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
                                     <option value="">Select Block</option>
                                    @if($blocks)
@@ -284,14 +284,14 @@
                         </div>   
                         <div class="mb-3">
                                 <label class="form-label">Flat Number*</label>
-                                <select class="form-control" style="width:450px;" name="flat_number" id="flat_number">
+                                <select class="form-control" style="width:450px;" name="flat_number" id="flat_number" required>
                                     <option value="">Select a Flat </option>
                                    
                                 </select>
                                 <span class="text-danger">{{ $errors->first('flat_number') }}</span>
                         </div>
                         <div class="mb-3">
-                                <label class="form-label">Type*</label>
+                                <label class="form-label">Type<span class="danger-str">*</span></label>
                                 <select  name="type" id="type"  required class="form-control @error('type') is-invalid @enderror">
                                     <option value="">Select Type</option>
                                     <option value="owner">Owner</option>

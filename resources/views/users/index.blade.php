@@ -38,6 +38,7 @@
                                     <th>Flat Number</th>
                                     <th>Type</th>
                                     <th>Action</th>
+                                    <th>Edit</th>
                                 </tr>
                                 @php
                                     $index = $users->firstItem()
@@ -48,8 +49,8 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->mobile }}</td>
-                                        <td>{{ $user->block->name }}</td>
-                                        <td>{{ $user->flat->flat_number }}</td>
+                                        <td>@if(isset($user->block->name)){{ $user->block->name }} @endif</td>
+                                        <td>@if(isset($user->flat->flat_number)){{ $user->flat->flat_number }} @endif</td>
                                         <td>{{ $user->type }}</td>
                                         <td>
                                             @if($user->active == 1)
@@ -58,6 +59,11 @@
                                                <a class="btn btn-secondary btn-sm activate-btn"
                                                    href="#" form-data="{{ $user->id }}" >Activate</a>
                                             @endif
+                                        </td>
+                                        <td>
+                                                <div class="btn-group">
+                                                    <a title="Edit" href="{{route('user.edit',$user->id)}}" class="btn btn-secondary btn-sm">Edit</a>
+                                                </div>
                                         </td>
                                     </tr>
                                 @endforeach

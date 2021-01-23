@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Flat;
+use App\Block;
 // namespace Illuminate\Auth\Middleware;
 
 use Auth;
@@ -28,9 +29,7 @@ class UserController extends Controller
         $users = User::where('type', '!=', 'superadmin')
         ->where('mobile_verified_at', '!=', '')
         ->paginate('10');
-        // echo '<pre>';
-        // print_r($users);
-        // exit;
+        
         return view('users.index',compact(['users']));
     }
 
@@ -56,17 +55,19 @@ class UserController extends Controller
     {
        
         $sixRandomDigit = mt_rand(100000,999999);
+
+       
     
         AppHelper::sendRegistrationOtp($_POST['name'], $_POST['mobile'], $sixRandomDigit);
         $user = new User();
-        $user->name = $_POST['name'];
-        $user->email= $_POST['email'];
-        $user->mobile = $_POST['mobile'];
-        $user->block_id = $_POST['block'];
-        $user->flat_id = $_POST['flat_number'];
-        $user->type = $_POST['type'];
+        $user->name = $request->input('name');
+        $user->email= $request->input('email');
+        $user->mobile = $request->input('mobile');
+        $user->block_id = $request->input('block');
+        $user->flat_id = $request->input('flat_number');
+        $user->type = $request->input('type');
         $user->otp = $sixRandomDigit;
-        $user->role = $_POST['type'];
+        $user->role = $request->input('type');
         $user->save();
        
         if($user){
@@ -100,6 +101,10 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = User::find($id);
+        $blocks = Block::all();
+        $flats = Flat::where('block_id','=',$user->block_id)->get();
+        return view('users.edit',compact(['user','blocks','flats']));
     }
 
     /**
@@ -111,7 +116,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'nullable|email|unique:users,email,'.$id, 
+            'mobile' => 'required|digits:10|regex:/^[0-9]/',
+            'block_id' => 'required',
+            'flat_id' => 'required', 
+            'type' => 'required'           
+        ]);
+
+        $user =User::find($id);
+        $user->name = $request->input('name');
+        $user->email= $request->input('email');
+        $user->mobile = $request->input('mobile');
+        $user->block_id = $request->input('block_id');
+        $user->flat_id = $request->input('flat_id');
+        $user->type = $request->input('type');
+        //$user->otp = $sixRandomDigit;
+        $user->role = $request->input('type');
+        $user->save();
+        
+        return redirect('/admin/user-list');
     }
 
     /**
@@ -123,6 +148,23 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * To check flat is already registered or not
+     */
+
+    public function checkFlat(Request $request){
+       
+
+        $isFlatExist = User::where('block_id','=',$request->input('block'))
+        ->where('flat_id','=',$request->input('flat_number'))
+        ->where('active','=',1)->first();
+        if($isFlatExist){
+           echo 'true';
+        }else{
+            echo 'false';
+        }
     }
 
     /**
@@ -288,12 +330,7 @@ class UserController extends Controller
                  $options .='<option value="'.$flat->id.'">'.$flat->flat_number.'</option>';
                  //$flat_nos[$flat->id] = $flat->flat_number;
              }
-            // // print_r($flat_nos);
-            // $msg =  array(
-            //     'status'=>1,
-            //     'data'=>$flat_nos
-            // );
-            // return response()->json($msg);
+          
             echo $options;
          }
     }
@@ -319,20 +356,7 @@ class UserController extends Controller
         }
         return response()->json($data);
       
-        // $flat_number = null;
-        // if($data){
-         
-        //     foreach($data as $dat){
-        //         $flat_number[]= $dat->flat_number;
-        //     }
-            
-          
-        // }
-        // if(!empty($flat_number)){
-        //      return response()->json($flat_number);
-        // }else{
-        //     return 'No';
-        // }
+        
         
     	
     }

@@ -13,8 +13,9 @@ class AppHelper
         $client = new \GuzzleHttp\Client();
         if ($receipientno) {
             $ch = curl_init();
+            $user=env('MVAAYOO_USERNAME');
+            $senderID=env('MVAAYOO_SENDERID');
             $user="manoj.p@netiapps.com:Netiapps839";
-           // $receipientno="9943308193";
             $senderID="sahas";
           //  $msgtxt="this is test message , test";
             $msgtxt = "Dear $name your OTP for registration is $otp Rgds SGOWA";

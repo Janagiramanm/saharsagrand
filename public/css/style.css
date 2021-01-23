@@ -179,3 +179,27 @@ body {
     .select2-selection__arrow {
     height: 38px;
 }
+.error {
+    color: #dc3545 !important;
+}
+.card {
+    padding: 10px;
+}
+form#user_edit_form {
+    width: 50%;
+    margin: 10px 10px 10px 50px;
+}
+h2.sb-page-header-title {
+    margin-left: 50px;
+}
+.navbar {
+    background: #284c6d !important;
+    width: 15%;
+}
+.nav-link {
+    background: #284c6d !important;
+    color: white;
+}
+.nav-link:hover {
+    color: rgb(235, 185, 94);
+}

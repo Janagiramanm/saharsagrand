@@ -27,6 +27,9 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::get('/admin/home', 'HomeController@index')->name('home');
     Route::post('/user/activate','UserController@activate');
     Route::get('/admin/user-list','UserController@index');
+    Route::get('/admin/user/edit/{id}','UserController@edit')->name('user.edit');
+    Route::get('/admin/user/edit/{id}/delete','UserController@edit')->name('user.destroy');
+    Route::put('/admin/user/edit/{id}/update','UserController@update')->name('user.update');
 
     Route::get('/admin/blocks','BlockController@index')->name('blocks');
     Route::get('/admin/block/add','BlockController@create')->name('block.create');
@@ -41,6 +44,7 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::put('/admin/flat/update/{id}','FlatController@update')->name('flat.update');
 });
 
+Route::post('/checkflat','UserController@checkFlat');
 Route::post('/checkmobile','UserController@checkMobile');
 Route::post('/checkemail','UserController@checkEmail');
 Route::post('/user/store','UserController@store');
