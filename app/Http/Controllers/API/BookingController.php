@@ -49,6 +49,7 @@ class BookingController extends Controller
        $booking->start_time = $timeSlots['startTime'];
        $booking->end_time = $timeSlots['endTime'];
        $booking->user_id = $user->id;
+       $booking->total_guests = $request->input('totalGuests');
        $booking->status = 1;
        $booking->save();
        return response()->json( [
@@ -95,6 +96,7 @@ class BookingController extends Controller
     public function checkAvailability(Request $request){
         $bookingType = $request->input('bookingType');
         $selectedMonth = $request->input('selectedMonth');
+        $availablePerson = 5;
 
         $current_day = date('d');
         for($i = $current_day; $i <=  date('t'); $i++)
@@ -113,7 +115,7 @@ class BookingController extends Controller
             $result[$key]['isFullDayEvent'] = false;
             $timeslots = [];
 
-            $bookings = Booking::select('booking_date','start_time','end_time')->where('booking_type','=',$bookingType)
+            $bookings = Booking::select('booking_date','start_time','end_time','total_guests')->where('booking_type','=',$bookingType)
             ->where('booking_date','=',$value)
             ->get();
                             
@@ -125,7 +127,7 @@ class BookingController extends Controller
                                         'startTime' => $time[0],
                                         'endTime'=>$time[1],
                                         'available'=> true,
-                                        'maxPersonsAllowed'=> 5,
+                                        'maxPersonsAllowed'=> $availablePerson,
                                         'currentPersonsBooked'=> 0
                     ];
                 }
@@ -144,11 +146,13 @@ class BookingController extends Controller
                             }else{
                                 $available = false;
                             }
+                           
+                            $availPerson = $availablePerson - $booking->total_guests;
                             $timeslots[] = [
                                             'startTime' => $time[0],
                                             'endTime'=>$time[1],
                                             'available'=> $available,
-                                            'maxPersonsAllowed'=> 5,
+                                            'maxPersonsAllowed'=> $availPerson,
                                             'currentPersonsBooked'=> 0
                             ];
                             

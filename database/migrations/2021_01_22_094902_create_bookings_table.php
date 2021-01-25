@@ -20,6 +20,7 @@ class CreateBookingsTable extends Migration
             $table->time('start_time')->default('00:00'); 
             $table->time('end_time')->default('00:00');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('total_guests')->default(0);
             $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
