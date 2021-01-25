@@ -34,6 +34,12 @@ class BookingController extends Controller
     //    exit;
        $token = $request->bearerToken();
        $user = User::where('remember_token','=',$token)->first();
+       if(!$user){
+        return response()->json( [
+                    'status' => 0,
+                    'message' => 'Invalid User',
+                    ],200);
+       }
 
        $timeSlots = $request->input('timeSlots');
 
