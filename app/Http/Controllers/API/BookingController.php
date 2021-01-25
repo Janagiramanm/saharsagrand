@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Booking;
+use App\User;
 
 class BookingController extends Controller
 {
@@ -27,6 +28,28 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         //
+       // $token = $request->header('')
+    //    echo '<pre>';
+    //    print_r($request->input('timeSlots'));
+    //    exit;
+       $token = $request->bearerToken();
+       $user = User::where('remember_token','=',$token)->first();
+
+       $timeSlots = $request->input('timeSlots');
+
+       $booking = new Booking();
+       $booking->booking_type = $request->input('bookingType');
+       $booking->booking_date = $request->input('selectedDate');
+       $booking->start_time = $timeSlots['startTime'];
+       $booking->end_time = $timeSlots['endTime'];
+       $booking->user_id = $user->id;
+       $booking->status = 1;
+       $booking->save();
+       return response()->json( [
+                                'status' => 1,
+                                'message' => 'Successfully Booked',
+                            ],200);
+
     }
 
     /**
@@ -86,9 +109,9 @@ class BookingController extends Controller
 
             $bookings = Booking::select('booking_date','start_time','end_time')->where('booking_type','=',$bookingType)
             ->where('booking_date','=',$value)
-            ->first();
+            ->get();
                             
-            if(!$bookings){
+            if($bookings->isEmpty()){
                 unset($timeslots);
                 foreach($timeSlots as $timeKey => $time){
                     $time = explode('-',$time);
@@ -102,12 +125,14 @@ class BookingController extends Controller
                 }
             }else{
             
-                    if($value == $bookings->booking_date){
+                foreach($bookings as $booking){
+                    if($value == $booking->booking_date){
                         unset($timeslots);
                         foreach($timeSlots as $timeKey => $time){
                             $time = explode('-',$time);
-                            $start_time = substr($bookings->start_time, 0, 5);
-                            $end_time = substr($bookings->end_time, 0, 5);
+                            $start_time = substr($booking->start_time, 0, 5);
+                            $end_time = substr($booking->end_time, 0, 5);
+                            //echo $start_time.'----'.$time[0].'<br>';
                             if($start_time != $time[0] && $end_time != $time[1]){
                                 $available = true;
                             }else{
@@ -123,6 +148,7 @@ class BookingController extends Controller
                             
                         }
                     }
+                }
                 
             }
             $result[$key]['timeSlots'] = $timeslots;

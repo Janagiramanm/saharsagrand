@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Flat;
 use App\Block;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendRegistrationOTP;
 // namespace Illuminate\Auth\Middleware;
 
 use Auth;
@@ -56,9 +58,7 @@ class UserController extends Controller
        
         $sixRandomDigit = mt_rand(100000,999999);
 
-       
-    
-        AppHelper::sendRegistrationOtp($_POST['name'], $_POST['mobile'], $sixRandomDigit);
+        AppHelper::sendRegistrationOtp($request->input('name'), $request->input('mobile'), $sixRandomDigit);
         $user = new User();
         $user->name = $request->input('name');
         $user->email= $request->input('email');
@@ -71,6 +71,9 @@ class UserController extends Controller
         $user->save();
        
         if($user){
+            if($user->email!=''){
+                Mail::to($user->email)->send(new SendRegistrationOTP($user));
+            }
             return response()->json($user);
            
         }else{
@@ -177,7 +180,8 @@ class UserController extends Controller
     public function checkMobile(Request $request){
         if($_POST['mobile'] != ''){
             $isMobileExist = User::where('mobile',$_POST['mobile'])
-            ->where('mobile_verified_at','!=', '')->first();
+            ->where('mobile_verified_at','!=', '')
+            ->where('active','=',1)->first();
             if($isMobileExist){
                 echo 'true';
             }else{
@@ -192,7 +196,8 @@ class UserController extends Controller
     public function checkEmail(Request $request){
         if($_POST['email']!=''){
             $isEmailExist = User::where('email',$_POST['email'])
-            ->where('mobile_verified_at','!=', '')->first();
+            ->where('mobile_verified_at','!=', '')
+            ->where('active','=',1)->first();
             if($isEmailExist){
                 echo 'true';
             }else{

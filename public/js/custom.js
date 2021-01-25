@@ -329,7 +329,7 @@ $(document).ready(function(){
                     data: { block_id: block_id },
                     success: function( response ) {
                         $("#flat_number").html(response);
-                        ("#flat_number").select2();
+                        //("#flat_number").select2();
                     }
                   });
             }

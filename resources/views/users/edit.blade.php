@@ -61,7 +61,7 @@
                                     </div>   
                                     <div class="mb-3">
                                             <label class="form-label">Flat Number<span class="text-danger">*</span></label>
-                                            <select class="form-control"  name="flat_id" id="flat_id" required>
+                                            <select class="form-control"   name="flat_id" id="flat_number" required>
                                                 <option value="">Select a Flat </option>
                                                 @if($flats)
                                                     @foreach($flats as $flat)
@@ -129,6 +129,10 @@
 <style>
 h1.sb-page-header-title {
 padding-left: 12px;
+}
+.select2-container--default .select2-selection--single {
+    height: 39px;
+    width: 597px;
 }
 </style>
 

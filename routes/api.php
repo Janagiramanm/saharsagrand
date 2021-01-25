@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 // Route::post('/login')
 Route::post('/login', 'API\UserController@login');
+Route::post('/booking','API\BookingController@store');
 // Route::get('/logged-user', 'API\UserController@loggedUser');
 // Route::get('/sahasra-reg-users','UserController@index');
 
