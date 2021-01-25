@@ -8,6 +8,6 @@ class Booking extends Model
 {
     //
     protected $fillable = [
-        'bookingType','booking_date','start_time','end_time','user_id','status'
+        'bookingType','booking_date','start_time','end_time','user_id','status','total_guests'
     ];
 }
