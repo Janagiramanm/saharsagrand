@@ -65,13 +65,13 @@
                                                 <option value="">Select a Flat </option>
                                                 @if($flats)
                                                     @foreach($flats as $flat)
-                                                        <option @if($user->flat_id == $flat->id ) selected @endif value="{{ $flat->id }}"> {{ $flat->flat_number }}  </option>
+                                                        <option @if($user->flat_id == $flat->id ) selected @endif value="{{ old('flat_id')? old('flat_id'): $flat->id }}"> {{ $flat->flat_number }}  </option>
                                                     @endforeach
                                                 @endif
                                             
                                             </select>
                                             @error('flat_id')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                            @enderror

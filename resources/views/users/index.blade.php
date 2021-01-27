@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <h1 class="sb-page-header-title"><span>Users</span></h1>
-
+                    <label class="success-msg"></label>
                 </div>
                 
             </div>
@@ -53,12 +53,9 @@
                                         <td>@if(isset($user->flat->flat_number)){{ $user->flat->flat_number }} @endif</td>
                                         <td>{{ $user->type }}</td>
                                         <td>
-                                            @if($user->active == 1)
-                                              <label>Active</label>
-                                            @else
-                                               <a class="btn btn-secondary btn-sm activate-btn"
-                                                   href="#" form-data="{{ $user->id }}" >Activate</a>
-                                            @endif
+                                          
+                                            <input data-id="{{$user->id}}" class="toggle-class user-change-status" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ ($user->active == 1) ? 'checked' : '' }}>
+                                           
                                         </td>
                                         <td>
                                                 <div class="btn-group">
@@ -74,16 +71,34 @@
                         </div>
                     </div>
 
+                    <div class="modal" id="de-active-confirm" tabindex="-1"  role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ "Please confirm to delete the record" }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Close' }}</button>
+                                        <form action="{{ route('user.destroy',$user->id) }}" method="POST" style="display:inline">
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="btn btn-danger btn-ok" value="{{ 'Confirm' }}" />
+                                        </form>
+                                    </div>
+                                </div>
+                    </div>
+
             </div>
         </div>
     </div>
 
-
-<style>
-    h1.sb-page-header-title {
-    padding-left: 12px;
-}
-</style>
+     <style>
+        h1.sb-page-header-title {
+        padding-left: 12px;
+    }
+    </style>
+    
 
 
 

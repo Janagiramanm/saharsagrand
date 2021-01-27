@@ -39,7 +39,10 @@ class BlockController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $request->validate([
+            'name' => 'required|unique:blocks,name',
+                      
+        ]);
         
         $block = new Block();
         $block->name = $request->input('name');
@@ -81,6 +84,10 @@ class BlockController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'name' => 'required|unique:blocks,name,'.$id,
+                      
+        ]);
         $block = Block::find($id);
         $block->name = $request->input('name');
         $block->save();

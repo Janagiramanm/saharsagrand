@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::get('/admin/user/edit/{id}','UserController@edit')->name('user.edit');
     Route::delete('/admin/user/edit/{id}/delete','UserController@destroy')->name('user.destroy');
     Route::put('/admin/user/edit/{id}/update','UserController@update')->name('user.update');
+    Route::post('/change-user-status','UserController@changeUserStatus');
    
 
     Route::get('/admin/blocks','BlockController@index')->name('blocks');

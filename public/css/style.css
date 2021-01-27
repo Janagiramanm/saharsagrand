@@ -203,3 +203,6 @@ h2.sb-page-header-title {
 .nav-link:hover {
     color: rgb(235, 185, 94);
 }
+.toggle-off.btn {
+    padding-left: 1.2rem !important;
+}

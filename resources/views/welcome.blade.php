@@ -263,7 +263,7 @@
                            
                         </div>
                         <div class="mb-3">
-                            <label for="email">Email Address</label>
+                            <label for="email">Email Address<span class="text-danger">*</span></label>
                             <input type="text" name="email" class="form-control" id="email" placeholder="Please enter email id">
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>   
@@ -288,7 +288,7 @@
                                     <option value="">Select a Flat </option>
                                    
                                 </select>
-                                <span class="text-danger">{{ $errors->first('flat_number') }}</span>
+                                <span id="error-flat" class="text-danger">{{ $errors->first('flat_number') }}</span>
                         </div>
                         <div class="mb-3">
                                 <label class="form-label">Type<span class="danger-str">*</span></label>

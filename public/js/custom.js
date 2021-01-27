@@ -46,6 +46,7 @@ $(document).ready(function(){
                 }
             },
             email: {
+                    required: true,
                     maxlength: 50,
                     email: true,
                     remote: {
@@ -69,22 +70,23 @@ $(document).ready(function(){
             },
             flat_number: {
                 required: true,
-                remote: {
+                // remote: {
 
-                    url: "checkflat",
-                    type: "post",
-                    data: {
-                        block: $("#block").val(),
-                        flat: $("#flat_number").val()
-                    },
-                    dataFilter: function(data) {
-                        if (data == "true") {
-                            return  false;
-                        } else {
-                            return true;
-                        }
-                    }
-                }
+                //     url: "checkflat",
+                //     type: "post",
+                //     data: {
+                //         block: $("#block").val(),
+                //         flat: $("#flat_number").val(),
+                //         type: $("#type").val()
+                //     },
+                //     dataFilter: function(data) {
+                //         if (data == "true") {
+                //             return  false;
+                //         } else {
+                //             return true;
+                //         }
+                //     }
+                // }
             },
             type:{
                 required: true,
@@ -104,6 +106,7 @@ $(document).ready(function(){
                 remote: "Mobile Number already exist"
             },
             email: {
+                required: "Please enter enter valid email",
                 email: "Please enter valid email",
                 maxlength: "The email name should less than or equal to 50 characters",
                 remote: "Email is already exists",
@@ -113,7 +116,7 @@ $(document).ready(function(){
             },
             flat_number: {
                 required: "Please enter flat number",
-                remote:" Flat Number already registered",
+                // remote:" Flat Number already registered",
             } ,
             type: {
                 required: "Please select type",
@@ -124,16 +127,22 @@ $(document).ready(function(){
         submitHandler: function(form) {
        
           $('#user-reg-submit').html('Sending..');
+          $("#error-flat").text('');
           $.ajax({
             // url: "{{ url('jquery-ajax-form-submit-validation')}}" ,
             url: "/user/store" ,
             type: "POST",
             data: $('#register_form').serialize(),
             success: function( resp ) {
-                if(resp.id!=''){
+              
+                if(resp.status == 0){
+                    $('#user-reg-submit').html('Submit');
+                    $("#error-flat").text(resp.message);
+                }
+                if(resp.status == 1){
                     $('.register-form').hide();
                     $('.otp-form').show();
-                    $("#user_id").val(resp.id);
+                    $("#user_id").val(resp.data.id);
                 }
             }
           });
@@ -241,6 +250,10 @@ $(document).ready(function(){
                         $(".invalid-login").text('Invalid Username and Password!.');
                         $('#login-btn').html('Login');
                     }
+                    if(response.status == 2){
+                        $(".invalid-login").text('Your account has been de activated.');
+                        $('#login-btn').html('Login');
+                    }
                    
                    }
                  });
@@ -341,6 +354,29 @@ $(document).ready(function(){
             allowClear: true,
             // dropdownParent: $("#registerModal")
         });
+
+
+        $('.user-change-status').on('change',function() {
+            var status = $(this).prop('checked') == true ? 1 : 0; 
+            var user_id = $(this).data('id'); 
+
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/change-user-status',
+                data: {'status': status, 'userid': user_id},
+                success: function(resp){
+                    $(".success-msg").text(resp.message)
+                 // console.log(data.success)
+                }
+            });
+        })
     
 
 });

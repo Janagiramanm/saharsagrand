@@ -15,6 +15,9 @@ use App\Flat;
 use App\Block;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendRegistrationOTP;
+use App\Mail\ActivationOTP;
+use Illuminate\Validation\Rule; 
+
 // namespace Illuminate\Auth\Middleware;
 
 use Auth;
@@ -58,6 +61,17 @@ class UserController extends Controller
        
         $sixRandomDigit = mt_rand(100000,999999);
 
+        $isFlatExists = $this->checkFlat($request);
+        if($isFlatExists == true){
+           
+            $type =  $request->input('type');
+            $msg = [
+                'status'=> 0,
+                'message' => 'This flat has been registered a '. $type
+            ];
+            return response()->json($msg);
+        }
+
         AppHelper::sendRegistrationOtp($request->input('name'), $request->input('mobile'), $sixRandomDigit);
         $user = new User();
         $user->name = $request->input('name');
@@ -74,7 +88,12 @@ class UserController extends Controller
             if($user->email!=''){
                 Mail::to($user->email)->send(new SendRegistrationOTP($user));
             }
-            return response()->json($user);
+            $msg = [
+                'status'=> 1,
+                'message' => 'Success',
+                'data' => $user
+            ];
+            return response()->json($msg);
            
         }else{
             echo 'failed';
@@ -119,15 +138,33 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+      
+
         $request->validate([
             'name' => 'required',
-            'email' => 'nullable|email|unique:users,email,'.$id, 
+            'email' => [
+                     'required','email',Rule::unique('users')->where(function($query) use($id)  {
+                        $query->where('active', '=', 1);
+                        $query->where('id', '!=', $id);
+                  })
+             ],
             'mobile' => 'required|digits:10|regex:/^[0-9]/',
             'block_id' => 'required',
-            'flat_id' => 'required', 
-            'type' => 'required'           
+            'flat_id' => [
+                'required',Rule::unique('users')->where(function($query) use ($request,$id) {
+                   $query->where('active', '=', 1);
+                   $query->where('type', '=', $request->input('type'));
+                   $query->where('block_id','=',$request->input('block_id'));
+                   $query->where('flat_id','=',$request->input('flat_id'));
+                   $query->where('id','!=',$id);
+             }),
+             
+        ],
+        ['flat_id.unique' => __('messages.unique', ['Already Exists'])],
+        'type' => 'required'           
         ]);
 
+        
         $user =User::find($id);
         $user->name = $request->input('name');
         $user->email= $request->input('email');
@@ -165,11 +202,13 @@ class UserController extends Controller
 
         $isFlatExist = User::where('block_id','=',$request->input('block'))
         ->where('flat_id','=',$request->input('flat_number'))
+        ->where('type','=',$request->input('type'))
         ->where('active','=',1)->first();
+       
         if($isFlatExist){
-           echo 'true';
+           return true;
         }else{
-            echo 'false';
+            return false;
         }
     }
 
@@ -254,32 +293,40 @@ class UserController extends Controller
        
         if (Auth::attempt([
                         'email' => $request->username,
-                        'password' => $request->password
+                        'password' => $request->password,
+                        'active' => 1,
                     ],true)
                     || Auth::attempt([
                         'mobile' => $request->username,
-                        'password' => $request->password
+                        'password' => $request->password,
+                        'active' => 1,
                     ],true)){
                 
             $user = User::where('email', '=', $request->username  )
-                       ->orWhere('mobile' , '=', $request->username)->first();
-           // $token = $user->createToken('access_token')->accessToken;
+                       ->orWhere('mobile' , '=', $request->username)
+                       ->where('active','=',1)->first();
+        
+             // $token = $user->createToken('access_token')->accessToken;
             //$user->remember_token = $token;
-            $user->save();
-            $msg =  array(
-                'status'=>1,
-                'message'=>'Success',
-                'type'=>$user['type']
-            );
-            return response()->json($msg);
-        }else{
-            $msg =  array(
-                'status'=>0,
-                'message'=>'Failed',
-                'type'=>Null
-            );
-            return response()->json($msg);
+            if($user){
+                $user->save();
+                $msg =  array(
+                    'status'=>1,
+                    'message'=>'Success',
+                    'type'=>$user['type']
+                );
+                return response()->json($msg);
+            }
+           
         }
+
+        $msg =  array(
+            'status'=>0,
+            'message'=>'Failed',
+            'type'=>Null
+        );
+        return response()->json($msg);
+    
     }
 
     /**
@@ -363,9 +410,61 @@ class UserController extends Controller
                         ->groupBy('flat_number','id')->get();
         }
         return response()->json($data);
-      
-        
-        
-    	
+     	
+    }
+
+    public function changeUserStatus(Request $request){
+
+        $status = $request->input('status');
+        if($status == 1){
+            $rndString = mt_rand(100000,999999);
+            $hashed_password = Hash::make($rndString);
+            $user = User::find($_POST['userid']);
+            $user->active = 1;
+            $user->password = $hashed_password;
+            $user->save();
+            //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
+           
+            AppHelper::sendActivationSms($user['name'],$user['mobile'], $rndString);
+            Mail::to($user->email)->send(new ActivationOTP($user, $rndString));
+         
+            if($user){
+                $msg =  array(
+                    'status'=>1,
+                    'message'=>'Successfully Activated'
+                );
+                return response()->json($msg);
+            }
+        }else{
+            $user = User::find($_POST['userid']);
+            $user->active = 0;
+            $user->save();
+            if($user){
+                $msg =  array(
+                    'status'=>1,
+                    'message'=>'Successfully De-Activated'
+                );
+                return response()->json($msg);
+            }
+        }
+
+        // $rndString = mt_rand(100000,999999);
+        // $hashed_password = Hash::make($rndString);
+        // $user = User::find($_POST['userid']);
+        // $user->active = 1;
+        // $user->password = $hashed_password;
+        // $user->save();
+        // //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
+       
+        // AppHelper::sendActivationSms($user['name'],$user['mobile'], $rndString);
+     
+        // if($user){
+        //     $msg =  array(
+        //         'status'=>1,
+        //         'message'=>'Success'
+        //     );
+        //     return response()->json($msg);
+        // }
+
     }
 }

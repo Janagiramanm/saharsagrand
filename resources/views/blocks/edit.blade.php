@@ -25,7 +25,12 @@
                                         <div class="form-group">
                                         <label>Block Name</label>
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $block->name }}" required autocomplete="name" autofocus>
-                                        </div>
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror    
+                                    </div>
                                     </div>
                                    
                                 </div>
