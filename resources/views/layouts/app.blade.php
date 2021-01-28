@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="logo">
-                                <img src="{{ asset('/images/logo.png') }}"/>
+                               <a href="/"> <img src="{{ asset('/images/logo.png') }}"/></a>
                             </div>
                         </div>
                         <div class="col-6 d-flex align-items-center justify-content-end">
