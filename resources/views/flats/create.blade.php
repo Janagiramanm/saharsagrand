@@ -31,7 +31,15 @@
                                                 <option value="">Select Type</option>
                                             @if($blocks)
                                                     @foreach($blocks as $block)
-                                                        <option value="{{ $block->id }}"> {{ $block->name }}  </option>
+                                                             @if(old('block'))
+                                                                            <option value="{{$block->id}}" @if($block->id == old('block')) selected ="selected" @endif >
+                                                                            {{$block->name}}
+                                                                            </option>
+                                                    @else
+                                                          <option value="{{ $block->id }}"> {{ $block->name }}  </option>
+
+                                                    @endif
+                                                       
                                                     @endforeach
                                             @endif
                                                 
@@ -40,10 +48,10 @@
                                     </div> 
 
                                     <div class="form-group">
-                                        <label>Flat Name</label>
+                                        <label>Flat Number</label>
                                         <input id="flat_number" type="text" class="form-control @error('flat_number') is-invalid @enderror" name="flat_number" value="{{ old('flat_number') }}" required autocomplete="name" autofocus>
                                        
-                                        @error('name')
+                                        @error('flat_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

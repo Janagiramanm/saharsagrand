@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Helpers\AppHelper;
+use App\Mail\BookingConfirmation;
+use Illuminate\Support\Facades\Mail;
 use App\Booking;
 use App\User;
 
@@ -27,11 +30,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
-       // $token = $request->header('')
-    //    echo '<pre>';
-    //    print_r($request->input('timeSlots'));
-    //    exit;
+       
        $token = $request->bearerToken();
        $user = User::where('remember_token','=',$token)->first();
        if(!$user){
@@ -43,6 +42,8 @@ class BookingController extends Controller
 
        $timeSlots = $request->input('timeSlots');
 
+       $booking_code = substr(md5(microtime()),rand(0,26),6);
+
        $booking = new Booking();
        $booking->booking_type = $request->input('bookingType');
        $booking->booking_date = $request->input('selectedDate');
@@ -50,8 +51,16 @@ class BookingController extends Controller
        $booking->end_time = $timeSlots['endTime'];
        $booking->user_id = $user->id;
        $booking->total_guests = $request->input('totalGuests');
+       $booking->booking_code = $booking_code;
        $booking->status = 1;
        $booking->save();
+
+       $userDetails = User::find($user->id);
+       
+       AppHelper::BookingConfirmation($userDetails->name, $request->input('mobile'), $booking_code);
+       if($userDetails->email!=''){
+             Mail::to($userDetails->email)->send(new BookingConfirmation($user, $booking));
+       }
        return response()->json( [
                                 'status' => 1,
                                 'message' => 'Successfully Booked',

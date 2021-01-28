@@ -34,9 +34,10 @@ $(document).ready(function(){
                     url: "checkmobile",
                     type: "post",
                     data: {
-                        mobile: $("#mobile").val()
+                        mobile: $("input[number='mobile']").val()
                     },
                     dataFilter: function(data) {
+                        alert(data);
                         if (data == "true") {
                             return  false;
                         } else {
@@ -75,9 +76,9 @@ $(document).ready(function(){
                 //     url: "checkflat",
                 //     type: "post",
                 //     data: {
-                //         block: $("#block").val(),
-                //         flat: $("#flat_number").val(),
-                //         type: $("#type").val()
+                //         block: $('select[name="block"] option:selected').val(),
+                //         flat: $('select[name="flat_number"] option:selected').val(),
+                //         type: $('select[name="type"] option:selected').val()
                 //     },
                 //     dataFilter: function(data) {
                 //         if (data == "true") {
@@ -377,6 +378,57 @@ $(document).ready(function(){
                 }
             });
         })
+
+        $("#search-book").on('click',function(){
+             var booking_code = $("#booking-code").val();
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/search-booking',
+                data: {'code': booking_code},
+                success: function(resp){
+                    if(resp.status == 1){
+                        $(".info-card-block").html(resp.data)
+                    }else{
+
+                    }
+                   
+                 // console.log(data.success)
+                }
+            });
+        });
     
+        // $("#mobile").on('blur',function(){
+           
+        // })
+        // $("#mobile").on("change", function(e) {
+        //      var mobileLength = $(this).val().length;
+           
+        //      if(mobileLength >=10 ){
+        //         var booking_code = $("#booking-code").val();
+              
+        //         $.ajax({
+        //             type: "POST",
+        //             dataType: "json",
+        //             url: '/checkmobile',
+        //             data: {'mobile': $(this).val() },
+        //             success: function(resp){
+        //                 if(resp.status == 1){
+        //                     $("#mobile-error").text("Mobile number already exists.")
+        //                 }else{
+
+        //                 }
+                    
+        //             // console.log(data.success)
+        //             }
+        //         });
+
+        //      }
+        // })
 
 });

@@ -22,6 +22,7 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('total_guests')->default(0);
             $table->string('status')->nullable();
+            $table->string('booking_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

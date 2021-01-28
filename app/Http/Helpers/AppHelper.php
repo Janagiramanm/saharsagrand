@@ -75,4 +75,25 @@ class AppHelper
             $ch = curl_init();
         }
     }
+
+    public static function BookingConfirmation($name,$receipientno,$rndString){
+        if ($receipientno) {
+
+            $ch = curl_init();
+            // $user=env('MVAAYOO_USERNAME'); //"manoj.p@netiapps.com:Netiapps839";
+            // $senderID = env('MVAAYOO_SENDERID');
+            $user="manoj.p@netiapps.com:Netiapps839";
+            $senderID="sahas";
+            $msgtxt = "Dear $name your OTP for registration is $rndString Rgds SGOWA";
+           
+            curl_setopt($ch,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, "user=$user&senderID=$senderID&receipientno=$receipientno&msgtxt=$msgtxt");
+            curl_exec($ch);
+           
+            curl_close($ch);
+            $ch = curl_init();
+        }
+    }
 }

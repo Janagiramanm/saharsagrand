@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Booking;
 
 use Redirect;
 
@@ -17,7 +18,8 @@ class BookingController extends Controller
     public function index()
     {
         //
-
+        $bookings = Booking::paginate(10);
+        return view('booking.index',compact(['bookings']));
     }
 
     /**
@@ -94,5 +96,32 @@ class BookingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * to search booking from anonymous user
+     */
+    public function searchBooking(Request $request){
+         $bookingCode = $request->input('code');
+         $booking = Booking::where('booking_code','=',$bookingCode)->first();
+         $returnHTML = view('booking.searchBook')->with('booking', $booking)->render();
+//return response()->json(array('success' => true, 'html'=>$returnHTML));
+         if($booking){
+            $msg = [
+                'status' => 1,
+                'data' => $returnHTML
+            ];
+            return response()->json($msg);
+         }
+
+         $msg = [
+            'status' => 0,
+            'message' => 'No Records Found'
+        ]; 
+         return response()->json($msg);
+
+
+         echo '<pre>';
+         print_r($booking);
     }
 }

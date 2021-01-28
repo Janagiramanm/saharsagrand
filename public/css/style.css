@@ -206,3 +206,7 @@ h2.sb-page-header-title {
 .toggle-off.btn {
     padding-left: 1.2rem !important;
 }
+input#booking_code {
+    width: 70%;
+    margin: auto;
+}

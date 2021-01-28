@@ -59,7 +59,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
        
-        $sixRandomDigit = mt_rand(100000,999999);
+        
 
         $isFlatExists = $this->checkFlat($request);
         if($isFlatExists == true){
@@ -71,7 +71,7 @@ class UserController extends Controller
             ];
             return response()->json($msg);
         }
-
+        $sixRandomDigit = mt_rand(100000,999999);
         AppHelper::sendRegistrationOtp($request->input('name'), $request->input('mobile'), $sixRandomDigit);
         $user = new User();
         $user->name = $request->input('name');

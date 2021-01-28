@@ -12,7 +12,7 @@
         <a class="nav-link " href="/admin/user-list"><img src="/images/master.png"><span class="text-capitalize"> Users</span></a>
         <a class="nav-link " href="/admin/blocks"><img src="/images/dashboard.png"><span class="text-capitalize"> Blocks</span></a>
         <a class="nav-link " href="/admin/flats"><img src="/images/master.png"><span class="text-capitalize"> Flats</span></a>
-        <a class="nav-link " href="/admin/user-list"><img src="/images/dashboard.png"><span class="text-capitalize"> Bookings</span></a>
+        <a class="nav-link " href="/admin/bookings"><img src="/images/dashboard.png"><span class="text-capitalize"> Bookings</span></a>
         <a class="nav-link " href="/admin/user-list"><img src="/images/dashboard.png"><span class="text-capitalize"> Notification</span></a>
         <a class="nav-link " href="/admin/user-list"><img src="/images/dashboard.png"><span class="text-capitalize"> Amenities</span></a>
         <a class="nav-link" data-toggle="collapse" href="#collapsemanifests" role="button" aria-expanded="false" aria-controls="collapsemanifests">
