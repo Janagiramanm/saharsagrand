@@ -37,7 +37,7 @@
                             <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
-                            <th>Action</th>
+                           
                         </tr>
                         @php
                             $index = $bookings->firstItem()
@@ -51,12 +51,6 @@
                                 <td>{{ $booking->start_time }}</td>
                                 <td>{{ $booking->end_time }}</td>
                              
-                                <td>
-                                    <div class="btn-group">
-                                    <a title="Edit" href="{{ route('block.edit',$booking->id)}}" class="btn btn-secondary btn-sm">Edit</a>
-                                    </div>
-                                </td>
-                            
                             </tr>
                         @endforeach
                     </table>
