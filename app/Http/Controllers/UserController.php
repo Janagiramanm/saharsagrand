@@ -400,18 +400,18 @@ class UserController extends Controller
     /**
      * to get flat number for ajax
      */
-    public function selectSearch(Request $request)
-    {
-        $data =[];
-        if($request->has('block')){
-                $data = Flat::select("flat_number","id")
-                        ->where('block_id','=',$request['block'])
-                        ->where("flat_number","LIKE", "%".$request['query']."%")
-                        ->groupBy('flat_number','id')->get();
-        }
-        return response()->json($data);
+    // public function selectSearch(Request $request)
+    // {
+    //     $data =[];
+    //     if($request->has('block')){
+    //             $data = Flat::select("flat_number","id")
+    //                     ->where('block_id','=',$request['block'])
+    //                     ->where("flat_number","LIKE", "%".$request['query']."%")
+    //                     ->groupBy('flat_number','id')->get();
+    //     }
+    //     return response()->json($data);
      	
-    }
+    // }
 
     public function changeUserStatus(Request $request){
 

@@ -358,27 +358,7 @@
         </div>
     </div>
 </div>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> -->
 
-<script>
-
-    // var path = "{{ route('autocomplete') }}";
-    
-    // $('input.typeahead').typeahead({
-    //     //var block = $("#block").val();
-    //     source:  function (query, process) {
-    //         return $.get(path, { flat: query,block:$("#block").val() }, function (data) {
-    //             // if (!data.length) {
-    //             //     return 'No Flats Found';
-    //             // }
-    //             return process(data);
-    //         });
-    //     }
-    // });
-
-   
-  
-</script>
 
 
 @endsection

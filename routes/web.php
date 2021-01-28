@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::put('/admin/flat/update/{id}','FlatController@update')->name('flat.update');
 
     Route::get('/admin/bookings','BookingController@index');
+    Route::get('/admin/bookings/search','BookingController@index')->name('bookings.search');
 });
 
 Route::post('/checkflat','UserController@checkFlat');
@@ -57,7 +58,7 @@ Route::post('/user/change-password','UserController@changePassword');
 Route::post('/user/get-flats','UserController@getFlats');
 Route::get('/user/reg-success','UserController@regSuccess');
 // Route::post('/autocomplete','UserController@selectSearch');
-Route::get('/autocomplete', 'UserController@selectSearch')->name('autocomplete');
+// Route::get('/autocomplete', 'UserController@selectSearch')->name('autocomplete');
 
 Route::post('/search-booking','BookingController@searchBooking');
 

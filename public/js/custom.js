@@ -309,25 +309,25 @@ $(document).ready(function(){
                 }
            });
      
-        $('.itemName').select2({
-            placeholder: 'Select an item',
-            ajax: {
-              url: '/autocomplete',
-              dataType: 'json',
-              delay: 250,
-              processResults: function (data) {
-                return {
-                  results:  $.map(data, function (item) {
-                        return {
-                            text: item.name,
-                            id: item.id
-                        }
-                    })
-                };
-              },
-              cache: true
-            }
-          });
+        // $('.itemName').select2({
+        //     placeholder: 'Select an item',
+        //     ajax: {
+        //       url: '/autocomplete',
+        //       dataType: 'json',
+        //       delay: 250,
+        //       processResults: function (data) {
+        //         return {
+        //           results:  $.map(data, function (item) {
+        //                 return {
+        //                     text: item.name,
+        //                     id: item.id
+        //                 }
+        //             })
+        //         };
+        //       },
+        //       cache: true
+        //     }
+        //   });
         $("#block").on('change',function(){
            
             let block_id =  $(this).val();
@@ -355,6 +355,17 @@ $(document).ready(function(){
             allowClear: true,
             // dropdownParent: $("#registerModal")
         });
+
+        $("#user_name_filter").select2({
+            placeholder: "Select User",
+            allowClear: true,
+        });
+
+        $("#amenity_name_filter").select2({
+            placeholder: "Select Amenity",
+            allowClear: true,
+        })
+
 
 
         $('.user-change-status').on('change',function() {
@@ -397,38 +408,11 @@ $(document).ready(function(){
                     }else{
 
                     }
-                   
-                 // console.log(data.success)
+                 
                 }
             });
         });
     
-        // $("#mobile").on('blur',function(){
-           
-        // })
-        // $("#mobile").on("change", function(e) {
-        //      var mobileLength = $(this).val().length;
-           
-        //      if(mobileLength >=10 ){
-        //         var booking_code = $("#booking-code").val();
-              
-        //         $.ajax({
-        //             type: "POST",
-        //             dataType: "json",
-        //             url: '/checkmobile',
-        //             data: {'mobile': $(this).val() },
-        //             success: function(resp){
-        //                 if(resp.status == 1){
-        //                     $("#mobile-error").text("Mobile number already exists.")
-        //                 }else{
-
-        //                 }
-                    
-        //             // console.log(data.success)
-        //             }
-        //         });
-
-        //      }
-        // })
+      
 
 });

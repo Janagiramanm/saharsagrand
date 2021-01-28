@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Booking;
+use App\User;
 
 use Redirect;
 
@@ -15,11 +16,19 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $bookings = Booking::paginate(10);
-        return view('booking.index',compact(['bookings']));
+        echo $user_id = $request->input('user_id');
+
+        $bookings = Booking::when($user_id, function ($q) use ($user_id){
+            return $q->where('user_id', '=', "$user_id");
+        })->paginate(10);
+
+        $users = User::where('active','=',1)
+                  ->where('role','!=','superadmin')->get();
+
+        return view('booking.index',compact(['bookings','users']));
     }
 
     /**
@@ -105,7 +114,7 @@ class BookingController extends Controller
          $bookingCode = $request->input('code');
          $booking = Booking::where('booking_code','=',$bookingCode)->first();
          $returnHTML = view('booking.searchBook')->with('booking', $booking)->render();
-//return response()->json(array('success' => true, 'html'=>$returnHTML));
+
          if($booking){
             $msg = [
                 'status' => 1,

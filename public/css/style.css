@@ -210,3 +210,13 @@ input#booking_code {
     width: 70%;
     margin: auto;
 }
+a.form-group.btn.btn-group.btn-outline-dark.mb-2.col-1 {
+    margin-left: 5px;
+}
+.filter_form {
+    padding-bottom: 30px;
+}
+.filter_form .select2-container--default .select2-selection--single {
+    height: 37px;
+    width: 285px;
+}
