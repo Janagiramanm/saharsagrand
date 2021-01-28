@@ -37,6 +37,7 @@
                             <th>Date</th>
                             <th>Start Time</th>
                             <th>End Time</th>
+                            <th>Total Guest</th>
                            
                         </tr>
                         @php
@@ -50,6 +51,7 @@
                                 <td>{{ $booking->booking_date }}</td>
                                 <td>{{ $booking->start_time }}</td>
                                 <td>{{ $booking->end_time }}</td>
+                                <td>{{ $booking->total_guests }}</td>
                              
                             </tr>
                         @endforeach
