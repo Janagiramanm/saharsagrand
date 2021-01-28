@@ -42,7 +42,7 @@ class BookingController extends Controller
 
        $timeSlots = $request->input('timeSlots');
 
-       $booking_code = substr(md5(microtime()),rand(0,26),6);
+       $booking_code =  mt_rand(100000,999999);
 
        $booking = new Booking();
        $booking->booking_type = $request->input('bookingType');
