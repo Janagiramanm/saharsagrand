@@ -413,6 +413,23 @@ $(document).ready(function(){
             });
         });
     
+        $("#time-required").on('change',function(){
+            if($(this).is(':checked')){
+                
+                $(".time-settings-sec").show();
+            }else{
+               
+                $(".time-settings-sec").hide();
+            }
+
+        })
+        
+        if($("#time-required").is(':checked')){
+            $(".time-settings-sec").show();
+        }else{
+            $(".time-settings-sec").hide();
+        }
+
       
 
 });

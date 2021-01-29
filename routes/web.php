@@ -47,6 +47,12 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
 
     Route::get('/admin/bookings','BookingController@index');
     Route::get('/admin/bookings/search','BookingController@index')->name('bookings.search');
+
+    Route::get('/admin/amenities','AmenityController@index')->name('amenities');
+    Route::get('/admin/amenities/add','AmenityController@create')->name('amenity.create');
+    Route::post('/admin/amenities/store','AmenityController@store')->name('amenity.store');
+    Route::get('/admin/amenities/edit/{id}','AmenityController@edit')->name('amenity.edit');
+    Route::put('/admin/amenities/update/{id}','AmenityController@update')->name('amenity.update');
 });
 
 Route::post('/checkflat','UserController@checkFlat');

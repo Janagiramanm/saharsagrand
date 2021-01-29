@@ -107,12 +107,15 @@ class BookingController extends Controller
         $selectedMonth = $request->input('selectedMonth');
         $availablePerson = 5;
 
-        $current_day = date('d');
-        for($i = $current_day; $i <=  date('t'); $i++)
-        {
-            $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
-        }
-      
+        // $current_day = date('d');
+        // for($i = $current_day; $i <=  date('t'); $i++)
+        // {
+        //     $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
+        // }
+
+        $current_date = date('Y-m-d');
+        $tomorrow = date("Y-m-d", time() + 86400);
+        $dates = [$current_date,$tomorrow];
         $isFullDayEvent = false;
         $timeSlots = array('09:00-10:00', '10:00-11:00', '11:00-12:00',
                            '12:00-13:00', '13:00-14:00', '14:00-15:00');

@@ -19,7 +19,7 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         //
-        echo $user_id = $request->input('user_id');
+        $user_id = $request->input('user_id');
 
         $bookings = Booking::when($user_id, function ($q) use ($user_id){
             return $q->where('user_id', '=', "$user_id");
