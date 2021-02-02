@@ -17,8 +17,12 @@ class CreateAmenitiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('advance_book')->nullable();
-            $table->boolean('time_slots');
-            $table->boolean('status')->default(1);
+            $table->string('logo')->nullable();
+            $table->string('amount')->nullable();
+            $table->boolean('time_slots')->default(1);
+            $table->boolean('active')->default(1);
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
            

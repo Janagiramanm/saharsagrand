@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Amenity;
 use App\AmenityTime;
+use Illuminate\Support\Facades\Hash;
 
 class AmenityController extends Controller
 {
@@ -45,13 +46,25 @@ class AmenityController extends Controller
             'name' => 'required|unique:amenities,name',
             
         ]);
-     
+
+            
         $name = $request->input('name');
         $advance_book = $request->input('advance_book');
+        $amenity_logo = $request->file('logo');
+
+      
+        
+        
 
         $amenity = new Amenity();
         $amenity->name = $name;
         $amenity->advance_book = $advance_book;
+        if (request()->hasFile('logo')) {
+            $logo = request()->file('logo');
+            $logoimage = $logo->getClientOriginalName() . time() . "." . $logo->getClientOriginalExtension();
+            $logo->move(public_path('images'), $logoimage);
+            $amenity->logo = $logoimage;
+        }
         $amenity->time_slots = $request->input('time_setting') ? true : false ;
         $amenity->save();
         if($request->input('time_setting')){
@@ -117,10 +130,21 @@ class AmenityController extends Controller
      
         $name = $request->input('name');
         $advance_book = $request->input('advance_book');
+        $amenity_logo = $request->file('logo');
+
+      
+
         $amenity = Amenity::find($id);
         $amenity->name = $name;
         $amenity->advance_book = $advance_book;
         $amenity->time_slots = $request->input('time_setting') ? true : false ;
+     
+        if (request()->hasFile('logo')) {
+            $logo = request()->file('logo');
+            $logoimage = $logo->getClientOriginalName() . time() . "." . $logo->getClientOriginalExtension();
+            $logo->move(public_path('images'), $logoimage);
+            $amenity->logo = $logoimage;
+        }
         $amenity->save();
         if($request->input('time_setting')){
             $starts = $request->input('start');
@@ -156,5 +180,45 @@ class AmenityController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * to block amenity
+     */
+    public function block(Request $request){
+        $id = $request->input('amenityId');
+        $start_date = date('Y-m-d',strtotime($request->input('start_date')));
+        $end_date = date('Y-m-d',strtotime($request->input('end_date')));
+        $amenity = Amenity::find($id);
+        $amenity->active = 0;
+        $amenity->start_date = $start_date;
+        $amenity->end_date = $end_date;
+        if($amenity->save()){
+            $msg = [
+                'status'=> 1,
+                'message' => $amenity->name . ' has been blocked',
+                
+            ];
+            return response()->json($msg);
+        }
+
+    }
+
+    public function unBlock(Request $request){
+
+        $id = $request->input('amenityId');
+        $amenity = Amenity::find($id);
+        $amenity->active = 1;
+        $amenity->start_date = NULL;
+        $amenity->end_date = NULL;
+        if($amenity->save()){
+            $msg = [
+                'status'=> 1,
+                'message' => $amenity->name . ' has been un-blocked',
+                
+            ];
+            return response()->json($msg);
+        }
+
     }
 }

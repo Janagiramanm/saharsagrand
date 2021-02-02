@@ -9,6 +9,7 @@ use App\Mail\BookingConfirmation;
 use Illuminate\Support\Facades\Mail;
 use App\Booking;
 use App\User;
+use App\Amenity;
 
 class BookingController extends Controller
 {
@@ -107,11 +108,15 @@ class BookingController extends Controller
         $selectedMonth = $request->input('selectedMonth');
         $availablePerson = 5;
 
-        // $current_day = date('d');
-        // for($i = $current_day; $i <=  date('t'); $i++)
-        // {
-        //     $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
-        // }
+
+        $amenities = Amenity::where('name','=',$bookingType)->first();
+        $advance_book = $amenities->advance_book;
+
+        $current_day = date('d');
+        for($i = $current_day; $i <= $advance_book; $i++)
+        {
+            $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
+        }
 
         $current_date = date('Y-m-d');
         $tomorrow = date("Y-m-d", time() + 86400);

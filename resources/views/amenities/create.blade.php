@@ -16,7 +16,7 @@
             <div class="col-12">
                 <div class="row ">
                     <div class="col-md-4">
-                        <form action="{{ route('amenity.store') }}" method="POST">
+                        <form action="{{ route('amenity.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
@@ -56,7 +56,11 @@
                                     </div>
                                     <div class="form-group">
                                     <label>Advance Booking </label>
-                                    <input id="name" type="number" class="form-control @error('advance_book') is-invalid @enderror" name="advance_book" value="{{ old('advance_book') }}" required autofocus>
+                                    <input id="name" type="number" class="form-control @error('advance_book') is-invalid @enderror" name="advance_book" value="{{ old('advance_book') }}"  autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                    <label>Logo</label>
+                                        <input type="file" name="logo" class="form-control">
                                     </div>
                                 </div>
                                 <br>

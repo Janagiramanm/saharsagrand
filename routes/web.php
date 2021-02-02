@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::post('/admin/amenities/store','AmenityController@store')->name('amenity.store');
     Route::get('/admin/amenities/edit/{id}','AmenityController@edit')->name('amenity.edit');
     Route::put('/admin/amenities/update/{id}','AmenityController@update')->name('amenity.update');
+    Route::post('/admin/amenities/block','AmenityController@block')->name('amenity.block');
+    Route::post('/admin/amenities/unblock','AmenityController@unBlock');
 });
 
 Route::post('/checkflat','UserController@checkFlat');

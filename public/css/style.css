@@ -226,3 +226,7 @@ th.time-section {
 th.day-section {
     width: 50%;
 }
+
+.image img {
+    width: 100px;
+}

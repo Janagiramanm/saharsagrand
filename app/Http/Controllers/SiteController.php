@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Block;
 use App\Flat;
+use App\Amenity;
 
 class SiteController extends Controller
 {
@@ -17,7 +18,8 @@ class SiteController extends Controller
     {
         //
         $blocks = Block::All();
-        return view('welcome', compact(['blocks']));
+        $amenities = Amenity::All();
+        return view('welcome', compact(['blocks','amenities']));
 
     }
 

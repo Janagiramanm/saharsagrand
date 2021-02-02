@@ -16,7 +16,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="">
-                            <form id="editAmenity" action="{{ route('amenity.update',$amenity->id) }}" method="POST">
+                            <form id="editAmenity" action="{{ route('amenity.update',$amenity->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -70,6 +70,13 @@
                                             <div class="form-group">
                                             <label>Advance Booking </label>
                                             <input id="name" type="number" class="form-control @error('advance_book') is-invalid @enderror" name="advance_book" value="{{ old('advance_book')?old('advance_book'):$amenity->advance_book }}" required autofocus>
+                                            </div>
+                                            <div class="form-group  image-card  ">
+                                               <div class="image"><img src="{{URL::to('/images/'.$amenity->logo)}}"/> </div>
+                                            </div>
+                                            <div class="form-group ">
+                                            <label>Change Logo</label>
+                                                <input type="file" name="logo" class="form-control">
                                             </div>
                                         </div>
                                     

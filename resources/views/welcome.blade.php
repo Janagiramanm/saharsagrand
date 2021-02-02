@@ -66,7 +66,26 @@
                          @endguest
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
+                    @foreach($amenities as $amenity)
+                        <div class="col-md-6 col-sm-12 col-lg-4">
+                            <div class="info-card">
+                                <div class="image"><img src="images/{{ $amenity->logo }}"/> </div>
+                                <div class="button">
+                                    <h3>{{ $amenity->name }}</h3>
+                                </div>
+                                @guest
+                                <div class="button">
+                                    <a href="#" class="btn btn-secondary w-100">Enroll</a>
+                                </div>
+                                @else
+                                    <div class="button">
+                                        <a href="https://booking.sahasragrand.com?bookingType={{$amenity->name}}&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Enroll</a>
+                                    </div>
+                                @endguest
+                            </div>
+                        </div>
+                    @endforeach
+                    <!-- <div class="col-md-6 col-sm-12 col-lg-4">
                         <div class="info-card">
                             <div class="image"><img src="images/icon-1.png"/> </div>
                             <div class="button">
@@ -166,7 +185,7 @@
                                 <a href="#" class="btn btn-secondary w-100">Submit</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
