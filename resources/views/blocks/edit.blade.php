@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -35,7 +35,7 @@
                                    
                                 </div>
                             </form>
-                            <div class="pt-lg-2">
+                            <div class="pt-lg-2 mt-4">
                                 <button form="editBlock" type="submit" class="btn btn-primary">{{ 'Update' }}</button>
                                 <button class="btn btn-danger mx-sm-2" data-toggle="modal" data-target="#deleteConfirm">{{ 'Delete' }}</button>
                             </div>

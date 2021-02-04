@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -9,7 +9,7 @@
 
                 </div>
                 <div>
-                    <a class="btn btn-primary" href="{{ route('block.create') }}">Add New Block</a>
+                    <a class="btn btn-info" href="{{ route('block.create') }}">Add New Block</a>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
 
                             
 
-                            <div class="card">
+                           
                             <table class="table table-bordered">
                                 <tr>
                                     <th>No</th>
@@ -53,7 +53,7 @@
                                 @endforeach
                             </table>
 
-                            </div>
+                            
                            
                         </div>
                     </div>

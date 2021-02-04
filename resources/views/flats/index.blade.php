@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -27,14 +27,12 @@
                                 </div>
                             @endif
 
-                            
 
-                            <div class="card">
                             <table class="table table-bordered">
                                 <tr>
                                     <th>No</th>
-                                    <th>Block</th>
-                                    <th>Name</th>
+                                    <th>Block </th>
+                                    <th>Flat</th>
                                     <th>Action</th>
                                 </tr>
                                 @php
@@ -54,8 +52,10 @@
                                     </tr>
                                 @endforeach
                             </table>
-
+                            <div>
+                            {{ $flats->links() }}
                             </div>
+                            
                            
                         </div>
                     </div>

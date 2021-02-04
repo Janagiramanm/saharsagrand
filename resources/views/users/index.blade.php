@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -27,7 +27,7 @@
 
                             
 
-                            <div class="card">
+                           
                             <table class="table table-bordered">
                                 <tr>
                                     <th>No</th>
@@ -66,7 +66,7 @@
                                 @endforeach
                             </table>
 
-                            </div>
+                           
                            
                         </div>
                     </div>

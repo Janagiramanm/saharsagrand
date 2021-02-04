@@ -1,21 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="main-container">
-        <div class="container">
-            <div class="container-block">
-                <div class="inner-page">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="title">
-                                <h3>Bookings</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                    <div class="row justify-content-center">
-
 <div class="container">
+        <div class="sb-page-header-content py-5">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h1 class="sb-page-header-title"><span>Bookings</span></h1>
+
+                </div>
+                <!-- <div>
+                    <a class="btn btn-info" href="{{ route('block.create') }}">Add New Block</a>
+                </div> -->
+            </div>
+        </div>
     <div class="row justify-content-center">
         <div class="col-12">
 
@@ -47,23 +44,14 @@
                                         <!-- <input type="text" placeholder="Branch Name" class="form-control" id="branch_name" name="branch_name" value="{{ request()->input('branch_name') }}"> -->
                                     </div>
                                     <div class="form-group mx-sm-2 mb-2 col-3" id="sandbox-container">
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control" value="">
-                                            <div class="input-group-addon">
-                                                <span class="glyphicon glyphicon-th"></span>
+                                                <input class="form-control" type="date" id="end_date" name="end_date"
+                                                    value="{{ date('d-m-Y')}}"
+                                                    min="2021-01-01" max="2021-12-31">
                                             </div>
-                                        </div>
-                                        <!-- <div class="input-daterange input-group" id="datepicker">
-                                            <input type="text" class="input-sm form-control" name="booking_date" placeholder="Date" value="{{ request()->input('start_date') }}">
-                                        </div> -->
+                                       
+                                        
                                     </div>
-                                    <!-- <div class="form-group mx-sm-2 mb-2 col-3">
-                                        <input type="text" placeholder="Pincode" class="form-control" id="pincode" name="pincode" value="{{ request()->input('pincode') }}">
-                                    </div> -->
-
-
-                                <!-- </div>
-                                <div class="row btn-section"> -->
+                                   
                                     <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-1">
                                                 {{ __('Search') }}
                                             </button>

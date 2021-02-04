@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -7,9 +7,7 @@
                 <div>
                     <h1 class="sb-page-header-title"><span>Add Flat</span></h1>
                 </div>
-{{--                <div>--}}
-{{--                    <a class="btn btn-primary" href="{{ route('pricing.index') }}"> Back</a>--}}
-{{--                </div>--}}
+
 
             </div>
 
@@ -59,9 +57,10 @@
                                     </div>
                                 </div>
                                 <br>
-                                <br>
-                                <div class="col-xs-12 col-sm-12 col-md-12 ">
-                                    <button type="submit" class="btn btn-primary">{{ 'Submit' }}</button>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-4 mt-4 ">
+                                        <button type="submit" class="btn btn-primary">{{ 'Submit' }}</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>

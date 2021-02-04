@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $users = User::where('type', '!=', 'superadmin')
         ->where('mobile_verified_at', '!=', '')
-        ->paginate('10');
+        ->paginate('5');
         
         return view('users.index',compact(['users']));
     }

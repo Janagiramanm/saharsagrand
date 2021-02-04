@@ -49,7 +49,12 @@
                                 <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a> -->
                             </div>
                           @else
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->role }}
+                            @if(Auth::user()->role == 'superadmin')
+                                <div class="button">
+                                    <a  href="/admin/home" >Dashboard</a>
+                                </div>
+                            @endif
                             <div class="button">
                                 <a data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#" >Change Password</a>
                             </div>
@@ -85,107 +90,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <!-- <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card">
-                            <div class="image"><img src="images/icon-1.png"/> </div>
-                            <div class="button">
-                                <h3>Badminton</h3>
-                            </div>
-                            @guest
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
-                            </div>
-                            @else
-                            <div class="button">
-                                <a href="https://booking.sahasragrand.com?bookingType=badminton&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Enroll</a>
-                            </div>
-                            @endguest
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-3.png"/> </div>
-                            <div class="button">
-                                <h3>Swimming</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-4.png"/> </div>
-                            <div class="button">
-                                <h3>Gym</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-5.png"/> </div>
-                            <div class="button">
-                                <h3>Snooker</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-6.png"/> </div>
-                            <div class="button">
-                                <h3>Table Tennis</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Enroll</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-7.png"/> </div>
-                            <div class="button">
-                                <h3>Party Hall</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Book</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-8.png"/> </div>
-                            <div class="button">
-                                <h3>Maintenance Payment</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Pay Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-lg-4">
-                        <div class="info-card ">
-                            <div class="image"><img src="images/icon-9.png"/> </div>
-                            <div class="button">
-                                <h3>Grievance</h3>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="button">
-                                <a href="#" class="btn btn-secondary w-100">Submit</a>
-                            </div>
-                        </div>
-                    </div> -->
+                  
                 </div>
             </div>
         </div>

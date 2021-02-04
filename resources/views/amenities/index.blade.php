@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -29,7 +29,7 @@
 
                             
 
-                            <div class="card">
+                           
                             <table class="table table-bordered">
                                 <tr>
                                     <th>No</th>
@@ -62,8 +62,11 @@
                                     </tr>
                                 @endforeach
                             </table>
-
+                            <div>
+                            {{ $amenities->links() }}
                             </div>
+
+                           
                            
                         </div>
                     </div>
@@ -88,21 +91,19 @@
                             <div class="form-group col-md-6">
                                 <p>Start Date </p>
                                 <div class="input-group">
-                                    <span class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa-calendar"></i></span>
-                                    </span>
-                                    <input  class="form-control datepicker" type="text" name="start_date" placeholder="Start Date"  id="start_date">
-                                    <!-- <input type="text" class="form-control pickadate-limits" placeholder="Select Date" name="appointment_date" id="datepicker_popup" > -->
+                                    <input class="form-control" type="date" id="start_date" name="start_date"
+                                        value="{{ date('d-m-Y')}}"
+                                        min="2021-01-01" max="2021-12-31">
                                 </div>
+                              
                             </div>
+                            <br>
                             <div class="form-group col-md-6">
                                 <p>End Date </p>
                                 <div class="input-group">
-                                    <span class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa-calendar"></i></span>
-                                    </span>
-                                    <input  class="form-control datepicker" type="text" name="end_date" placeholder="End Date"  id="end_date">
-                                    <!-- <input type="text" class="form-control pickadate-limits" placeholder="Select Date" name="appointment_date" id="datepicker_popup" > -->
+                                <input class="form-control" type="date" id="end_date" name="end_date"
+                                        value="{{ date('d-m-Y')}}"
+                                        min="2021-01-01" max="2021-12-31">
                                 </div>
                             </div>
                            
@@ -147,12 +148,6 @@
             // When the document is ready
             $(document).ready(function () {
                 
-                $('#start_date').datepicker({
-                    format: "dd/mm/yyyy"
-                }); 
-                $('#end_date').datepicker({
-                    format: "dd/mm/yyyy"
-                }); 
                 
                 $(".un-block-amenity").click(function(){
                      $("#name-amenity").text($(this).data('name'));
@@ -212,6 +207,7 @@
                                 }
                             });
                 });
+                
                 
             
             });

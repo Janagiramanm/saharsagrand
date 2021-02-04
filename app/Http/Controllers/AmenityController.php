@@ -17,7 +17,7 @@ class AmenityController extends Controller
     public function index()
     {
         //
-        $amenities = Amenity::paginate(10);
+        $amenities = Amenity::paginate(5);
         return view('amenities.index',compact(['amenities']));
     }
 
@@ -189,6 +189,7 @@ class AmenityController extends Controller
         $id = $request->input('amenityId');
         $start_date = date('Y-m-d',strtotime($request->input('start_date')));
         $end_date = date('Y-m-d',strtotime($request->input('end_date')));
+             
         $amenity = Amenity::find($id);
         $amenity->active = 0;
         $amenity->start_date = $start_date;

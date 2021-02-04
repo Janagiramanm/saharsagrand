@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
         <div class="sb-page-header-content py-5">
             <div class="d-flex justify-content-between">
                 <div>
-                    <h1 class="sb-page-header-title"><span>Add Flat</span></h1>
+                    <h1 class="sb-page-header-title"><span>Edit Flat</span></h1>
                 </div>
 {{--                <div>--}}
 {{--                    <a class="btn btn-primary" href="{{ route('pricing.index') }}"> Back</a>--}}
@@ -56,7 +56,7 @@
                                 </div>
                                 <br>
                                 <br>
-                                <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mt-4">
                                     <button type="submit" class="btn btn-primary">{{ 'Submit' }}</button>
                                 </div>
                             </div>

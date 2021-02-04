@@ -230,3 +230,8 @@ th.day-section {
 .image img {
     width: 100px;
 }
+
+.header nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    width: 100%;
+}
+

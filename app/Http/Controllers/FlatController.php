@@ -17,7 +17,7 @@ class FlatController extends Controller
     public function index()
     {
         //
-        $flats = Flat::paginate(10);
+        $flats = Flat::paginate(5);
         return view('flats.index',compact(['flats']));
     }
 

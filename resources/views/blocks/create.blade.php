@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -37,7 +37,7 @@
                                 </div>
                                 <br>
                                 <br>
-                                <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                <div class="col-xs-12 col-sm-12 col-md-12 mt-4 ">
                                     <button type="submit" class="btn btn-primary">{{ 'Submit' }}</button>
                                 </div>
                             </div>

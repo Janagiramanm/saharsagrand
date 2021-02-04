@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
   
-
+<div class="row">
+            <div class="col-8">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
@@ -16,7 +17,7 @@
 
             
 
-            <div class="card">
+            
                         <div>
                             <h2 class="sb-page-header-title"><span>Edit User</span></h2>
                         </div>
@@ -114,13 +115,15 @@
                                     </div>
                                 </div>
                         </div>
-            </div>
+            
         </div>
     </div>
            
 
            
    
+</div>
+</div>
 </div>
 
 
