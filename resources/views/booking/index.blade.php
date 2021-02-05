@@ -91,7 +91,9 @@
                             </tr>
                         @endforeach
                     </table>
-
+                    <div>
+                            {{ $bookings->links() }}
+                    </div>
        
            
         </div>
