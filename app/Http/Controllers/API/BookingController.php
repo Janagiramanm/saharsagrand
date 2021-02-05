@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Booking;
 use App\User;
 use App\Amenity;
+use App\AmenityTime;
+use DateTime;
+use DatePeriod;
+use DateInterval;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -109,28 +114,34 @@ class BookingController extends Controller
         $availablePerson = 5;
 
 
-        $amenities = Amenity::where('name','=',$bookingType)->first();
-        $advance_book = $amenities->advance_book;
+        $amenity = Amenity::where('name','=',$bookingType)->first();
+        $amenityTimes = AmenityTime::where('amenity_id','=',$amenity->id)->get();
 
-        $current_day = date('d');
-        $total_days = $current_date + $advance_book;
-        $dates = [];
-        for($i =$current_day ; $i <= $total_days; $i++)
-        {
-            $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
+        foreach($amenityTimes as $amenityTime){
+             $times[$amenityTime->day] = [$amenityTime->start_time, $amenityTime->end_time];
         }
-
-        $isFullDayEvent = false;
-        $timeSlots = array('09:00-10:00', '10:00-11:00', '11:00-12:00',
-                           '12:00-13:00', '13:00-14:00', '14:00-15:00');
-        
        
+        $advance_book = $amenity->advance_book - 1;
+       
+        $carbon = Carbon::now();
+        $start_date =  $carbon->format('Y-m-d');
+        $end_date = $carbon->addDays($advance_book)->format('Y-m-d');
+        $dates = $this->getDatesFromRange($start_date, $end_date);
+    
+        $isFullDayEvent = false;
+      
         foreach($dates as $key => $value){
             $result[$key]['date'] = $value;
             $result[$key]['available'] = true;
             $result[$key]['isFullDayEvent'] = false;
             $timeslots = [];
-
+            $day = Carbon::parse($value)->format('l');
+            
+            $start_time = $value.' '.$times[$day][0];
+            $end_time = $value.' '.$times[$day][1];
+           
+            $timeSlots =  $this->SplitTime($start_time, $end_time, "60");
+       
             $bookings = Booking::select('booking_date','start_time','end_time','total_guests')->where('booking_type','=',$bookingType)
             ->where('booking_date','=',$value)
             ->get();
@@ -188,5 +199,36 @@ class BookingController extends Controller
             'bookingType' => $bookingType,
             'availability' => $result
         ],200);
+    }
+
+    public function SplitTime($StartTime, $EndTime, $Duration="60"){
+        $ReturnArray = array ();// Define output
+        $StartTime    = strtotime ($StartTime); //Get Timestamp
+        $EndTime      = strtotime ($EndTime); //Get Timestamp
+    
+        $AddMins  = $Duration * 60;
+    
+        while ($StartTime <= $EndTime) //Run loop
+        {
+            $ReturnArray[] = date ("G:i", $StartTime).'-'.date ("G:i",$StartTime += $AddMins);
+            // $StartTime += $AddMins; //Endtime check
+        }
+        return $ReturnArray;
+    }
+
+    public function getDatesFromRange($start, $end, $format = 'Y-m-d') {
+        $array = array();
+        $interval = new DateInterval('P1D');
+    
+        $realEnd = new DateTime($end);
+        $realEnd->add($interval);
+    
+        $period = new DatePeriod(new DateTime($start), $interval, $realEnd);
+    
+        foreach($period as $date) { 
+            $array[] = $date->format($format); 
+        }
+    
+        return $array;
     }
 }
