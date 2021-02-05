@@ -12,23 +12,22 @@
                         <h2>Welcome to <span>Saharsa Grand</span></h2>
                        
                         <div class="row">
-                          <div class="col-4">
+                          <div class="col-2">
                           </div>
-                          <div class="col-4">
+                          <div class="col-8">
 
-                          <div class="input-group">
-                                <input type="text" class="form-control" id="booking-code" placeholder="Search Booking Code">
-                                <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="search-book">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                                </div>
-                            </div>
-                    
+                           @guest
+                           @else
+                            <marquee style="  scrollamount="6" scrolldelay="90" direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+                              @foreach($tickers as $ticker)
+                                  <label>{{ $ticker->ticker_news }}</label>
+                              @endforeach
+                            </marquee>
+                           @endguest
                           
                           <!-- <input class="form-control search-booking" type="text" name="booking_code" id="booking_code" /> -->
                           </div>
-                          <div class="col-4">
+                          <div class="col-2">
                           </div>
                         
                         </div>

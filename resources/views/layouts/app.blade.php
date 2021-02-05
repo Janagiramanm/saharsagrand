@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Sahasra Grand</title>
-    <!-- <title>{{ config('app.name', 'Sahasra Grand') }}</title> -->
+   
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -61,22 +61,16 @@
                                <a href="/"> <img src="{{ asset('/images/logo.png') }}"/></a>
                             </div>
                         </div>
-                        <div class="col-6 d-flex align-items-center justify-content-end">
-                            <div class="contact">
-                                <div class="image">
-                                    <img src="{{ asset('/images/call.png') }}"/>
-                                </div>
-                                <div class="contact-content">
-                                    <h5>Call for any Assistance</h5>
-                                    <h3>+91 90190 23457</h3>
-                                </div>
-                            </div>
-                            <div class="user">
-                                <div class="user-image">
-                                    <img src="{{ asset('/images/user.png') }}"/>
+                        <div class="col-2"></div>
+                        <div class="col-4 d-flex align-items-center justify-content-end">
+                        <div class="input-group">
+                                <input type="text" class="form-control" id="booking-code" placeholder="Search Booking Code">
+                                <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="search-book">
+                                    <i class="fa fa-search"></i>
+                                </button>
                                 </div>
                             </div>
-                           
                         </div>
                     </div>
                 </div>
@@ -86,58 +80,8 @@
                             @component('components.nav')
                             @endcomponent
                         </div>
-                    @endif
-          <!-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-
-                    <ul class="navbar-nav ml-auto">
-
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav> -->
-
+            @endif
+          
         <main class="py-4">
             @yield('content')
         </main>

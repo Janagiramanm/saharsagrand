@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Block;
-use App\Flat;
-use App\Amenity;
 use App\Ticker;
 
-class SiteController extends Controller
+class TickerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +15,8 @@ class SiteController extends Controller
     public function index()
     {
         //
-        $blocks = Block::All();
-        $amenities = Amenity::All();
-        $tickers =  Ticker::all();
-        return view('welcome', compact(['blocks','amenities','tickers']));
-
+        $tickers = Ticker::paginate(5);
+        return view('tickers.index',compact(['tickers']));
     }
 
     /**
@@ -32,7 +26,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('tickers.create');
     }
 
     /**
@@ -44,6 +38,19 @@ class SiteController extends Controller
     public function store(Request $request)
     {
         //
+    
+        $request->validate([
+            'ticker_news' => 'required',
+            
+        ]);
+
+        $ticker = new Ticker();
+        $ticker->ticker_news = $request->input('ticker_news');
+        $ticker->start_date = $request->input('start_date');
+        $ticker->end_date = $request->input('end_date');
+        $ticker->save();
+        return redirect( route('tickers'))->withSuccess('Ticker added successfully!');
+
     }
 
     /**
@@ -66,6 +73,8 @@ class SiteController extends Controller
     public function edit($id)
     {
         //
+        $ticker = Ticker::find($id);
+        return view('tickers.edit',compact(['ticker']));
     }
 
     /**
@@ -77,7 +86,16 @@ class SiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'ticker_news' => 'required',
+            
+        ]);
+        $ticker = Ticker::find($id);
+        $ticker->ticker_news = $request->input('ticker_news');
+        $ticker->start_date = $request->input('start_date');
+        $ticker->end_date = $request->input('end_date');
+        $ticker->save();
+        return redirect( route('tickers'))->withSuccess('Ticker updated successfully!');
     }
 
     /**

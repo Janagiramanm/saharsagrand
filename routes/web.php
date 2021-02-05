@@ -55,6 +55,12 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::put('/admin/amenities/update/{id}','AmenityController@update')->name('amenity.update');
     Route::post('/admin/amenities/block','AmenityController@block')->name('amenity.block');
     Route::post('/admin/amenities/unblock','AmenityController@unBlock');
+
+    Route::get('/admin/tickers','TickerController@index')->name('tickers');
+    Route::get('/admin/tickers/add','TickerController@create')->name('ticker.create');
+    Route::get('/admin/tickers/edit/{id}','TickerController@edit')->name('ticker.edit');
+    Route::post('/admin/tickers/store','TickerController@store')->name('ticker.store');
+    Route::put('/admin/tickers/update/{id}','TickerController@update')->name('ticker.update');
 });
 
 Route::post('/checkflat','UserController@checkFlat');

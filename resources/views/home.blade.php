@@ -27,14 +27,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="dash-block-card" style="background: #fb875d">
+                                <div class="dash-block-card" >
                                     <h2>10</h2>
                                     <p>Bookings</p>
                                 </div>
                             </div>
                            
                             <div class="col-md-3">
-                                <div class="dash-block-card" style="background: #e56de6">
+                                <div class="dash-block-card" >
                                     <h2>40</h2>
                                     <p>Total Users</p>
                                 </div>

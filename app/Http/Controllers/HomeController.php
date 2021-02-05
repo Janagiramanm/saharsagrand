@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Ticker;
 
 class HomeController extends Controller
 {
@@ -30,6 +31,7 @@ class HomeController extends Controller
      * home page
      */
     public function homePage(){
-        return view('welcome');
+        $tickers =  Ticker::all();
+        return view('welcome',compact(['tickers']));
     }
 }

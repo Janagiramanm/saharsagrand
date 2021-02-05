@@ -113,15 +113,13 @@ class BookingController extends Controller
         $advance_book = $amenities->advance_book;
 
         $current_day = date('d');
+        $total_days = $current_date + $advance_book;
         $dates = [];
-        for($i = $current_day; $i <= $advance_book; $i++)
+        for($i =$current_day ; $i <= $advance_book; $i++)
         {
             $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
         }
 
-        // $current_date = date('Y-m-d');
-        // $tomorrow = date("Y-m-d", time() + 86400);
-        // $dates = [$current_date,$tomorrow];
         $isFullDayEvent = false;
         $timeSlots = array('09:00-10:00', '10:00-11:00', '11:00-12:00',
                            '12:00-13:00', '13:00-14:00', '14:00-15:00');
