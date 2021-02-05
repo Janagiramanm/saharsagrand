@@ -421,12 +421,12 @@ class UserController extends Controller
             $hashed_password = Hash::make($rndString);
             $user = User::find($_POST['userid']);
             $user->active = 1;
-            $user->password = $hashed_password;
+            //$user->password = $hashed_password;
             $user->save();
             //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
            
             AppHelper::sendActivationSms($user['name'],$user['mobile'], $rndString);
-            Mail::to($user->email)->send(new ActivationOTP($user, $rndString));
+            //Mail::to($user->email)->send(new ActivationOTP($user, $rndString));
          
             if($user){
                 $msg =  array(
