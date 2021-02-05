@@ -115,7 +115,7 @@ class BookingController extends Controller
         $current_day = date('d');
         $total_days = $current_date + $advance_book;
         $dates = [];
-        for($i =$current_day ; $i <= $advance_book; $i++)
+        for($i =$current_day ; $i <= $total_days; $i++)
         {
             $dates[] = date('Y') . "-" . date('m') . "-" . str_pad($i, 2, '0', STR_PAD_LEFT);
         }

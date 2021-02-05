@@ -48,7 +48,7 @@
 </head>
 <body cz-shortcut-listen="true">
     <nav class="navbar navbar-dark fixed-top top-navbar flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 p-3" href="/admin/home">SAHASRA GRAND</a>
+      <a class="navbar-brand col-sm-3 col-md-2 p-3" href="/">SAHASRA GRAND</a>
       <!-- <button name="" id="btn-tg"  class="btn text-white" >Menu</button> -->
       <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
       <ul class="navbar-nav px-3 logout-sec">
