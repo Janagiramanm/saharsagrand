@@ -1,27 +1,35 @@
 
-    <div class="col-md-12">
-        <div class="title">
-            <h3>Booked For {{ $booking->booking_type }} </h3>
+    <div class="col-md-12 booking-result">
+        
+        <table class="table">
+             <tr>
+                 <th colspan="2">
+                  <h3>Booked For {{ $booking->booking_type }} </h3>
+                 </th>
+            </tr>
+            <tr>
+                <td>Name </dt>
+                <td>{{ $booking->user->name }}</dt>
+            </tr>
+            <tr>
+                <td>Date </dt>
+                <td>{{ $booking->booking_date }}</dt>
+            </tr>
+            <tr>
+                <td>Start Time </dt>
+                <td>{{ $booking->start_time }}</dt>
+            </tr>
+            <tr>
+                <td>End Time </dt>
+                <td>{{ $booking->end_time }}</dt>
+            </tr>
+            <tr>
+                <td>Reference Code </dt>
+                <td>{{ $booking->booking_code }}</dt>
+            </tr>
+        </table>
+        <div class="">
+            <a href="/"> Go Back </a>
         </div>
-        <div class="row">
-            Name : {{ $booking->user->name }}
-        </div>
-        <div class="row">
-             Date: {{ $booking->booking_date }}
-        </div>
-        <div class="row">
-             Start Time: {{ $booking->start_time }}
-        </div>
-        <div class="row">
-             End Time: {{ $booking->end_time }}
-        </div>
-        <div class="row">
-             Reference Code: {{ $booking->booking_code }}
-        </div>
-
-
-    <div class="">
-        <a href="/"> Go Back </a>
-    </div>
     </div>
 

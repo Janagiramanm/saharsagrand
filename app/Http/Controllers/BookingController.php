@@ -129,8 +129,5 @@ class BookingController extends Controller
         ]; 
          return response()->json($msg);
 
-
-         echo '<pre>';
-         print_r($booking);
     }
 }
