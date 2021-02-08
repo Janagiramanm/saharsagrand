@@ -15,6 +15,7 @@ use App\Flat;
 use App\Block;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendRegistrationOTP;
+use App\Mail\ForgotPasswordOtp;
 use App\Mail\ActivationOTP;
 use Illuminate\Validation\Rule; 
 
@@ -447,24 +448,85 @@ class UserController extends Controller
                 return response()->json($msg);
             }
         }
+    }
+    public function forgotPassword(Request $request){
 
-        // $rndString = mt_rand(100000,999999);
-        // $hashed_password = Hash::make($rndString);
-        // $user = User::find($_POST['userid']);
-        // $user->active = 1;
-        // $user->password = $hashed_password;
-        // $user->save();
-        // //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
+        $username = $request->input('username');
        
-        // AppHelper::sendActivationSms($user['name'],$user['mobile'], $rndString);
-     
-        // if($user){
-        //     $msg =  array(
-        //         'status'=>1,
-        //         'message'=>'Success'
-        //     );
-        //     return response()->json($msg);
-        // }
+        $user = User::where('email', '=', $username  )
+                       ->orWhere('mobile' , '=', $username )
+                       ->where('active','=',1)->first();
+        if(!$user){
+            $msg =  array(
+                'status'=>0,
+                'message'=>'Username not found!'
+            );
+            return response()->json($msg);
+        }
+
+        $sixRandomDigit = mt_rand(100000,999999);
+        $name = $user->name;
+        $email = $user->email;
+        $mobile = $user->mobile;
+
+        $user->otp = $sixRandomDigit;
+        if($user->save()){
+                //AppHelper::sendForgotPasswordOtp($name, $mobile, $sixRandomDigit);
+                Mail::to($email)->send(new ForgotPasswordOtp($user));
+                $msg =  array(
+                    'status'=>1,
+                    'message'=>'success',
+                    'data' => $user
+                );
+                return response()->json($msg);
+        }
+
+       
+       
+
+
+    }
+    public function forgotPasswordChange(Request $request){
+
+        $otp = $request->input('otp');
+        $userid = $request->input('userid');
+        $newPassword = $request->input('newpassword');
+       
+        // $user = User::where('email', '=', $username  )
+        //                ->orWhere('mobile' , '=', $username )
+        //                ->where('active','=',1)->first();
+
+        $user = User::find($userid);
+        
+        if(!$user){
+            $msg =  array(
+                'status'=>0,
+                'message'=>'Username not found!'
+            );
+            return response()->json($msg);
+        }
+        if($user->otp != $otp){
+            $msg =  array(
+                'status'=>0,
+                'message'=>'OTP is invalid. Please enter the valid OTP'
+            );
+            return response()->json($msg);
+        }
+
+        $user->password = Hash::make($newPassword);
+        if($user->save()){
+                //AppHelper::sendForgotPasswordOtp($name, $mobile, $sixRandomDigit);
+              //  Mail::to($email)->send(new ForgotPasswordOtp($user));
+                $msg =  array(
+                    'status'=>1,
+                    'message'=>'Successfully changed your password'
+                );
+                return response()->json($msg);
+        }
+
+       
+       
+
 
     }
 }

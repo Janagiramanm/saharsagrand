@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Amenity;
 use App\AmenityTime;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class AmenityController extends Controller
 {
@@ -29,6 +30,7 @@ class AmenityController extends Controller
     public function create()
     {
         //
+       
         $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         return view('amenities.create', compact(['days']));
     }
@@ -52,9 +54,8 @@ class AmenityController extends Controller
         $advance_book = $request->input('advance_book');
         $amenity_logo = $request->file('logo');
 
-      
-        
-        
+        $startDate = Carbon::createFromFormat('d/m/Y', $request->input('start_date'))->format('Y-m-d');
+               
 
         $amenity = new Amenity();
         $amenity->name = $name;

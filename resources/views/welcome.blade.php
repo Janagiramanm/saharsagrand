@@ -112,38 +112,107 @@
 <div class="modal" tabindex="-1" id="loginModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Login</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+               <div class="login-section">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="login_form" method="post" action="javascript:void(0)">
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="text" name="username" id="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                               
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form id="login_form" method="post" action="javascript:void(0)">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                        <input type="text" name="username" id="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                                        <input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Remember</label>
+                                        <a href="#" id="forget-pwd" > <label class="form-check-label">Forget Password ?</label> </a>
+                                    </div>
+                                    <span class="text-danger invalid-login"></span><br>
+                                    <button type="submit" id="login-btn" class="btn btn-primary">Login</button>
+                                </form>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Remember</label>
-                            </div>
-                            <span class="text-danger invalid-login"></span><br>
-                            <button type="submit" id="login-btn" class="btn btn-primary">Login</button>
-                        </form>
+
+                        </div>
+
+
+                    </div> 
+                </div> 
+            
+           
+            <div class=" forget-section">
+                <div class="modal-header">
+                    <h5 class="modal-title">Forget Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="forget_pwd_form" method="post" action="javascript:void(0)">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email / Mobile</label>
+                                    <input type="text" name="forget_username" id="forget_username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <span class="text-danger invalid-user-forgot"></span><br>
+                                </div>
+                                
+                                <button type="submit" id="forget-pwd-btn" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
                     </div>
 
+
+                </div> 
+           
+            </div>
+
+            <div class=" change-your-pwd-section">
+                <div class="modal-header">
+                    <h5 class="modal-title">Chang Your Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form id="login_form" method="post" action="javascript:void(0)">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">OTP</label>
+                                        <input type="text" name="change-otp" id="change-otp" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">New Password</label>
+                                        <input type="password" name="new-password" id="new-password" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                                        <input type="password" name="confirm-password" id="confirm-password" class="form-control" id="exampleInputPassword1">
+                                    </div>
+                                  
+                                    <span class="text-danger confirm-mismatch"></span><br>
+                                    <span class="alert-success confirm-success"></span><br>
+                                    <button type="submit" id="change-password-forgot" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+
+                        </div>
 
 
-            </div> 
-        </div>
+                    </div>
+            </div>
+
+            <input type="hidden" name="user-id" value="" id="user-id" />
+            
     </div>
 </div>
 

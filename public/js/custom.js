@@ -431,7 +431,80 @@ $(document).ready(function(){
         }
 
 
+        $("#forget-pwd").on('click',function(){
+             $(".login-section").hide();
+             $(".forget-section").show();
+        });
+
+        $("#forget-pwd-btn").on('click',function(){
+            var username = $("#forget_username").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/user/forgot-password',
+                data: {'username': username},
+                beforeSend: function() {
+                    // setting a timeout
+                    $("#forget-pwd-btn").text('Checking..');
+                  
+                },
+                success: function(resp){
+                    if(resp.status == 1){
+                         $(".forget-section").hide();
+                         $("#user-id").val(resp.data.id);
+                         $(".change-your-pwd-section").show();
+                        //  $(".info-card-block").html(resp.data)
+                    }else{
+                        $(".invalid-user-forgot").html(resp.message)
+
+                    }
+                 
+                }
+            });
+        });
       
+        $("#change-password-forgot").on('click',function(){
+            var otp = $("#change-otp").val();
+            var newPassword = $("#new-password").val();
+            var confirmPassword = $("#confirm-password").val();
+            var userId = $("#user-id").val();
+           
+            if(newPassword != confirmPassword){
+                
+                 $(".confirm-mismatch").text('Confirm Password is mismatch with new password');
+                 return false;
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/user/forgot-password-change',
+                data: {'userid': userId, otp:otp, newpassword:newPassword},
+                success: function(resp){
+                    if(resp.status == 1){
+                         $(".confirm-success").text(resp.message)
+                         setTimeout(function(){
+                             location.reload();
+                         },1300)
+                      
+                    }else{
+                        $(".confirm-mismatch").html(resp.message)
+
+                    }
+                 
+                }
+            });
+
+        });
       
 
 });

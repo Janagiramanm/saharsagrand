@@ -167,7 +167,6 @@ class BookingController extends Controller
                             $time = explode('-',$time);
                             $start_time = substr($booking->start_time, 0, 5);
                             $end_time = substr($booking->end_time, 0, 5);
-                            //echo $start_time.'----'.$time[0].'<br>';
                             if($start_time != $time[0] && $end_time != $time[1]){
                                 $available = true;
                             }else{

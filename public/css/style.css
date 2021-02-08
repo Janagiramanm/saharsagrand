@@ -234,4 +234,12 @@ th.day-section {
 .header nav.navbar.navbar-expand-lg.navbar-light.bg-light {
     width: 100%;
 }
-
+a#forget-pwd {
+    float: right;
+}
+.forget-section {
+    display: none;
+}
+.change-your-pwd-section {
+    display: none;
+}
