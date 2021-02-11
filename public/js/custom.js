@@ -505,6 +505,15 @@ $(document).ready(function(){
             });
 
         });
-      
+       
+        $("#menu-humberger-btn").on('click',function(){
+            if($( ".sidebar" ).hasClass( "d-none" )){
+                $( ".sidebar" ).removeClass( "d-none" );
+            }else{
+                $( ".sidebar" ).addClass( "d-none" );
+            }
+            
+             
+        });
 
 });

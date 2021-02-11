@@ -34,13 +34,13 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
    
 
     Route::get('/admin/blocks','BlockController@index')->name('blocks');
-    Route::get('/admin/block/add','BlockController@create')->name('block.create');
+    Route::get('/admin/blocks/add','BlockController@create')->name('block.create');
     Route::post('/admin/block/store','BlockController@store')->name('block.store');
     Route::get('/admin/block/edit/{id}','BlockController@edit')->name('block.edit');
     Route::put('/admin/block/update/{id}','BlockController@update')->name('block.update');
 
     Route::get('/admin/flats','FlatController@index')->name('flats');
-    Route::get('/admin/flat/add','FlatController@create')->name('flat.create');
+    Route::get('/admin/flats/add','FlatController@create')->name('flat.create');
     Route::post('/admin/flat/store','FlatController@store')->name('flat.store');
     Route::get('/admin/flat/edit/{id}','FlatController@edit')->name('flat.edit');
     Route::put('/admin/flat/update/{id}','FlatController@update')->name('flat.update');
@@ -61,6 +61,12 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::get('/admin/tickers/edit/{id}','TickerController@edit')->name('ticker.edit');
     Route::post('/admin/tickers/store','TickerController@store')->name('ticker.store');
     Route::put('/admin/tickers/update/{id}','TickerController@update')->name('ticker.update');
+
+    Route::post('/admin/select-user-notification', 'NotificationController@selectUsers');
+    Route::post('/admin/get-sms-template', 'NotificationController@getSmsTemplate');
+    Route::resource('/admin/notifications', 'NotificationController');
+    Route::resource('/admin/messages', 'MessageController');
+    
 });
 
 Route::post('/checkflat','UserController@checkFlat');

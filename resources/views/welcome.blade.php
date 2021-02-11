@@ -79,11 +79,11 @@
                                 </div>
                                 @guest
                                 <div class="button">
-                                    <a href="#" class="btn btn-secondary w-100">Enroll</a>
+                                    <a href="#" class="btn btn-secondary w-100">Book</a>
                                 </div>
                                 @else
                                     <div class="button">
-                                        <a href="https://booking.sahasragrand.com?bookingType={{$amenity->name}}&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Enroll</a>
+                                        <a href="https://booking.sahasragrand.com?bookingType={{$amenity->name}}&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Book</a>
                                     </div>
                                 @endguest
                             </div>

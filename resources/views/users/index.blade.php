@@ -47,8 +47,8 @@
                                     <tr>
                                         <td>{{ $index++ }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
                                         <td>{{ $user->mobile }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>@if(isset($user->block->name)){{ $user->block->name }} @endif</td>
                                         <td>@if(isset($user->flat->flat_number)){{ $user->flat->flat_number }} @endif</td>
                                         <td>{{ $user->type }}</td>

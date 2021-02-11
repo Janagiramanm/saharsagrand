@@ -27,6 +27,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/bootstrap.js') }}" defer></script>    
     <script src="{{ asset('js/custom.js') }}" defer></script>
+    <script src="{{ asset('js/multiselect.js') }}" defer></script>
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     
  
     <!-- Fonts -->
@@ -35,8 +37,12 @@
     
 
     <!-- Styles -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> -->
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
      <!-- Bootstrap core CSS -->
@@ -45,13 +51,24 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/admin/admin_style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/multiselect.css') }}" rel="stylesheet">
 </head>
 <body cz-shortcut-listen="true">
     <nav class="navbar navbar-dark fixed-top top-navbar flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 p-3" href="/">SAHASRA GRAND</a>
+      <div class="navbar-header">
+       
+      <i class="fa fa-bars" id="menu-humberger-btn" aria-hidden="true"></i>
+      
+    </div>
       <!-- <button name="" id="btn-tg"  class="btn text-white" >Menu</button> -->
       <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
       <ul class="navbar-nav px-3 logout-sec">
+      <li class="nav-item">
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-md-block">
+						<i class="icon-paragraph-justify3"></i>
+					</a>
+				</li>
         <li class="nav-item text-nowrap">
           <a class="dropdown-item " href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -66,7 +83,9 @@
     </nav>
 
     <div class="container-fluid">
+    
       <div class="row">
+            
             @component('components.nav')
             @endcomponent
         
