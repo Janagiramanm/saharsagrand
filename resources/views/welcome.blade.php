@@ -44,8 +44,8 @@
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary w-100">Login</a>
                             </div>
                             <div class="button">
-                                <input type="button" data-bs-toggle="modal" data-bs-target="#registerModal" value="Create an Account" class="btn btn-secondary w-100" />
-                                <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a> -->
+                              
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a>
                             </div>
                           @else
                             {{ Auth::user()->role }}
@@ -213,6 +213,7 @@
 
             <input type="hidden" name="user-id" value="" id="user-id" />
             
+        </div>
     </div>
 </div>
 
@@ -252,7 +253,7 @@
 </div>
 
 
-<div class="modal"  id="registerModal">
+<div class="modal"   id="registerModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
