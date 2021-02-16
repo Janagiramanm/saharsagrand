@@ -114,7 +114,7 @@ class BookingController extends Controller
         $availablePerson = 5;
 
 
-        $amenity = Amenity::where('name','=',$bookingType)->first();
+        $amenity = Amenity::where('id','=',$bookingType)->first();
         $isFullDayEvent = false;
         $advance_book = 0 ;
         if($amenity->time_slots == 0){
