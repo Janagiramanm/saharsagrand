@@ -152,7 +152,7 @@ class BookingController extends Controller
                     $timeSlots =  $this->SplitTime($start_time, $end_time, "60");
             }
            
-            $bookings = Booking::select('booking_date','start_time','end_time','total_guests')->where('booking_type','=',$bookingType)
+            $bookings = Booking::select('booking_date','start_time','end_time','total_guests')->where('amenity_id','=',$bookingType)
             ->where('booking_date','=',$value)
             ->get();
                             
