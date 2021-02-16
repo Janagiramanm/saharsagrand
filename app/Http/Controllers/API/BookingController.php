@@ -126,16 +126,20 @@ class BookingController extends Controller
             }
             $advance_book = $amenity->advance_book - 1;
         }
-       
-       
+ 
         $carbon = Carbon::now();
-        $start_date =  $carbon->format('Y-m-d');
+       
+        $currentMonth = Carbon::now()->format('F Y');
+        $start_date = \Carbon\Carbon::parse($selectedMonth)->startOfMonth();
+        if($selectedMonth == $currentMonth){
+            $start_date =  $carbon->format('Y-m-d');
+        }
         $end_date =    \Carbon\Carbon::parse($start_date)->endOfMonth()->toDateString();
         if($advance_book > 0){
             $end_date = $carbon->addDays($advance_book)->format('Y-m-d');
         }
         $dates = $this->getDatesFromRange($start_date, $end_date);
-     
+        $result =[];
         foreach($dates as $key => $value){
             $result[$key]['date'] = $value;
             $result[$key]['available'] = true;
