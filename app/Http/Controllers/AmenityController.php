@@ -147,6 +147,9 @@ class AmenityController extends Controller
             $amenity->logo = $logoimage;
         }
         $amenity->save();
+        if($amenity->time_slots == false){
+            AmenityTime::where('amenity_id',$id)->delete();
+        }
         if($request->input('time_setting')){
             $starts = $request->input('start');
             $ends = $request->input('end');

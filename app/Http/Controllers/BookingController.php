@@ -23,7 +23,7 @@ class BookingController extends Controller
 
         $bookings = Booking::when($user_id, function ($q) use ($user_id){
             return $q->where('user_id', '=', "$user_id");
-        })->paginate(10);
+        })->latest('id')->paginate(5);
 
         $users = User::where('active','=',1)
                   ->where('role','!=','superadmin')->get();

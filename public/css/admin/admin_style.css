@@ -148,4 +148,8 @@ ul.navbar-nav.px-3.logout-sec {
         font-size: 14px;
         color: cornflowerblue;
     }
+    .justify-content-center {
+        justify-content: center !important;
+        margin-bottom: 10px;
+    }
 }

@@ -115,85 +115,91 @@ class BookingController extends Controller
 
 
         $amenity = Amenity::where('name','=',$bookingType)->first();
-        $amenityTimes = AmenityTime::where('amenity_id','=',$amenity->id)->get();
-
-        foreach($amenityTimes as $amenityTime){
-             $times[$amenityTime->day] = [$amenityTime->start_time, $amenityTime->end_time];
+        $isFullDayEvent = false;
+        $advance_book = 0 ;
+        if($amenity->time_slots == 0){
+               $isFullDayEvent = true;
+        }else{
+            $amenityTimes = AmenityTime::where('amenity_id','=',$amenity->id)->get();
+            foreach($amenityTimes as $amenityTime){
+                 $times[$amenityTime->day] = [$amenityTime->start_time, $amenityTime->end_time];
+            }
+            $advance_book = $amenity->advance_book - 1;
         }
        
-        $advance_book = $amenity->advance_book - 1;
        
         $carbon = Carbon::now();
         $start_date =  $carbon->format('Y-m-d');
-        $end_date = $carbon->addDays($advance_book)->format('Y-m-d');
+        $end_date =    \Carbon\Carbon::parse($start_date)->endOfMonth()->toDateString();
+        if($advance_book > 0){
+            $end_date = $carbon->addDays($advance_book)->format('Y-m-d');
+        }
         $dates = $this->getDatesFromRange($start_date, $end_date);
-    
-        $isFullDayEvent = false;
-      
+     
         foreach($dates as $key => $value){
             $result[$key]['date'] = $value;
             $result[$key]['available'] = true;
-            $result[$key]['isFullDayEvent'] = false;
+            $result[$key]['isFullDayEvent'] = $isFullDayEvent;
             $timeslots = [];
             $day = Carbon::parse($value)->format('l');
-            
-            $start_time = $value.' '.$times[$day][0];
-            $end_time = $value.' '.$times[$day][1];
+            if(!$isFullDayEvent){
+                    $start_time = $value.' '.$times[$day][0];
+                    $end_time = $value.' '.$times[$day][1];
+                    $timeSlots =  $this->SplitTime($start_time, $end_time, "60");
+            }
            
-            $timeSlots =  $this->SplitTime($start_time, $end_time, "60");
-       
             $bookings = Booking::select('booking_date','start_time','end_time','total_guests')->where('booking_type','=',$bookingType)
             ->where('booking_date','=',$value)
             ->get();
                             
             if($bookings->isEmpty()){
-                unset($timeslots);
-                foreach($timeSlots as $timeKey => $time){
-                    $time = explode('-',$time);
-                    $timeslots[] = [
-                                        'startTime' => $time[0],
-                                        'endTime'=>$time[1],
-                                        'available'=> true,
-                                        'maxPersonsAllowed'=> $availablePerson,
-                                        'currentPersonsBooked'=> 0
-                    ];
-                }
-            }else{
-            
-                foreach($bookings as $booking){
-                    if($value == $booking->booking_date){
+               
+                if(!$isFullDayEvent){
                         unset($timeslots);
                         foreach($timeSlots as $timeKey => $time){
                             $time = explode('-',$time);
-                            $start_time = substr($booking->start_time, 0, 5);
-                            $end_time = substr($booking->end_time, 0, 5);
-                            if($start_time != $time[0] && $end_time != $time[1]){
-                                $available = true;
-                            }else{
-                                $available = false;
-                            }
-                           
-                            $availPerson = $availablePerson - $booking->total_guests;
                             $timeslots[] = [
-                                            'startTime' => $time[0],
-                                            'endTime'=>$time[1],
-                                            'available'=> $available,
-                                            'maxPersonsAllowed'=> $availPerson,
-                                            'currentPersonsBooked'=> 0
+                                                'startTime' => $time[0],
+                                                'endTime'=>$time[1],
+                                                'available'=> true,
+                                                'maxPersonsAllowed'=> $availablePerson,
+                                                'currentPersonsBooked'=> 0
                             ];
-                            
                         }
-                    }
                 }
-                
+            }else{
+               
+                if(!$isFullDayEvent){
+                        foreach($bookings as $booking){
+                            if($value == $booking->booking_date){
+                                unset($timeslots);
+                                foreach($timeSlots as $timeKey => $time){
+                                    $time = explode('-',$time);
+                                    $start_time = substr($booking->start_time, 0, 5);
+                                    $end_time = substr($booking->end_time, 0, 5);
+                                    if($start_time != $time[0] && $end_time != $time[1]){
+                                        $available = true;
+                                    }else{
+                                        $available = false;
+                                    }
+                                    $availPerson = $availablePerson - $booking->total_guests;
+                                    $timeslots[] = [
+                                                    'startTime' => $time[0],
+                                                    'endTime'=>$time[1],
+                                                    'available'=> $available,
+                                                    'maxPersonsAllowed'=> $availPerson,
+                                                    'currentPersonsBooked'=> 0
+                                    ];
+                                    
+                                }
+                            }
+                        }
+                }  
             }
             $result[$key]['timeSlots'] = $timeslots;
-        
-        }
-                             
+        }                             
 
         return response()->json( [
-            
             'month' => $selectedMonth,
             'bookingType' => $bookingType,
             'availability' => $result
