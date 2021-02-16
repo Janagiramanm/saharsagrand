@@ -83,7 +83,7 @@
                                 </div>
                                 @else
                                     <div class="button">
-                                        <a href="https://booking.sahasragrand.com?bookingType={{$amenity->name}}&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Book</a>
+                                        <a href="https://booking.sahasragrand.com?bookingType={{$amenity->id}}&userToken={{Auth::user()->remember_token}}" class="btn btn-secondary w-100">Book</a>
                                     </div>
                                 @endguest
                             </div>

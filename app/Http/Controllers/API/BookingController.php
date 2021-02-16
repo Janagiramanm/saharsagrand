@@ -51,7 +51,7 @@ class BookingController extends Controller
        $booking_code =  mt_rand(100000,999999);
 
        $booking = new Booking();
-       $booking->booking_type = $request->input('bookingType');
+       $booking->amenity_id = $request->input('bookingType');
        $booking->booking_date = $request->input('selectedDate');
        $booking->start_time = $timeSlots['startTime'];
        $booking->end_time = $timeSlots['endTime'];

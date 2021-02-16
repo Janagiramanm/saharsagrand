@@ -54,7 +54,7 @@
                                         @endforeach
                                         </table>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group time-settings-sec">
                                     <label>Advance Booking </label>
                                     <input id="name" type="number" class="form-control @error('advance_book') is-invalid @enderror" name="advance_book" value="{{ old('advance_book') }}"  autofocus>
                                     </div>

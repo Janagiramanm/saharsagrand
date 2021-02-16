@@ -152,4 +152,30 @@ ul.navbar-nav.px-3.logout-sec {
         justify-content: center !important;
         margin-bottom: 10px;
     }
+    .form-group {
+        /* margin-top: 0px; */
+        margin-bottom: 23px;
+    }
+    .filter_form {
+        margin-bottom: 25px;
+    }
+    .btn-group,
+    .btn-group-vertical {
+        margin-left: 5px;
+    }
+    .select2-container--default
+        .select2-selection--single
+        .select2-selection__rendered {
+        color: #444;
+        line-height: 34px;
+    }
+    .select2-container--default .select2-selection--single {
+        background-color: #fff;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        height: 37px;
+    }
+    button.form-group.btn.btn-primary.mr-3.mb-2.col-1 {
+        margin-left: 21px;
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Booking;
 use App\User;
+use App\Amenity;
 
 use Redirect;
 
@@ -20,15 +21,26 @@ class BookingController extends Controller
     {
         //
         $user_id = $request->input('user_id');
+        $amenity = $request->input('amenity_id');
+        $booked_date = $request->input('book_date');
+        $reference_code = $request->input('reference_code');
 
         $bookings = Booking::when($user_id, function ($q) use ($user_id){
-            return $q->where('user_id', '=', "$user_id");
+            return $q->where('user_id', '=', $user_id);
+        })->when($amenity, function($q) use($amenity){
+            return $q->where('amenity_id','=',$amenity);
+        })->when($booked_date, function($q) use($booked_date){
+            return $q->where('booking_date','=',$booked_date);
+        })->when($reference_code, function($q) use($reference_code){
+            return $q->where('booking_code','=',$reference_code);
         })->latest('id')->paginate(5);
 
         $users = User::where('active','=',1)
                   ->where('role','!=','superadmin')->get();
 
-        return view('booking.index',compact(['bookings','users']));
+        $amenities =  Amenity::where('active','=',1)->get();
+
+        return view('booking.index',compact(['bookings','users','amenities']));
     }
 
     /**

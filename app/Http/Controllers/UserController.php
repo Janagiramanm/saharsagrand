@@ -32,10 +32,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('type', '!=', 'superadmin')
-        ->where('mobile_verified_at', '!=', '')
-        ->paginate('5');
-        
+        $search  = $request->input('search');
+        $users = User::when($search, function ($q) use($search){
+            return $q->where('mobile', '=', $search)
+                       ->orWhere('name','=',$search);
+                    //   ->orWhere('email','=',$search);
+        })
+        ->where('type', '!=', 'superadmin')
+        ->where('mobile_verified_at', '!=', "")
+        ->paginate(5);
+  
         return view('users.index',compact(['users']));
     }
 

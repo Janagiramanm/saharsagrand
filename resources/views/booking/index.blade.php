@@ -26,36 +26,46 @@
                      <div class="filter_form">
                            <form class="form-inline"  action="{{ route('bookings.search') }}">
                                 <div class="row">
+                                <div class="form-group mx-sm-2 mb-2 col-3">
+                                       <input class="form-control" type="text" name="reference_code" id="reference_code" placeholder="Reference Code" value="{{ old('reference_code')}}" />
+                                        
+                                    </div>
                                     <div class="form-group mx-sm-2 mb-2 col-3">
                                         <select class="form-control" name="user_id" id="user_name_filter">
-                                              <option>Select User</option>
+                                              <option value="">Select User</option>
                                               @if($users)
                                                   @foreach($users as $user)
                                                      <option value="{{ $user->id }}"> {{ $user->name }}</option>
                                                   @endforeach
                                               @endif
                                         </select> 
-                                        <!-- <input type="text" placeholder="User Name" class="form-control" id="branch_code" name="user_name" value="{{ request()->input('branch_code') }}"> -->
+                                        
                                     </div>
                                     <div class="form-group mx-sm-2 mb-2 col-3">
-                                        <select class="form-control" name="amenity_name" id="amenity_name_filter">
-                                              <option>Select Amenity</select>
+                                        <select class="form-control" name="amenity_id" id="amenity_name_filter">
+                                              <option value="">Select Amenity</option>
+                                              @if($amenities)
+                                                  @foreach($amenities as $amenity)
+                                                     <option value="{{ $amenity->id }}"> {{ $amenity->name }}</option>
+                                                  @endforeach
+                                              @endif
                                         </select> 
-                                        <!-- <input type="text" placeholder="Branch Name" class="form-control" id="branch_name" name="branch_name" value="{{ request()->input('branch_name') }}"> -->
+                                        
                                     </div>
+                                    
                                     <div class="form-group mx-sm-2 mb-2 col-3" id="sandbox-container">
-                                                <input class="form-control" type="date" id="end_date" name="end_date"
+                                                <input class="form-control" type="date" id="book_date" name="book_date"
                                                     value="{{ date('d-m-Y')}}"
                                                     min="2021-01-01" max="2021-12-31">
                                             </div>
                                        
-                                        
-                                    </div>
-                                   
-                                    <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-1">
+                                            <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-1">
                                                 {{ __('Search') }}
                                             </button>
                                     <a title="Reset" href="{{route('bookings.search')}}" class="form-group btn btn-group btn-outline-dark  mb-2 col-1">Reset</a>
+                                    </div>
+                                   
+                                    
                                 </div>
                             </form>
 
@@ -81,7 +91,7 @@
                             <tr>
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $booking->user->name }}</td>
-                                <td>{{ $booking->booking_type }}</td>
+                                <td>{{ $booking->amenity->name }}</td>
                                 <td>{{ $booking->booking_date }}</td>
                                 <td>{{ $booking->start_time }}</td>
                                 <td>{{ $booking->end_time }}</td>

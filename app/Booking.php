@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Amenity;
 
 class Booking extends Model
 {
@@ -16,5 +17,8 @@ class Booking extends Model
     {
          return $this->belongsTo(User::class);
       
+    }
+    public function amenity(){
+        return $this->belongsTo(Amenity::class);
     }
 }

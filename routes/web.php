@@ -26,11 +26,12 @@ Route::post('/login','UserController@login');
 Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::get('/admin/home', 'HomeController@index')->name('home');
     Route::post('/user/activate','UserController@activate');
-    Route::get('/admin/user-list','UserController@index');
+    Route::get('/admin/user-list','UserController@index')->name('users.list');
     Route::get('/admin/user/edit/{id}','UserController@edit')->name('user.edit');
     Route::delete('/admin/user/edit/{id}/delete','UserController@destroy')->name('user.destroy');
     Route::put('/admin/user/edit/{id}/update','UserController@update')->name('user.update');
     Route::post('/change-user-status','UserController@changeUserStatus');
+    //Route::get('/admin/bookings/search','BookingController@index')->name('bookings.search');
    
 
     Route::get('/admin/blocks','BlockController@index')->name('blocks');
@@ -79,6 +80,7 @@ Route::post('/user/get-flats','UserController@getFlats');
 Route::post('/user/forgot-password','UserController@forgotPassword');
 Route::post('/user/forgot-password-change','UserController@forgotPasswordChange');
 Route::get('/user/reg-success','UserController@regSuccess');
+// Route::get('/user/search','UserController@regSuccess');
 // Route::post('/autocomplete','UserController@selectSearch');
 // Route::get('/autocomplete', 'UserController@selectSearch')->name('autocomplete');
 

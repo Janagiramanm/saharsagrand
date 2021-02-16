@@ -98,7 +98,19 @@ class FlatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'flat_number' => [
+                'required',Rule::unique('flats')->where(function($query) use ($request,$id) {
+                   $query->where('id', '!=', $id);
+                   $query->where('active', '=', 1);
+                   $query->where('block_id','=',$request->input('block'));
+                   $query->where('flat_number','=',$request->input('flat_number'));
+             }),
+             
+        ],
+        ['flat_number.unique' => __('messages.unique', ['Already Exists'])],
+                      
+        ]);
         $flat = Flat::find($id);
         $flat->block_id = $request->input('block');
         $flat->flat_number = $request->input('flat_number');
