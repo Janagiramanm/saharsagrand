@@ -24,8 +24,8 @@
                             <div class="row">
                                
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                   <label> Notification Send to </label>
-                                   <div class="row radio-section">
+                                    <label> Notification Send to </label>
+                                    <div class="row radio-section">
                                         <div class="form-check col-2" >
                                             <input class="form-check-input" type="radio" name="user_type" required value="all" id="all">
                                             <label class="form-check-label" for="all">

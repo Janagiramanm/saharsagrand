@@ -33,14 +33,19 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search  = $request->input('search');
+        
         $users = User::when($search, function ($q) use($search){
             return $q->where('mobile', '=', $search)
-                       ->orWhere('name','=',$search);
-                    //   ->orWhere('email','=',$search);
+                       ->orWhere('name','=',$search)
+                      ->orWhere('email','=',$search);
         })
         ->where('type', '!=', 'superadmin')
         ->where('mobile_verified_at', '!=', "")
         ->paginate(5);
+       
+        if(!$users){
+            $users = array();
+        }
   
         return view('users.index',compact(['users']));
     }
@@ -313,8 +318,6 @@ class UserController extends Controller
                        ->orWhere('mobile' , '=', $request->username)
                        ->where('active','=',1)->first();
         
-             // $token = $user->createToken('access_token')->accessToken;
-            //$user->remember_token = $token;
             if($user){
                 $user->save();
                 $msg =  array(

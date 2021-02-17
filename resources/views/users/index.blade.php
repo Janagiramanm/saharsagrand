@@ -58,8 +58,10 @@
                                 </tr>
                                 @php
                                     $index = $users->firstItem()
-                                    @endphp
-                                @foreach ($users as $user)
+                                @endphp
+                                
+                                @forelse($users as $user)
+
                                     <tr>
                                         <td>{{ $index++ }}</td>
                                         <td>{{ $user->name }}</td>
@@ -79,7 +81,12 @@
                                                 </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td coslpan="9">No User Found</td>
+                                    </tr>
+                                @endforelse
+                               
                             </table>
 
                            

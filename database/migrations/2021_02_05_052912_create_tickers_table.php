@@ -16,6 +16,7 @@ class CreateTickersTable extends Migration
         Schema::create('tickers', function (Blueprint $table) {
             $table->id();
             $table->string('ticker_news');
+            $table->string('role')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->boolean('active')->default(1);

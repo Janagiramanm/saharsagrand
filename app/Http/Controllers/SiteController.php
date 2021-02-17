@@ -7,6 +7,7 @@ use App\Block;
 use App\Flat;
 use App\Amenity;
 use App\Ticker;
+use Carbon\Carbon;
 
 class SiteController extends Controller
 {
@@ -17,10 +18,18 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+       
         $blocks = Block::All();
         $amenities = Amenity::All();
-        $tickers =  Ticker::all();
+        $tickers =  Ticker::where(function($q){
+                    $q->where(function($q){
+                        $q->whereNull('start_date')
+                          ->whereNull('end_date');
+                    })->orWhere(function($q){
+                        $q->where('start_date', '<=', Carbon::now()->format('Y-m-d'))
+                          ->where('end_date', '>=', Carbon::now()->format('Y-m-d'));
+                    });
+            })->where('active','=',1)->get();
         return view('welcome', compact(['blocks','amenities','tickers']));
 
     }

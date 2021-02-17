@@ -44,7 +44,7 @@
                                 @foreach ($tickers as $ticker)
                                     <tr>
                                         <td>{{ $index++ }}</td>
-                                        <td>{{ $ticker->ticker_news }}</td>
+                                        <td style="width:770px;">{{ $ticker->ticker_news }}</td>
                                         <td>{{ $ticker->start_date }}</td>
                                         <td>{{ $ticker->end_date }}</td>
                                         <td>

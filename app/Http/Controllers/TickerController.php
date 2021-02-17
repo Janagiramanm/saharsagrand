@@ -48,6 +48,7 @@ class TickerController extends Controller
         $ticker->ticker_news = $request->input('ticker_news');
         $ticker->start_date = $request->input('start_date');
         $ticker->end_date = $request->input('end_date');
+        $ticker->role = $request->input('role');
         $ticker->save();
         return redirect( route('tickers'))->withSuccess('Ticker added successfully!');
 
@@ -94,6 +95,7 @@ class TickerController extends Controller
         $ticker->ticker_news = $request->input('ticker_news');
         $ticker->start_date = $request->input('start_date');
         $ticker->end_date = $request->input('end_date');
+        $ticker->role = $request->input('role');
         $ticker->save();
         return redirect( route('tickers'))->withSuccess('Ticker updated successfully!');
     }

@@ -19,8 +19,13 @@
                            @guest
                            @else
                             <marquee style="  scrollamount="6" scrolldelay="90" direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+                              @php
+                                  $role = Auth::user()->role;
+                              @endphp
                               @foreach($tickers as $ticker)
-                                  <label>{{ $ticker->ticker_news }}</label>
+                                   @if($ticker->role == $role || $ticker->role=='all' || $role == 'superadmin')
+                                       <label>{{ strip_tags($ticker->ticker_news) }}</label> &emsp; 
+                                   @endif
                               @endforeach
                             </marquee>
                            @endguest

@@ -25,7 +25,7 @@
                                     <div class="form-group">
                                         <label>Ticker News</label>
                                         <!-- <input id="ticker_news" type="text" class="form-control @error('ticker_news') is-invalid @enderror" name="ticker_news" value="{{ old('ticker_news') }}" required autocomplete="name" autofocus> -->
-                                        <textarea class="form-control"  id="ticker_news"  name="ticker_news"></textarea>
+                                       <textarea class="form-control" id="ticker-ckeditor" name="ticker_news" required></textarea>
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -45,6 +45,34 @@
                                             min="2021-01-01" max="2021-12-31" />
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <label> Notification Display to </label>
+                                    <div class="row radio-section">
+                                        <div class="form-check col-2" >
+                                            <input class="form-check-input" type="radio" name="role" required value="all" id="all">
+                                            <label class="form-check-label" for="all">
+                                                All
+                                            </label>
+                                        </div >
+                                        <div class="form-check col-2" >
+                                            <input class="form-check-input" type="radio" name="role" required value="owner" id="owner">
+                                            <label class="form-check-label" for="owner">
+                                                Owner
+                                            </label>
+                                        </div >
+                                        <div class="form-check col-2">
+                                            <input class="form-check-input" type="radio" name="role" required value="tenant" id="tenant">
+                                            <label class="form-check-label" for="tenant">
+                                                Tenant
+                                            </label>
+                                        </div>
+                                        @error('user_type')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
                                 <br>
                                 <br>
                                 <div class="col-xs-12 col-sm-12 col-md-12 mt-4 ">
@@ -57,4 +85,16 @@
             </div>
         </div>
     </div>
+    <script>
+    //CKEDITOR.replace( 'ticker-ckeditor' );
+    var editor = CKEDITOR.replace( 'ticker-ckeditor', {
+        language: 'en',
+        extraPlugins: 'notification'
+    });
+
+    editor.on( 'required', function( evt ) {
+        editor.showNotification( 'This field is required.', 'warning' );
+        evt.cancel();
+    } );
+    </script>
 @endsection
