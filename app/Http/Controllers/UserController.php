@@ -35,11 +35,10 @@ class UserController extends Controller
         $search  = $request->input('search');
         
         $users = User::when($search, function ($q) use($search){
-            return $q->where('mobile', '=', $search)
-                       ->orWhere('name','=',$search)
-                      ->orWhere('email','=',$search);
+            return $q->where('mobile', '=', $search,'OR','name','=',$search,'OR','email','=',$search);
+                   
         })
-        ->where('type', '!=', 'superadmin')
+        ->where('type', '!=', "superadmin")
         ->where('mobile_verified_at', '!=', "")
         ->paginate(5);
        
