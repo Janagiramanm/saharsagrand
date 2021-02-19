@@ -158,6 +158,7 @@ ul.navbar-nav.px-3.logout-sec {
     }
     .filter_form {
         margin-bottom: 25px;
+        margin-left: -8px;
     }
     .btn-group,
     .btn-group-vertical {
@@ -177,5 +178,8 @@ ul.navbar-nav.px-3.logout-sec {
     }
     button.form-group.btn.btn-primary.mr-3.mb-2.col-1 {
         margin-left: 21px;
+    }
+    .breadcrumb-sec {
+        margin: 25px;
     }
 }

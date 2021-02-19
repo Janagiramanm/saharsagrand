@@ -1,4 +1,11 @@
 @extends('layouts.admin')
+@section('parent_link')
+    <a href="{{ route('users.list') }}" class="breadcrumb-item"> Users </a>
+@endsection
+@section('breadcrum')
+    Edit User
+@endsection
+
 
 @section('content')
   

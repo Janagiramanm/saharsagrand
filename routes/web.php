@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::post('/admin/get-sms-template', 'NotificationController@getSmsTemplate');
     Route::resource('/admin/notifications', 'NotificationController');
     Route::resource('/admin/messages', 'MessageController');
+    Route::resource('/admin/election/postings', 'PostingController');
     
 });
 

@@ -59,20 +59,30 @@
                   
                 </a>
               </li>
-              <li class="nav-item nav-item-submenu <?php if(\Request::is('admin/messages*')){ echo 'active'; } ?>">
+              <li class="nav-item <?php if(\Request::is('admin/messages*')){ echo 'active'; } ?>">
                 <a class="nav-link" href="/admin/messages">  
                   <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg> -->
                   <i class="fa fa-envelope" aria-hidden="true"></i>
                   <label> SMS Templates </label>
                   </a>
               </li>
-              <li class="nav-item nav-item-submenu <?php if(\Request::is('admin/notifications*')){ echo 'active'; } ?>">
+              <li class="nav-item <?php if(\Request::is('admin/notifications*')){ echo 'active'; } ?>">
                 <a class="nav-link" href="/admin/notifications/create">  
                   <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg> -->
                   <i class="fa fa-envelope" aria-hidden="true"></i>
                   <label> Notification </label>
                   </a>
               </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-vote-yea" aria-hidden="true"></i>  <label> Election </label>
+                  </a>
+                  <div class="dropdown-menu  <?php if(\Request::is('admin/election*')){ echo 'show'; } ?>" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item <?php if(\Request::is('admin/election/postings*')){ echo 'active'; } ?>" href="/admin/election/postings">Postings</a>
+                    <a class="dropdown-item" href="#">Nominees</a>
+                    <a class="dropdown-item" href="#">Settings</a>
+                  </div>
+                </li>
              
               
             </ul>

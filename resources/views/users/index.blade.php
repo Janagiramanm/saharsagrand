@@ -1,8 +1,12 @@
 @extends('layouts.admin')
+@section('breadcrum')
+     Users
+@endsection
+
 
 @section('content')
     <div class="container">
-        <div class="sb-page-header-content py-5">
+        <div class="sb-page-header-content">
             <div class="d-flex justify-content-between">
                 <div>
                     <h1 class="sb-page-header-title"><span>Users</span></h1>
@@ -115,15 +119,5 @@
             </div>
         </div>
     </div>
-
-     <style>
-        h1.sb-page-header-title {
-        padding-left: 12px;
-    }
-    </style>
-    
-
-
-
 
 @endsection
