@@ -360,6 +360,10 @@ $(document).ready(function(){
             placeholder: "Select User",
             allowClear: true,
         });
+        $("#postings").select2({
+            placeholder: "Select Posting",
+            allowClear: true,
+        });
 
         $("#amenity_name_filter").select2({
             placeholder: "Select Amenity",
@@ -371,23 +375,33 @@ $(document).ready(function(){
         $('.user-change-status').on('change',function() {
             var status = $(this).prop('checked') == true ? 1 : 0; 
             var user_id = $(this).data('id'); 
-
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: '/change-user-status',
-                data: {'status': status, 'userid': user_id},
-                success: function(resp){
-                    $(".success-msg").text(resp.message)
-                 // console.log(data.success)
-                }
-            });
+            var chk = $(this);
+           // var status = $(this).attr('data-status');
+           var confirm_alert = (status == 1) ? confirm("Are you sure you want to deactivate this user?") : confirm("Are you sure you want to activate this user?");
+           if (confirm_alert == true) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '/change-user-status',
+                    data: {'status': status, 'userid': user_id},
+                    success: function(resp){
+                        $(".success-msg").text(resp.message)
+                    // console.log(data.success)
+                    }
+                });
+            }else{
+                if(chk.checked) {
+                    chk.prop("checked", false);
+                  }
+                  else {
+                    chk.prop("checked", true);
+                  }
+            }
         })
 
         $("#search-book").on('click',function(){
@@ -533,5 +547,9 @@ $(document).ready(function(){
           
             return false;
           });
+
+        $().on('click',function(e){
+            
+        })
 
 });

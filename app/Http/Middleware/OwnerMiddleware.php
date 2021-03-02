@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Auth;
 
-class AdminMiddleware
+class OwnerMiddleware
 {
     /**
      * The Guard implementation.
@@ -24,7 +25,6 @@ class AdminMiddleware
     {
         $this->auth = $auth;
     }
-
     /**
      * Handle an incoming request.
      *
@@ -34,11 +34,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->getUser()->type !== "superadmin") {
+        $role =  Auth::user()->role;
+        if ($role  !== "owner") {
             abort(403, 'Unauthorized action.');
         }
-       
-
         return $next($request);
     }
 }

@@ -8,6 +8,7 @@ use App\Flat;
 use App\Amenity;
 use App\Ticker;
 use Carbon\Carbon;
+use Session;
 
 class SiteController extends Controller
 {
@@ -30,6 +31,7 @@ class SiteController extends Controller
                           ->where('end_date', '>=', Carbon::now()->format('Y-m-d'));
                     });
             })->where('active','=',1)->get();
+        Session::put('tickers', $tickers);
         return view('welcome', compact(['blocks','amenities','tickers']));
 
     }

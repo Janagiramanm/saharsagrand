@@ -24,7 +24,8 @@
                               @endphp
                               @foreach($tickers as $ticker)
                                    @if($ticker->role == $role || $ticker->role=='all' || $role == 'superadmin')
-                                       <label>{{ strip_tags($ticker->ticker_news) }}</label> &emsp; 
+                                       <label>{!! html_entity_decode($ticker->ticker_news) !!}
+                                       </label> &emsp; 
                                    @endif
                               @endforeach
                             </marquee>
@@ -275,7 +276,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="formGroupExampleInput">Name<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Please enter name">
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Please enter name" autocomplete="no-fill">
                            
                         </div>
                         <div class="mb-3">

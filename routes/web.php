@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::resource('/admin/notifications', 'NotificationController');
     Route::resource('/admin/messages', 'MessageController');
     Route::resource('/admin/election/postings', 'PostingController');
+    Route::get('/admin/election/nominees', 'NomineeController@index')->name('nominees');
+  
     
 });
 
@@ -81,11 +83,16 @@ Route::post('/user/get-flats','UserController@getFlats');
 Route::post('/user/forgot-password','UserController@forgotPassword');
 Route::post('/user/forgot-password-change','UserController@forgotPasswordChange');
 Route::get('/user/reg-success','UserController@regSuccess');
-// Route::get('/user/search','UserController@regSuccess');
-// Route::post('/autocomplete','UserController@selectSearch');
-// Route::get('/autocomplete', 'UserController@selectSearch')->name('autocomplete');
 
 Route::post('/search-booking','BookingController@searchBooking');
 
-
 Route::get('/booking/badminton','BookingController@create')->name('booking.badminton');
+
+// Route::post('/election/nominee/create', 'NomineeController@create')->name('nominees.create');
+Route::group(['middleware' => ['auth', 'owner']], function() {
+        Route::get('/election/nominee/create', 'NomineeController@create')->name('nominees.create');
+     
+});
+Route::resource('/election/nominees', 'NomineeController');
+
+  
