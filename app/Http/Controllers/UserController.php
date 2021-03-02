@@ -97,7 +97,7 @@ class UserController extends Controller
        
         if($user){
             if($user->email!=''){
-                Mail::to($user->email)->send(new SendRegistrationOTP($user));
+              //  Mail::to($user->email)->send(new SendRegistrationOTP($user));
             }
             $msg = [
                 'status'=> 1,
