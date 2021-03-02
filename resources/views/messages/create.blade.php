@@ -1,5 +1,10 @@
 @extends('layouts.admin')
-
+@section('parent_link')
+    <a href="{{ route('messages.index') }}" class="breadcrumb-item"> SMS Templates </a>
+@endsection
+@section('breadcrum')
+    Add New Template
+@endsection
 @section('content')
     <div class="container">
         <div class="sb-page-header-content py-5">

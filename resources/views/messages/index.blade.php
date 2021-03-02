@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('breadcrum')
+     SMS Templates
+@endsection
 @section('content')
     <div class="container">
         <div class="sb-page-header-content py-5">

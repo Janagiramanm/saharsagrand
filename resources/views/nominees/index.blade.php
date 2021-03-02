@@ -41,7 +41,7 @@
                                                 @php
                                                     $index = $nominees->firstItem()
                                                 @endphp
-                                                @foreach ($nominees as $nominee)
+                                                @forelse ($nominees as $nominee)
                                                     <tr>
                                                         <td>{{ $index++ }}</td>
                                                         <td><img class="nominee_photo" src="{{URL::to('/images/nominees/'.$nominee->photo)}}"/></td>
@@ -60,7 +60,11 @@
                                                         </td>
                                                     
                                                     </tr>
-                                                @endforeach
+                                                    @empty
+                                                    <tr>
+                                                        <td colspan="9">No User Found</td>
+                                                    </tr>
+                                                @endforelse
                                     </table>
 
 

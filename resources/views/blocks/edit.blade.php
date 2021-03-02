@@ -1,4 +1,10 @@
 @extends('layouts.admin')
+@section('parent_link')
+    <a href="{{ route('blocks') }}" class="breadcrumb-item"> Blocks </a>
+@endsection
+@section('breadcrum')
+    Edit Block
+@endsection
 
 @section('content')
     <div class="container">
@@ -23,7 +29,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-4">
                                         <div class="form-group">
-                                        <label>Block Name</label>
+                                        <label>Block Name <span class="text-danger">*</span></label>
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $block->name }}" required autocomplete="name" autofocus>
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">

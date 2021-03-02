@@ -305,7 +305,7 @@
                               
                         </div>   
                         <div class="mb-3">
-                                <label class="form-label">Flat Number*</label>
+                                <label class="form-label">Flat Number <span class="text-danger">*</span></label>
                                 <select class="form-control" style="width:450px;" name="flat_number" id="flat_number" required>
                                     <option value="">Select a Flat </option>
                                    
@@ -313,7 +313,7 @@
                                 <span id="error-flat" class="text-danger">{{ $errors->first('flat_number') }}</span>
                         </div>
                         <div class="mb-3">
-                                <label class="form-label">Type<span class="danger-str">*</span></label>
+                                <label class="form-label">Type<span class="text-danger">*</span></label>
                                 <select  name="type" id="type"  required class="form-control @error('type') is-invalid @enderror">
                                     <option value="">Select Type</option>
                                     <option value="owner">Owner</option>
@@ -334,7 +334,7 @@
                         <form id="verify_mobile" method="post" action="javascript:void(0)" >
                            @csrf
                             <div class="mb-3">
-                                <label class="form-label">Enter Your OTP * </label>
+                                <label class="form-label">Enter Your OTP <span class="text-danger">*</span> </label>
                                 <input type="text" name="otp" id="otp" required class="form-control">
                                 <span class="text-danger" id="error-otp">{{ $errors->first('otp') }}</span>
                                 

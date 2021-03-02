@@ -46,21 +46,40 @@ class AppHelper
          
         if ($receipientno) {
 
-            $ch = curl_init();
-            // $user=env('MVAAYOO_USERNAME'); //"manoj.p@netiapps.com:Netiapps839";
-            // $senderID = env('MVAAYOO_SENDERID');
-            $user="manoj.p@netiapps.com:Netiapps839";
-            $senderID="sahas";
-            $msgtxt = "Dear $name Welcome to Sahasra Grand your membership has been activated User name $receipientno and Password : $rndString";
-           
-            curl_setopt($ch,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, "user=$user&senderID=$senderID&receipientno=$receipientno&msgtxt=$msgtxt");
-            curl_exec($ch);
-           
+            $username =  env('TEXTLOCAL_USERNAME');
+            $hash =  env('TEXTLOCAL_HASH');
+
+            $test = "0";
+            // Data for text message. This is the text message data.
+            $sender = "sahasr"; // This is who the message appears to be from.
+            $numbers = $receipientno; // A single number or a comma-seperated list of numbers
+            $message = "Dear $name your OTP for registration is $otp Rgds SGOWA";
+            // 612 chars or less
+            // A single number or a comma-seperated list of numbers
+            $message = urlencode($message);
+            $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+            $ch = curl_init('http://api.textlocal.in/send/?');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch); // This is the result from the API
             curl_close($ch);
-            $ch = curl_init();
+
+            // $ch = curl_init();
+            // // $user=env('MVAAYOO_USERNAME'); //"manoj.p@netiapps.com:Netiapps839";
+            // // $senderID = env('MVAAYOO_SENDERID');
+            // $user="manoj.p@netiapps.com:Netiapps839";
+            // $senderID="sahas";
+            // $msgtxt = "Dear $name Welcome to Sahasra Grand your membership has been activated User name $receipientno and Password : $rndString";
+           
+            // curl_setopt($ch,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
+            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            // curl_setopt($ch, CURLOPT_POST, 1);
+            // curl_setopt($ch, CURLOPT_POSTFIELDS, "user=$user&senderID=$senderID&receipientno=$receipientno&msgtxt=$msgtxt");
+            // curl_exec($ch);
+           
+            // curl_close($ch);
+            // $ch = curl_init();
         }
     }
 

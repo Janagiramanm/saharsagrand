@@ -65,8 +65,6 @@ class AmenitySeeder extends Seeder
 
         foreach($amenities as $key => $value){
 
-            
-
             $amenity = new Amenity();
             $amenity->name = $key;
             $amenity->logo = $value['logo'];

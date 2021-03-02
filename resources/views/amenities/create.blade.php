@@ -1,5 +1,10 @@
 @extends('layouts.admin')
-
+@section('parent_link')
+    <a href="{{ route('amenities') }}" class="breadcrumb-item"> Amenities </a>
+@endsection
+@section('breadcrum')
+    Add New Amenity
+@endsection
 @section('content')
     <div class="container">
         <div class="sb-page-header-content py-5">

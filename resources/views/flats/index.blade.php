@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('breadcrum')
+     Flats
+@endsection
 
 @section('content')
     <div class="container">

@@ -1,5 +1,10 @@
 @extends('layouts.admin')
-
+@section('parent_link')
+    <a href="{{ route('flats') }}" class="breadcrumb-item"> Flats </a>
+@endsection
+@section('breadcrum')
+    Edit Flat
+@endsection
 @section('content')
     <div class="container">
         <div class="sb-page-header-content py-5">
@@ -27,7 +32,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
 
                                     <div class="mb-3">
-                                            <label class="form-label">Block*</label>
+                                            <label class="form-label">Block <span class="text-danger">*</span></label>
                                             <select  name="block" id="block"  required class="form-control @error('block') is-invalid @enderror">
                                                 <option value="">Select Type</option>
                                             @if($blocks)
@@ -44,7 +49,7 @@
                                     </div> 
 
                                     <div class="form-group">
-                                        <label>Flat Name</label>
+                                        <label>Flat Name <span class="text-danger">*</span></label>
                                         <input id="flat_number" type="text" class="form-control @error('flat_number') is-invalid @enderror" name="flat_number" value="{{ $flat->flat_number }}" required autocomplete="name" autofocus>
                                        
                                         @error('flat_number')
