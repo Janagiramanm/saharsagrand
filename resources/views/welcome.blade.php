@@ -54,15 +54,19 @@
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a>
                             </div>
                           @else
-                            {{ Auth::user()->role }}
+                            {{ Auth::user()->name }} ( {{ Auth::user()->role }} )
                             @if(Auth::user()->role == 'superadmin')
                                 <div class="button">
                                     <a  href="/admin/home" >Dashboard</a>
                                 </div>
-                            @endif
+                            @else
+                            <div class="button">
+                                <a href="/user/dashboard" >My Dashboard</a>
+                            </div>
                             <div class="button">
                                 <a data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#" >Change Password</a>
                             </div>
+                            @endif
                             <div class="button">
                                   <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -73,6 +77,7 @@
                                         @csrf
                                     </form>
                             </div>
+                          
                          @endguest
                         </div>
                     </div>

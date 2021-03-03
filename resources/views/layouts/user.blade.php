@@ -115,49 +115,25 @@
                                         
                                         <!-- <input class="form-control search-booking" type="text" name="booking_code" id="booking_code" /> -->
                                         </div>
-                                        <div class="col-2">
-                                        </div>
+                                        
                                         
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="info-card-block">
+                            <div>
+                                
+
+                            </div>
+                            <div class="info-card-block user-blade">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12 col-lg-4">
-                                        <div class="info-card active">
-                                            @guest
-                                                <div class="image"><img src="{{ asset('/images/login.png') }}"/> </div>
-                                                <div class="button">
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn btn-primary w-100">Login</a>
-                                                </div>
-                                                <div class="button">
-                                                
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal"  class="btn btn-secondary w-100">Create an Account</a>
-                                                </div>
-                                            @else
-                                                {{ Auth::user()->role }}
-                                                @if(Auth::user()->role == 'superadmin')
-                                                    <div class="button">
-                                                        <a  href="/admin/home" >Dashboard</a>
-                                                    </div>
-                                                @endif
-                                                <div class="button">
-                                                    <a data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#" >Change Password</a>
-                                                </div>
-                                                <div class="button">
-                                                    <a href="{{ route('logout') }}"
-                                                        onclick="event.preventDefault();
-                                                                        document.getElementById('logout-form').submit();">
-                                                            {{ __('Logout') }}
-                                                        </a>
-                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                            @csrf
-                                                        </form>
-                                                </div>
-                                            @endguest
-                                        </div>
-                                    </div>
+
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item" aria-current="page"><a href="/">Home</a></li>
+                                        </ol>
+                                    </nav>
+                                   
                                     @yield('content')
                                 
                                 </div>
@@ -172,4 +148,28 @@
 
 
 </body>
+<style>
+    li.breadcrumb-item {
+    border: 1px solid gainsboro;
+    padding: 0px 10px;
+    margin-left: 4px;
+    cursor: pointer;
+    
+}
+li.breadcrumb-item a{
+text-decoration:none !important;
+}
+.user-blade .info-card.active {
+    box-shadow: none;
+    min-height: 230px;
+}
+.count-lbl {
+    font-size: 50px;
+    text-align: center;
+}
+label.heading-lbl {
+    font-size: 22px;
+    text-align: center;
+}
+</style>
 </html>

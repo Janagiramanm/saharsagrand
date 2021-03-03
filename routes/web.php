@@ -70,11 +70,15 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::resource('/admin/election/postings', 'PostingController');
 
     Route::put('/admin/nominee/verification','NomineeController@nomineeVerification');
-    Route::resource('/admin/election/nominees', 'NomineeController');
-    // Route::get('/admin/election/nominees', 'NomineeController@index')->name('nominees');
+    //Route::resource('/admin/election/nominees', 'NomineeController');
+    Route::get('/admin/election/nominees', 'NomineeController@index')->name('nominees');
   
     
 });
+// Route::group(['middleware' => ['auth', '!superadmin']], function() {
+    Route::get('/user/dashboard', 'HomeController@userDashboard');
+
+// });
 
 Route::post('/checkflat','UserController@checkFlat');
 Route::post('/checkmobile','UserController@checkMobile');

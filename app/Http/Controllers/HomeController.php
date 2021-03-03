@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ticker;
+use App\Booking;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -34,4 +36,16 @@ class HomeController extends Controller
         $tickers =  Ticker::all();
         return view('welcome',compact(['tickers']));
     }
+   
+    /**
+     * User Dashboard
+     */
+    public function userDashboard(){
+        $user = Auth::user();
+        $bookings = Booking::where('user_id','=',$user->id)->get();
+        $result['booking_count'] = $bookings->count();
+        return view('dashboards.user',compact(['result']));
+    }
+
+
 }

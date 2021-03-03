@@ -75,7 +75,7 @@ class AppHelper
 
              $test = "0";
              $sender = "sahasr"; // This is who the message appears to be from.
-             $message = "Dear $name your booking for $amenity is Approved. Yoer Refference iD is $rndString. Rgds SGOWA";
+             $message = "Dear $name your booking for $amenity is Approved. Your Refference iD is $rndString. Rgds SGOWA";
              $message = urlencode($message);
              $data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$receipientno."&test=".$test;
              $ch = curl_init('http://api.textlocal.in/send/?');
