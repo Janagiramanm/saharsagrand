@@ -63,7 +63,7 @@ class BookingController extends Controller
 
        $userDetails = User::find($user->id);
        
-       AppHelper::BookingConfirmation($userDetails->name, $request->input('mobile'), $booking_code);
+       AppHelper::BookingConfirmation($userDetails->name, $request->input('mobile'), $booking_code, $booking->amenity->name);
        if($userDetails->email!=''){
             // Mail::to($userDetails->email)->send(new BookingConfirmation($user, $booking));
        }
