@@ -342,7 +342,7 @@ class UserController extends Controller
      * to activate
      */
     public function activate(Request $request){
-       //$rndString = Str::random(8);
+      
         $rndString = mt_rand(100000,999999);
         $hashed_password = Hash::make($rndString);
         $user = User::find($_POST['userid']);
@@ -430,7 +430,7 @@ class UserController extends Controller
             $hashed_password = Hash::make($rndString);
             $user = User::find($_POST['userid']);
             $user->active = 1;
-            //$user->password = $hashed_password;
+            $user->password = $hashed_password;
             $user->save();
             //$user = User::where('id',$_POST['userid'])->update(array('active' => 1,'password' => $hashed_password));
            
@@ -479,8 +479,8 @@ class UserController extends Controller
 
         $user->otp = $sixRandomDigit;
         if($user->save()){
-                //AppHelper::sendForgotPasswordOtp($name, $mobile, $sixRandomDigit);
-                Mail::to($email)->send(new ForgotPasswordOtp($user));
+                AppHelper::sendForgotPasswordOtp($name, $mobile, $sixRandomDigit);
+                //Mail::to($email)->send(new ForgotPasswordOtp($user));
                 $msg =  array(
                     'status'=>1,
                     'message'=>'success',

@@ -67,7 +67,7 @@
                                 <input type="text" class="form-control" id="booking-code" placeholder="Search Booking Code">
                                 <div class="input-group-append">
                                 <button class="btn btn-primary" type="button" id="search-book">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
                                 </div>
                             </div>

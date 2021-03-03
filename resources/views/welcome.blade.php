@@ -281,12 +281,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="mobile">Mobile<span class="text-danger">*</span></label>
-                            <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Please enter mobile number" maxlength="10">
+                            <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Please enter mobile number" maxlength="10" autocomplete="no-fill">
                            
                         </div>
                         <div class="mb-3">
                             <label for="email">Email Address<span class="text-danger">*</span></label>
-                            <input type="text" name="email" class="form-control" id="email" placeholder="Please enter email id">
+                            <input type="text" name="email" class="form-control" id="email" placeholder="Please enter email id"  />
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                         </div>   
                         <div class="mb-3">

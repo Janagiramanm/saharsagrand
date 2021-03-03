@@ -68,7 +68,10 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::resource('/admin/notifications', 'NotificationController');
     Route::resource('/admin/messages', 'MessageController');
     Route::resource('/admin/election/postings', 'PostingController');
-    Route::get('/admin/election/nominees', 'NomineeController@index')->name('nominees');
+
+    Route::put('/admin/nominee/verification','NomineeController@nomineeVerification');
+    Route::resource('/admin/election/nominees', 'NomineeController');
+    // Route::get('/admin/election/nominees', 'NomineeController@index')->name('nominees');
   
     
 });

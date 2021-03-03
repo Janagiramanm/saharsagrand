@@ -377,7 +377,7 @@ $(document).ready(function(){
             var user_id = $(this).data('id'); 
             var chk = $(this);
            // var status = $(this).attr('data-status');
-           var confirm_alert = (status == 1) ? confirm("Are you sure you want to deactivate this user?") : confirm("Are you sure you want to activate this user?");
+           var confirm_alert = (status == 1) ? confirm("Are you sure you want to activate this user?") : confirm("Are you sure you want to de-activate this user?");
            if (confirm_alert == true) {
                 $.ajaxSetup({
                     headers: {
@@ -395,12 +395,12 @@ $(document).ready(function(){
                     }
                 });
             }else{
-                if(chk.checked) {
+                //if(chk.checked) {
                     chk.prop("checked", false);
-                  }
-                  else {
-                    chk.prop("checked", true);
-                  }
+                //   }
+                //   else {
+                //     chk.prop("checked", true);
+                //   }
             }
         })
 
@@ -519,6 +519,39 @@ $(document).ready(function(){
             });
 
         });
+
+
+        $(".nominee-validate").on('click',function(){
+             var id =  $(this).attr('data-id');
+             var act = $(this).attr('data-act');
+             $("#act_lbl").text(act);
+             $("#nominee_id").val(id);
+             $("#nominee_act").val(act);
+        })
+
+        $("#nominee-validate-submit").on('click',function(){
+            var id = $("#nominee_id").val();
+            var act = $("#nominee_act").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "PUT",
+                dataType: "json",
+                url: '/admin/nominee/verification',
+                data: {'id': id, 'act':act },
+                success: function(resp){
+                    if(resp.status == 1){
+                          location.reload();
+                    }
+                 
+                }
+            });
+        })
+       
+
        
         $("#menu-humberger-btn").on('click',function(){
             if($( ".sidebar" ).hasClass( "d-none" )){
@@ -549,7 +582,7 @@ $(document).ready(function(){
           });
 
         $().on('click',function(e){
-            
+
         })
 
 });

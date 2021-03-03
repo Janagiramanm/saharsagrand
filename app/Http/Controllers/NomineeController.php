@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Auth;
 use App\Posting;
 use App\Nominee;
+use App\Http\Helpers\AppHelper;
 
 class NomineeController extends Controller
 {
@@ -72,6 +73,8 @@ class NomineeController extends Controller
             $nominees->photo = $nominee_photo;
         }
         if($nominees->save()){
+            $posting =  Posting::find($nominees->posting_id);
+            AppHelper::nominationSms($user->name, $user->mobile, $posting->name);
             return redirect( route('nominees.create'))->withSuccess('Your nominee registration successfully done. You will get confirmation soon.');
         }
         
@@ -120,5 +123,27 @@ class NomineeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function nomineeVerification(Request $request){
+         
+          $status = 0;
+          if($request->act == 'Accept'){
+              $status = 2;
+          }
+          $nominee = Nominee::find($request->id);
+          $nominee->status = $status;
+          if($nominee->save()){
+            //    echo $nominee->user->name;
+            //    echo $nominee->user->mobile;
+            //    exit;
+                AppHelper::nominationFinalizedSms($nominee->user->name, $nominee->user->mobile, $nominee->posting->name, $status);
+                $msg = [
+                    'status'=> 1,
+                    'message' => 'Success',
+                ];
+          }
+          return response()->json($msg);
     }
 }
