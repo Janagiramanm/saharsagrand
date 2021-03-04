@@ -92,6 +92,9 @@
                                 @endforelse
                                
                             </table>
+                            <div>
+                            {{ $users->links() }}
+                            </div>
 
                            
                            
