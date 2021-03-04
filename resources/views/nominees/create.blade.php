@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-                <div class="col-md-6 col-sm-12 col-lg-8">
+                <div class="col-md-6 col-sm-12 col-lg-12">
                     <div class="card">
                     <div>
                         <h2>Nominee Registration</h2>
