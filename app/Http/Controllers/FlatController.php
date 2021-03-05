@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Flat;
 use App\Block;
+use App\User;
 use Illuminate\Validation\Rule;
 
 class FlatController extends Controller
@@ -126,6 +127,12 @@ class FlatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $isUserAdded = User::where('block_id','=',$id)->first();
+        if($isUserAdded){
+            return redirect('/admin/flats')->withError('Can not delete this Flat. Because some user belongs to this Flat.');
+        }
+        $flat = Flat::find($id);
+        $flat->delete();
+        return redirect('/admin/flats')->withSuccess('Flat has been deleted successfully.');
     }
 }

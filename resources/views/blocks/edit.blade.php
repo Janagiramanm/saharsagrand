@@ -43,8 +43,26 @@
                             </form>
                             <div class="pt-lg-2 mt-4">
                                 <button form="editBlock" type="submit" class="btn btn-primary">{{ 'Update' }}</button>
-                                <button class="btn btn-danger mx-sm-2" data-toggle="modal" data-target="#deleteConfirm">{{ 'Delete' }}</button>
+                                <input type="button" data-bs-toggle="modal" data-bs-target="#deleteConfirm" value="Delete" class="btn btn-danger" />   
                             </div>
+
+                            <div class="modal" id="deleteConfirm" tabindex="-1"  role="dialog" aria-labelledby="deleteConfirmLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {{ "Please confirm to delete the record" }}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Close' }}</button>
+                                        <form action="{{ route('block.destroy',$block->id) }}" method="POST" style="display:inline">
+
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="submit" class="btn btn-danger btn-ok" value="{{ 'Confirm' }}" />
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
 
                            
                         </div>

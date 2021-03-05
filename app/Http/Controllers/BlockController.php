@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Block;
+use App\User;
 
 class BlockController extends Controller
 {
@@ -102,6 +103,14 @@ class BlockController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        $isUserAdded = User::where('block_id','=',$id)->first();
+        if($isUserAdded){
+            return redirect('/admin/blocks')->withError('Can not delete this Block. Because some user belongs to this block.');
+        }
+        $block = Block::find($id);
+        $block->delete();
+        return redirect('/admin/blocks')->withSuccess('Block has been deleted successfully.');
+      
     }
 }

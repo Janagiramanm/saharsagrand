@@ -38,12 +38,14 @@ Route::group(['middleware' => ['auth', 'superadmin']], function() {
     Route::get('/admin/blocks/add','BlockController@create')->name('block.create');
     Route::post('/admin/block/store','BlockController@store')->name('block.store');
     Route::get('/admin/block/edit/{id}','BlockController@edit')->name('block.edit');
+    Route::delete('/admin/block/{id}/delete','BlockController@destroy')->name('block.destroy');
     Route::put('/admin/block/update/{id}','BlockController@update')->name('block.update');
 
     Route::get('/admin/flats','FlatController@index')->name('flats');
     Route::get('/admin/flats/add','FlatController@create')->name('flat.create');
     Route::post('/admin/flat/store','FlatController@store')->name('flat.store');
     Route::get('/admin/flat/edit/{id}','FlatController@edit')->name('flat.edit');
+    Route::delete('/admin/flat/{id}/delete','FlatController@destroy')->name('flat.destroy');
     Route::put('/admin/flat/update/{id}','FlatController@update')->name('flat.update');
 
     Route::get('/admin/bookings','BookingController@index');
