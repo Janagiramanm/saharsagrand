@@ -40,14 +40,22 @@ class BookingController extends Controller
        $token = $request->bearerToken();
        $user = User::where('remember_token','=',$token)->first();
        if(!$user){
-        return response()->json( [
+                 return response()->json( [
                     'status' => 0,
                     'message' => 'Invalid User',
-                    ],200);
+                 ],200);
        }
+        $isBookingExist = Booking::where('amenity_id','=',$request->input('bookingType'))
+                                  ->where('booking_date','=',$request->input('selectedDate'))
+                                  ->where('user_id','=', $user->id)->first();
+        if($isBookingExist){
+            return response()->json( [
+                'status' => 0,
+                'message' => 'Already booked this amenity today.',
+             ],200);
+        }
 
        $timeSlots = $request->input('timeSlots');
-
        $booking_code =  mt_rand(100000,999999);
 
        $booking = new Booking();
@@ -113,10 +121,10 @@ class BookingController extends Controller
         $selectedMonth = $request->input('selectedMonth');
         $availablePerson = 5;
 
-
         $amenity = Amenity::where('id','=',$bookingType)->first();
         $isFullDayEvent = false;
         $advance_book = 0 ;
+       
         if($amenity->time_slots == 0){
                $isFullDayEvent = true;
         }else{
@@ -126,7 +134,8 @@ class BookingController extends Controller
             }
             $advance_book = $amenity->advance_book - 1;
         }
- 
+
+        
         $carbon = Carbon::now();
        
         $currentMonth = Carbon::now()->format('F Y');
@@ -134,11 +143,13 @@ class BookingController extends Controller
         if($selectedMonth == $currentMonth){
             $start_date =  $carbon->format('Y-m-d');
         }
+      
         $end_date =    \Carbon\Carbon::parse($start_date)->endOfMonth()->toDateString();
         if($advance_book > 0){
             $end_date = $carbon->addDays($advance_book)->format('Y-m-d');
         }
         $dates = $this->getDatesFromRange($start_date, $end_date);
+        
         $result =[];
         foreach($dates as $key => $value){
             $result[$key]['date'] = $value;
@@ -155,7 +166,8 @@ class BookingController extends Controller
             $bookings = Booking::select('booking_date','start_time','end_time','total_guests')->where('amenity_id','=',$bookingType)
             ->where('booking_date','=',$value)
             ->get();
-                            
+
+
             if($bookings->isEmpty()){
                
                 if(!$isFullDayEvent){
@@ -186,6 +198,7 @@ class BookingController extends Controller
                                     }else{
                                         $available = false;
                                     }
+                                    
                                     $availPerson = $availablePerson - $booking->total_guests;
                                     $timeslots[] = [
                                                     'startTime' => $time[0],
@@ -201,8 +214,8 @@ class BookingController extends Controller
                 }  
             }
             $result[$key]['timeSlots'] = $timeslots;
-        }                             
-
+        }  
+       
         return response()->json( [
             'month' => $selectedMonth,
             'bookingType' => $bookingType,
@@ -216,11 +229,9 @@ class BookingController extends Controller
         $EndTime      = strtotime ($EndTime); //Get Timestamp
     
         $AddMins  = $Duration * 60;
-    
         while ($StartTime <= $EndTime) //Run loop
         {
-            $ReturnArray[] = date ("G:i", $StartTime).'-'.date ("G:i",$StartTime += $AddMins);
-            // $StartTime += $AddMins; //Endtime check
+            $ReturnArray[] = date ("h:i", $StartTime).'-'.date ("h:i",$StartTime += $AddMins);
         }
         return $ReturnArray;
     }
