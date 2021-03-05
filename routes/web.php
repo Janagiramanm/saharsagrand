@@ -102,4 +102,7 @@ Route::group(['middleware' => ['auth', 'owner']], function() {
 });
 Route::resource('/election/nominees', 'NomineeController');
 
+Route::post('/user/voting','PollingController@store');
+Route::resource('/user/polling','PollingController');
+
   

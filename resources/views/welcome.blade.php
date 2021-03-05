@@ -63,10 +63,14 @@
                             <div class="button">
                                 <a href="/user/dashboard" >My Dashboard</a>
                             </div>
+                           
                             <div class="button">
                                 <a data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#" >Change Password</a>
                             </div>
                             @endif
+                            <div class="button">
+                                <a href="/user/polling" >Vote</a>
+                            </div>
                             <div class="button">
                                   <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
