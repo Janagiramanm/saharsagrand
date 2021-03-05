@@ -21,7 +21,7 @@ class SiteController extends Controller
     {
        
         $blocks = Block::All();
-        $amenities = Amenity::All();
+        $amenities = Amenity::where('active','=',1)->get();
         $tickers =  Ticker::where(function($q){
                     $q->where(function($q){
                         $q->whereNull('start_date')

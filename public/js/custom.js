@@ -371,13 +371,17 @@ $(document).ready(function(){
         })
 
 
+            // $('.user-change-status').on('mouseover',function(){
 
-        $('.user-change-status').on('change',function() {
-            var status = $(this).prop('checked') == true ? 1 : 0; 
-            var user_id = $(this).data('id'); 
-            var chk = $(this);
-           // var status = $(this).attr('data-status');
-           var confirm_alert = (status == 1) ? confirm("Are you sure you want to activate this user?") : confirm("Are you sure you want to de-activate this user?");
+            // })
+
+            $('.user-change-status').on('change',function() {
+               
+                var status = $(this).prop('checked') == true ? 1 : 0; 
+                var user_id = $(this).data('id'); 
+                var chk = $(this);
+            // var status = $(this).attr('data-status');
+           var confirm_alert = (status == 1) ? confirm("    Are you sure you want to activate this user?") : confirm("Are you sure you want to de-activate this user?");
            if (confirm_alert == true) {
                 $.ajaxSetup({
                     headers: {
@@ -390,17 +394,28 @@ $(document).ready(function(){
                     url: '/change-user-status',
                     data: {'status': status, 'userid': user_id},
                     success: function(resp){
+                        $(".success-msg").addClass('alert alert-success');
                         $(".success-msg").text(resp.message)
-                    // console.log(data.success)
+                        setInterval(function () {
+                           location.reload()
+                        }, 2000);
+                      // console.log(data.success)
                     }
                 });
             }else{
-                //if(chk.checked) {
-                    chk.prop("checked", false);
-                //   }
-                //   else {
-                //     chk.prop("checked", true);
-                //   }
+                var preClass = $(this).parent().prop('className');
+               
+                if(preClass == 'toggle btn btn-danger off'){
+                    setClass = 'toggle btn btn-success';
+                }
+                if(preClass == 'toggle btn btn-success'){
+                    setClass = 'toggle btn btn-danger off'
+                }
+                $(this).parent().removeClass(preClass);
+                $(this).parent().addClass(setClass);
+                location.reload()
+                //$(".container").load(location.href + ".container");
+                
             }
         })
 

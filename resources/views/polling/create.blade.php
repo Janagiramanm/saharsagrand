@@ -6,38 +6,41 @@
           $posting_name = '';
        @endphp
         @foreach ($candidates as $candidate)
+                 @if($candidate->user->active == 1)
            
-                 @if($candidate->posting->name !=  $posting_name )
-                    <div for="" class="posting-name"> {{ ucwords($candidate->posting->name) }} Candidates </div>
-                 @endif
-                 
-                       
-                        <div class="col-md-6 col-sm-12 col-lg-3">
-                            <div class="info-card active">
-                                <!-- <label for="" class="heading-lbl"> {{ $candidate->posting->name}} </label> -->
-                                <div class="candidate-img">
-                                <img class="photo" src="{{URL::to('/images/nominees/'.$candidate->photo)}}"/>
-                                </div>
-                                <div class="candidate-name">
-                                    {{ $candidate->user->name }}
-                                </div>
-                                <div>
-                                <input type="radio"  name="{{ $candidate->posting->name }}" value="{{ $candidate->user_id }}" /> Choose 
+                    @if($candidate->posting->name !=  $posting_name )
+                        <div for="" class="posting-name"> {{ ucwords($candidate->posting->name) }} Candidates </div>
+                    @endif
+                    
+                        
+                            <div class="col-md-6 col-sm-12 col-lg-3">
+                                <div class="info-card active">
+                                    <!-- <label for="" class="heading-lbl"> {{ $candidate->posting->name}} </label> -->
+                                    <div class="candidate-img">
+                                    <img class="photo" src="{{URL::to('/images/nominees/'.$candidate->photo)}}"/>
+                                    </div>
+                                    <div class="candidate-name">
+                                        {{ $candidate->user->name }}
+                                    </div>
+                                    <div>
+                                    <input type="radio"  name="{{ $candidate->posting->name }}" value="{{ $candidate->user_id }}" /> Choose 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                @if(isset($voter[$candidate->posting->id]) != 'false')    
-                    @if($candidate->posting->name ==  $posting_name )
-                        <div class="vote-btn-sec">
-                            <label for="" class="error-label" id="{{$candidate->posting->id}}_lbl"></label>
-                            <br>
-                        <button class="voting-btn col-lg-3" data-postingId="{{ $candidate->posting->id }}" id="{{ $candidate->posting->name }}">Vote</button>
-                        </div>
+                    @if(isset($voter[$candidate->posting->id]) != 'false')    
+                        @if($candidate->posting->name ==  $posting_name )
+                            <div class="vote-btn-sec">
+                                <label for="" class="error-label" id="{{$candidate->posting->id}}_lbl"></label>
+                                <br>
+                            <button class="voting-btn col-lg-3" data-postingId="{{ $candidate->posting->id }}" id="{{ $candidate->posting->name }}">Vote</button>
+                            </div>
+                        @endif
                     @endif
+                    @php  
+                    $posting_name = $candidate->posting->name;
+                    @endphp
+                    
                 @endif
-                @php  
-                 $posting_name = $candidate->posting->name;
-                @endphp
 
                
         @endforeach

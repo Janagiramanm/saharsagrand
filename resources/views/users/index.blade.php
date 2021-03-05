@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <h1 class="sb-page-header-title"><span>Users</span></h1>
-                    <label class="success-msg"></label>
+                   
                 </div>
                 
             </div>
@@ -28,6 +28,13 @@
                                     <p>{{ $message }}</p>
                                 </div>
                             @endif
+                            @if ($message = Session::get('error'))
+                                <div class="alert alert-danger">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @endif
+                            <div class="success-msg"></div>
+                         
 
                         <div class="filter_form">
                            <form class="form-inline" method="get"  action="{{ route('users.list') }}">
@@ -57,6 +64,7 @@
                                     <th>Block</th>
                                     <th>Flat Number</th>
                                     <th>Type</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                     <th>Edit</th>
                                 </tr>
@@ -74,6 +82,7 @@
                                         <td>@if(isset($user->block->name)){{ $user->block->name }} @endif</td>
                                         <td>@if(isset($user->flat->flat_number)){{ $user->flat->flat_number }} @endif</td>
                                         <td>{{ $user->type }}</td>
+                                        <td>{{ $user->active }}</td>
                                         <td>
                                           
                                             <input data-id="{{$user->id}}" class="toggle-class user-change-status" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ ($user->active == 1) ? 'checked' : '' }}>

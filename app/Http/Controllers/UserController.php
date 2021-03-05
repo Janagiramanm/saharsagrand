@@ -18,6 +18,7 @@ use App\Mail\SendRegistrationOTP;
 use App\Mail\ForgotPasswordOtp;
 use App\Mail\ActivationOTP;
 use Illuminate\Validation\Rule; 
+use App\Nominee;
 
 // namespace Illuminate\Auth\Middleware;
 
@@ -200,6 +201,11 @@ class UserController extends Controller
     {
         //
         $user = User::find($id);
+
+        $isSelectedCandidate = Nominee::where('user_id','=',$id)->where('status','=',2)->first();
+        if($isSelectedCandidate){
+              return redirect('/admin/user-list')->withError('Can not delete this user. Because this user is selected candidate. Please In-Activate this user.');
+        }
         $user->delete();
         return redirect('/admin/user-list');
     }
