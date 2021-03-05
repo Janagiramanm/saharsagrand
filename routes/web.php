@@ -102,6 +102,8 @@ Route::group(['middleware' => ['auth', 'owner']], function() {
 });
 Route::resource('/election/nominees', 'NomineeController');
 
+Route::get('/user/bookings','BookingController@userBookings');
+Route::get('/user/bookings/search','BookingController@userBookings')->name('bookings.userSearch');
 Route::post('/user/voting','PollingController@store');
 Route::resource('/user/polling','PollingController');
 
