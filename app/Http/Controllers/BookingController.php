@@ -158,7 +158,7 @@ class BookingController extends Controller
             return $q->where('booking_date','=',$booked_date);
         })->when($reference_code, function($q) use($reference_code){
             return $q->where('booking_code','=',$reference_code);
-        })->latest('id')->paginate(5);
+        })->where('user_id','=',$user->id)->latest('id')->paginate(5);
            $amenities =  Amenity::where('active','=',1)->get();
 
            return view('booking.userBooking',compact(['bookings','user','amenities']));
