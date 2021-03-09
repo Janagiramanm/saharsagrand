@@ -77,8 +77,19 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
+        <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p>Copyright © 2021 Sahasra Grand</p>
+                            <p>Designed and Developed by NetiApps</p>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    
 
 
 </body>

@@ -107,11 +107,7 @@
         </main>
       </div>
     </div>
-    <div class="footer py-5 ">
-    Copyright © 2021 Sahasra Grand,
-    &nbsp;&nbsp;
-Designed and Developed by NetiApps    
-</div>
+   
 
 
 </body>

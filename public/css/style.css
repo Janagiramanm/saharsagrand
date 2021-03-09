@@ -258,6 +258,14 @@ button#search-book {
     font-weight: bold;
     padding: 9px 20px;
 }
+.justify-content-center,
+.info-card-block {
+    justify-content: center !important;
+    margin-bottom: 100px;
+}
+div#accordionExample {
+    margin-bottom: 100px;
+}
 
 @media (max-width: 575.98px) {
     .user-blade .info-card {
