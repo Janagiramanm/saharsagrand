@@ -107,6 +107,7 @@ Route::resource('/election/nominees', 'NomineeController');
 Route::get('/user/bookings','BookingController@userBookings');
 Route::get('/user/bookings/search','BookingController@userBookings')->name('bookings.userSearch');
 Route::post('/user/voting','PollingController@store');
+Route::get('/user/polling/result','PollingController@getResult');
 Route::resource('/user/polling','PollingController');
 
   

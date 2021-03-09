@@ -243,3 +243,27 @@ a#forget-pwd {
 .change-your-pwd-section {
     display: none;
 }
+button#search-book {
+    border-radius: 0px 11px 11px 0px;
+}
+.info-card {
+    box-shadow: none;
+    min-height: 230px;
+    margin: auto;
+    margin-bottom: 14px;
+}
+.votes-count {
+    background: green;
+    color: white;
+    font-weight: bold;
+    padding: 9px 20px;
+}
+
+@media (max-width: 575.98px) {
+    .user-blade .info-card {
+        margin-bottom: 14px;
+    }
+    .posting-name {
+        font-size: 16px;
+    }
+}

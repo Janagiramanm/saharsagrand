@@ -20,7 +20,7 @@
 
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-12">
+                        <div class="col-md-12">
 
 
                             @if ($message = Session::get('success'))
@@ -40,14 +40,14 @@
                            <form class="form-inline" method="get"  action="{{ route('users.list') }}">
                                 <div class="row">
                                    
-                                    <div class="form-group mx-sm-2 mb-2 col-3">
+                                    <div class="form-group mx-sm-2 mb-2 col-md-3">
                                        
                                         <input type="text" placeholder="Search" class="form-control" id="search" name="search" value="{{ request()->input('search') }}">
                                     </div>
-                                        <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-1">
+                                        <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-md-1">
                                                 {{ __('Search') }}
                                             </button>
-                                    <a title="Reset" href="{{route('users.list')}}" class="form-group btn btn-group btn-outline-dark  mb-2 col-1">Reset</a>
+                                    <a title="Reset" href="{{route('users.list')}}" class="form-group btn btn-group btn-outline-dark  mb-2 col-md-1">Reset</a>
                                 </div>
                             </form>
 

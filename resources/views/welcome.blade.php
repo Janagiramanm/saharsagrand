@@ -72,6 +72,9 @@
                                 <a href="/user/polling" >Vote</a>
                             </div>
                             <div class="button">
+                                <a href="/user/polling/result" >Results</a>
+                            </div>
+                            <div class="button">
                                   <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

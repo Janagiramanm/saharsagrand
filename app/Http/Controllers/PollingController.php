@@ -120,5 +120,42 @@ class PollingController extends Controller
         //
     }
 
+    public function getResult(){
+
+        
+        $winners = [];
+        $candidates = Nominee::where('status','=',2)->orderBy('posting_id','ASC')->get();
+        if($candidates){
+            foreach($candidates as $nominee){
+                $result[$nominee->posting->name][$nominee->user_id] = Polling::where('vote','=',$nominee->user_id)->get()->count();
+            }
+        }
+        if($result){
+           
+            foreach($result as $key =>  $value){
+                $winners[$key] = $this->largest($result[$key]);
+               
+            }
+        }
+        return view('polling.result',compact(['candidates','winners']));
+       
+        
+    }
+
+    public function largest($arr)
+    {
+        $i = 0;
+        foreach($arr as $key => $val){
+            if($i == 0){
+                $max = $val;
+                $win = $key;
+            }
+            if ($val > $max)
+                 $win = $key;
+          $i++;
+        }
+         return $win;
+    }   
+
     
 }

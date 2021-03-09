@@ -13,7 +13,7 @@
                     @endif
                     
                         
-                            <div class="col-md-6 col-sm-12 col-lg-3">
+                            <div class="col-md-3 col-sm-12 col-lg-3">
                                 <div class="info-card active">
                                     <!-- <label for="" class="heading-lbl"> {{ $candidate->posting->name}} </label> -->
                                     <div class="candidate-img">
