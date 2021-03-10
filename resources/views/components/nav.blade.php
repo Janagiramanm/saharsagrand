@@ -80,7 +80,7 @@
                   <div class="dropdown-menu  <?php if(\Request::is('admin/election*')){ echo 'show'; } ?>" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item  <?php if(\Request::is('admin/election/postings*')){ echo 'active'; } ?>" href="/admin/election/postings">Postings</a>
                     <a class="dropdown-item  <?php if(\Request::is('admin/election/nominees*')){ echo 'active'; } ?>" href="/admin/election/nominees">Nominees</a>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item  <?php if(\Request::is('admin/election/settings*')){ echo 'active'; } ?>" href="/admin/election/settings">Settings</a>
                   </div>
                 </li>
              

@@ -28,11 +28,11 @@
                      <div class="filter_form">
                            <form class="form-inline"  action="{{ route('bookings.userSearch') }}">
                                 <div class="row">
-                                <div class="form-group mx-sm-2 mb-2  col-3">
+                                <div class="form-group mx-sm-2 mb-2  col-md-3">
                                        <input class="form-control" type="text" name="reference_code" id="reference_code" placeholder="Reference Code" value="{{ old('reference_code')}}" />
                                         
                                     </div>
-                                    <div class="form-group mx-sm-2 mb-2 col-3" >
+                                    <div class="form-group mx-sm-2 mb-2 col-md-3" >
                                         <select class="form-control" name="amenity_id" id="amenity_name_filter" >
                                               <option value="">Select Amenity</option>
                                               @if($amenities)
@@ -43,16 +43,16 @@
                                          </select> 
                                     </div>
                                     
-                                    <div class="form-group mx-sm-2 mb-2 col-3" id="sandbox-container">
+                                    <div class="form-group mx-sm-2 mb-2 col-md-3" id="sandbox-container">
                                                 <input class="form-control" type="date" id="book_date" name="book_date"
                                                     value="{{ date('d-m-Y')}}"
                                                     min="2021-01-01" max="2021-12-31">
                                             </div>
                                        
-                                            <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-1">
+                                            <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-md-2">
                                                 {{ __('Search') }}
                                             </button>
-                                    <a title="Reset" href="{{route('bookings.userSearch')}}" class="form-group btn btn-group btn-outline-dark  mb-2 col-1">Reset</a>
+                                    <a title="Reset" href="{{route('bookings.userSearch')}}" class="form-group btn btn-group btn-outline-dark  mb-2 col-md-2">Reset</a>
                                     </div>
                                    
                                     

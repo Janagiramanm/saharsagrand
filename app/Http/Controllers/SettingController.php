@@ -3,15 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Block;
-use App\Flat;
-use App\Amenity;
-use App\Ticker;
 use App\Setting;
-use Carbon\Carbon;
-use Session;
 
-class SiteController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,36 +14,8 @@ class SiteController extends Controller
      */
     public function index()
     {
-       
-        $blocks = Block::All();
-        $amenities = Amenity::where('active','=',1)->get();
-        $tickers =  Ticker::where(function($q){
-                    $q->where(function($q){
-                        $q->whereNull('start_date')
-                          ->whereNull('end_date');
-                    })->orWhere(function($q){
-                        $q->where('start_date', '<=', Carbon::now()->format('Y-m-d'))
-                          ->where('end_date', '>=', Carbon::now()->format('Y-m-d'));
-                    });
-            })->where('active','=',1)->get();
-        Session::put('tickers', $tickers);
         $settings = Setting::all();
-        $currentDate = date('Y-m-d');
-        if($settings){
-            foreach($settings as $setting){
-                // echo '<pre>';
-                $start_date = date('Y-m-d', strtotime($setting->start_date));
-                $end_date = date('Y-m-d', strtotime($setting->end_date));
-                if (($currentDate >= $start_date) && ($currentDate <= $end_date)){
-                       $setup[$setting->name] = 'true';
-                }else{
-                    $setup[$setting->name] = 'false';
-                }
-            }
-            
-        }
-        return view('welcome', compact(['blocks','amenities','tickers','setup']));
-
+        return view('settings.index',compact(['settings']));
     }
 
     /**
@@ -59,7 +25,8 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+        $settings = Setting::all();
+        return view('settings.create',compact(['settings']));
     }
 
     /**
@@ -70,7 +37,24 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         
+        $input = $request->input();
+        $setting = Setting::all();
+        if($setting){
+            Setting::truncate();
+        }
+        
+        foreach($input as $key => $value){
+            if($key != '_token'){
+                $setting = new Setting();
+                $setting->name = $key;
+                $setting->start_date = $value['start_date'];
+                $setting->end_date = $value['end_date'];
+                $setting->save();
+            }
+        }
+        return redirect( route('settings.index'))->withSuccess('Setting added successfully!'); 
+       
     }
 
     /**
@@ -92,7 +76,8 @@ class SiteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $settings = Setting::all();
+        return view('settings.create',compact(['settings']));
     }
 
     /**

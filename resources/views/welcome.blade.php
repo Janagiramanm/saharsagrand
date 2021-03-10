@@ -68,12 +68,17 @@
                                 <a data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="#" >Change Password</a>
                             </div>
                             @endif
-                            <div class="button">
-                                <a href="/user/polling" >Vote</a>
-                            </div>
+
+                            @if($setup['polling'] == 'true')
+                                <div class="button">
+                                    <a href="/user/polling" >Vote</a>
+                                </div>
+                            @endif
+                            @if($setup['result'] == 'true')
                             <div class="button">
                                 <a href="/user/polling/result" >Results</a>
                             </div>
+                            @endif
                             <div class="button">
                                   <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

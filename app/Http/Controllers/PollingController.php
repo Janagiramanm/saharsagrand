@@ -131,10 +131,8 @@ class PollingController extends Controller
             }
         }
         if($result){
-           
-            foreach($result as $key =>  $value){
+           foreach($result as $key =>  $value){
                 $winners[$key] = $this->largest($result[$key]);
-               
             }
         }
         return view('polling.result',compact(['candidates','winners']));
