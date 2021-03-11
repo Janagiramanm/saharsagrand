@@ -52,7 +52,7 @@ class BookingController extends Controller
             return response()->json( [
                 'status' => 0,
                 'message' => 'Already booked this amenity today.',
-             ],200);
+             ],409);
         }
 
        $timeSlots = $request->input('timeSlots');
