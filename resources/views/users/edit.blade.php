@@ -99,7 +99,7 @@
                                     <span id="res_message"></span>
                                     </div>
                                     <div class="form-group">
-                                    <button type="submit" id="user-reg-submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" id="user-reg-submit" class="btn btn-success">Update</button>
                                     <input type="button" data-bs-toggle="modal" data-bs-target="#deleteConfirm" value="Delete" class="btn btn-danger" />   
                                 </div>
 

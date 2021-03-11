@@ -146,7 +146,7 @@
                             <div class="col-md-12">
                                 <form id="login_form" method="post" action="javascript:void(0)">
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                        <label for="exampleInputEmail1" class="form-label">Email / Mobile </label>
                                         <input type="text" name="username" id="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                     
                                     </div>
