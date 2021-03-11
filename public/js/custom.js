@@ -596,8 +596,14 @@ $(document).ready(function(){
             return false;
           });
 
-        $().on('click',function(e){
+       
 
+        // $('.modal').on('hidden', function () {
+        //     window.location.reload(true);
+        // })
+
+        $(".btn-close").on('click',function(){
+            window.location.reload(true);
         })
 
 });
