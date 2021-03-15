@@ -34,13 +34,13 @@
                                                     <label>Start Date</label>
                                                     <input class="form-control" type="date" id="{{$setting->name}}_start_date" name="{{$setting->name}}[start_date]" 
                                                         value="{{ date('Y-m-d',strtotime($setting->start_date)) }}"
-                                                        min="{{ date('Y-m-d') }}" max="{{ date('Y-12-31') }}" />
+                                                        min="{{ $setting->start_date ? date('Y-m-d',strtotime($setting->start_date)) : date('Y-m-d') }}" max="{{ date('Y-12-31') }}" />
                                             </div>
                                             <div class="form-group col-md-4 mt-3">
                                                 <label>End Date</label>
                                                 <input class="form-control" type="date" id="{{$setting->name}}_end_date" name="{{$setting->name}}[end_date]"
                                                     value="{{ date('Y-m-d',strtotime($setting->end_date)) }}"
-                                                    min="{{ date('Y-m-d') }}" max="{{ date('Y-12-31') }}" />
+                                                    min="{{ $setting->end_date ? date('Y-m-d',strtotime($setting->end_date)) : date('Y-m-d') }}" max="{{ date('Y-12-31') }}" />
                                             </div>
                                     </div>
                                  

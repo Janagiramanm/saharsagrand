@@ -8,42 +8,10 @@
 
        <div >Election Results</div>
 
-       <div class="row">
-                @foreach($winners as $key => $value)
-                        @php
-                            $user = App\User::find($value);
-                            $photo = App\Nominee::where('user_id','=',$value)->first()->photo;
-                            
-                        @endphp
-                        <div class="col-md-6">
-                            <div class="info-card  col-md-6 active">
-                                <div class="test rounded-circle">
-                                    <!-- <img class="photo" src="{{URL::to('/images/nominees/'.$photo)}}"/> -->
-                                </div>
-                            </div>
-                        </div>
-                            <!-- <div class="circular--landscape">
-                                <img class="photo" src="{{URL::to('/images/nominees/'.$photo)}}"/>
-                            </div> -->
-                            <!-- <div class="col-md-6">
-                                <div for="" class="posting-name"> {{ ucwords($key) }} Candidate </div>
-                                <div class="info-card  col-md-6 active">
-                                    
-                                   
-                                    <div class="candidate-name">
-                                        {{ $user->name }}
-                                    </div>
-                                    
-                                </div>
-                            </div> -->
-                @endforeach
-           <!-- <div class="circular--landscape">
-                <img src="images/barack-obama.png" />
-            </div> -->
-       </div>
+       
 
 
-        <!-- <div class="accordion" id="accordionExample">
+        <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -123,10 +91,10 @@
                         </div>
                     </div>
                     
-        </div> -->
+        </div>
 
         <style>
-/* .candidate-img {
+.candidate-img {
     height: 140px;
     width: 150px;
 }
@@ -143,29 +111,8 @@
     text-align: center;
     font-weight: bolder;
     font-size: 22px;
-} */
-.info-card{
-    padding:22px !important;
-}
-.test {
-  width: 200px;
-  height: 200px;
-  background-color: yellow;
-}
-.circular--landscape {
-  display: inline-block;
-  position: relative;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 50%;
 }
 
-.circular--landscape img {
-  width: auto;
-  height: 100%;
-  margin-left: -50px;
-}
 
 </style>
 
