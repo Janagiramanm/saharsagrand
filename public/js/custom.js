@@ -302,6 +302,9 @@ $(document).ready(function(){
                         success: function( response ) {
                             if(response.status == 1){
                                 $(".confirm-success").text('Password changed successfully');
+                                setTimeout(function(){
+                                    window.location.reload();
+                                },1000)
                               
                             }
                         }

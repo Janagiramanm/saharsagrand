@@ -40,13 +40,13 @@
                                         <label>Start Date</label>
                                         <input class="form-control" type="date" id="start_date" name="start_date"
                                             value="{{ $ticker->start_date }}"
-                                            min="2021-01-01" max="2021-12-31"  />
+                                            min="{{ date('Y-m-d') }}" max="{{ date('Y-12-31') }}"  />
                                     </div>
                                     <div class="form-group col-4 mt-3">
                                         <label>End Date</label>
                                         <input class="form-control" type="date" id="end_date" name="end_date"
                                             value="{{ $ticker->end_date }}"
-                                            min="2021-01-01" max="2021-12-31" />
+                                            min="{{ date('Y-m-d') }}" max="{{ date('Y-12-31') }}" />
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

@@ -253,11 +253,11 @@
                     <div class="col-md-12">
                         <form id="login_form" method="post" action="javascript:void(0)">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Password</label>
+                                <label for="exampleInputEmail1" class="form-label">New Password</label>
                                 <input type="password" name="change_password" id="change_password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                                 <input type="password" name="confirm_password" id="confirm_password" class="form-control" id="exampleInputPassword1">
                             </div>
                            

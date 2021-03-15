@@ -42,13 +42,22 @@
                                 </tr>
                                 @php
                                     $index = $tickers->firstItem()
-                                    @endphp
+                                    
+                                @endphp
                                 @foreach ($tickers as $ticker)
                                     <tr>
                                         <td>{{ $index++ }}</td>
                                         <td style="width:770px;">{{ strip_tags($ticker->ticker_news) }}</td>
-                                        <td>{{ $ticker->start_date }}</td>
-                                        <td>{{ $ticker->end_date }}</td>
+                                        <td>
+                                        @if($ticker->start_date != NULL)
+                                        {{ date('d-m-Y',strtotime($ticker->start_date)) }}
+                                        @endif
+                                        </td>
+                                        <td>
+                                        @if($ticker->end_date != NULL )
+                                        {{ date('d-m-Y',strtotime($ticker->end_date)) }}
+                                        @endif
+                                        </td>
                                         <td>
                                             <div class="btn-group">
                                             <a title="Edit" href="{{ route('ticker.edit',$ticker->id)}}" class="btn btn-secondary btn-sm">Edit</a>

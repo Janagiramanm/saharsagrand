@@ -58,7 +58,7 @@
                                     <div class="form-group mx-sm-2 mb-2 col-3" id="sandbox-container">
                                                 <input class="form-control" type="date" id="book_date" name="book_date"
                                                     value="{{ date('d-m-Y')}}"
-                                                    min="date('Y-m-d')" max="2021-12-31">
+                                                    min="date('Y-m-d')" max="date('Y-12-31')">
                                             </div>
                                        
                                             <button type="submit" class="form-group btn btn-primary mr-3 mb-2 col-1">
@@ -94,7 +94,7 @@
                                 <td>{{ $index++ }}</td>
                                 <td>{{ $booking->user->name }}</td>
                                 <td>{{ $booking->amenity->name }}</td>
-                                <td>{{ $booking->booking_date }}</td>
+                                <td>{{ date('d-m-Y',strtotime($booking->booking_date)) }}</td>
                                 <td>{{ $booking->start_time }}</td>
                                 <td>{{ $booking->end_time }}</td>
                                 <td>{{ $booking->total_guests }}</td>

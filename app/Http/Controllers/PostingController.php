@@ -87,7 +87,7 @@ class PostingController extends Controller
         $posting = Posting::find($id);
         $posting->name = $request->input('name');
         $posting->save();
-        return redirect( route('postings.index'))->withSuccess('Posting added successfully!');
+        return redirect( route('postings.index'))->withSuccess('Posting Updated Successfully!');
     }
 
     /**
