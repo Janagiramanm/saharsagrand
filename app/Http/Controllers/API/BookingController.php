@@ -213,7 +213,10 @@ class BookingController extends Controller
                                 }
                             }
                         }
-                }  
+                } 
+                if($isFullDayEvent){
+                    $result[$key]['available'] = false;
+                }
             }
             $result[$key]['timeSlots'] = $timeslots;
         }  
