@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-group col-4 mt-3">
                                         <label>End Date</label>
-                                        <input class="form-control" type="date" id="end_date" name="end_date"
+                                        <input class="form-control" type="date" id="end_date" name="end_date" placeholder="dd/mm/YYYY"
                                             value="{{ date('d-m-Y')}}"
                                             min="{{ date('Y-m-d') }}" max="{{ date('Y-12-31') }}" />
                                     </div>

@@ -131,29 +131,34 @@ class PollingController extends Controller
             }
         }
         if($result){
-           foreach($result as $key =>  $value){
-                $winners[$key] = $this->largest($result[$key]);
+            foreach($result as $key =>  $value){
+               
+                $val = max($value);
+                if(count(array_keys($value, $val)) == 1 ){
+                      $winners[$key] = array_search($val, $result[$key]);
+                }else{
+                    $winners[$key] = 'die';
+                }
             }
         }
-        return view('polling.result',compact(['candidates','winners']));
-       
+        return view('polling.pie',compact(['result','winners']));
         
     }
 
-    public function largest($arr)
-    {
-        $i = 0;
-        foreach($arr as $key => $val){
-            if($i == 0){
-                $max = $val;
-                $win = $key;
-            }
-            if ($val > $max)
-                 $win = $key;
-          $i++;
-        }
-         return $win;
-    }   
+    // public function largest($arr)
+    // {
+    //     $i = 0;
+    //     foreach($arr as $key => $val){
+    //         if($i == 0){
+    //             $max = $val;
+    //             $win = $key;
+    //         }
+    //         if ($val > $max)
+    //              $win = $key;
+    //       $i++;
+    //     }
+    //      return $win;
+    // }   
 
     
 }
