@@ -73,7 +73,7 @@
                 </script>
               </div>
               <div class="col-md-4">
-                 <div class="">
+                 <div class="img-sec">
                  
                   @php
                           $photo ='';
@@ -161,6 +161,11 @@
   object-fit: cover;
     height: 100%;
     width: 100%;
+}
+.img-sec{
+    width: 80%;
+    text-align: center;
+    margin: auto;
 }
 </style>
 @endsection
