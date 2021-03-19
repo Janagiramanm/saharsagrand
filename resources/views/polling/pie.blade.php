@@ -40,7 +40,8 @@
                     //           width: '94%'
                     //         },
                     //         legend: {
-                    //           position: 'top'
+                    //           position: 'top',
+                    //           text: "{name} ( {y} votes ) ",
                     //         },
                     //         width: '100%',
                     //         height: '400',
@@ -62,15 +63,10 @@
                     var options = {
                             width: '100%',
                             height: '200',
-                            colors: ['red','green', 'purple'],
+                            colors: ['purple','green', 'purple'],
                      };
                     var chart = new google.visualization.BarChart(document.getElementById('{{$key}}'));
-                      
-
-                      
-
                     
-                     
 
                       chart.draw(data, options);
                     }
