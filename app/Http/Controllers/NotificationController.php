@@ -113,7 +113,7 @@ class NotificationController extends Controller
         if($users->isNotEmpty()){
             $result = '<select id="user-selectbox" required name="user_id[]">';
             foreach($users as $user){
-                  $result .= '<option value="'.$user->id.'">'.$user->name.' - '.$user->flat->flat_number.'</option>';
+                  $result .= '<option value="'.$user->id.'">'.$user->name.' - '.( $user->flat->flat_number ? $user->flat->flat_number: '')  .'</option>';
             }
             $result .='</select>'; 
             $msg = [
