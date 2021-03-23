@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Ticker;
 use App\Booking;
+use App\User;
 use Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -26,7 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $carbon = Carbon::now();
+        $booking_date =  $carbon->format('Y-m-d');
+        $users = User::where('type','!=','superadmin')->get();
+        $bookings = Booking::where('booking_date','=',$booking_date)->get();
+        return view('home',compact(['users','bookings']));
     }
 
     /**

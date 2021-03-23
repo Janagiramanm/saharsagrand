@@ -12,7 +12,7 @@
                 <main>
                     @php
                         $user = \Illuminate\Support\Facades\Auth::user();
-                    @endphp
+                   @endphp
                   
 
 
@@ -31,14 +31,14 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="dash-block-card" >
-                                    <h2>10</h2>
+                                    <h2><a href="/admin/bookings" >{{ $bookings->count() }}</a></h2>
                                     <p>Bookings</p>
                                 </div>
                             </div>
                            
                             <div class="col-md-3">
                                 <div class="dash-block-card" >
-                                    <h2>40</h2>
+                                    <h2><a href="/admin/user-list" > {{ $users->count() }} </a></h2>
                                     <p>Total Users</p>
                                 </div>
                             </div>
