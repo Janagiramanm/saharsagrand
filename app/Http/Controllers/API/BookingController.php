@@ -137,6 +137,9 @@ class BookingController extends Controller
             $advance_book = $amenity->advance_book - 1;
         }
 
+        // echo '<pre>';
+        // print_r($times);
+        // exit;
         
         $carbon = Carbon::now();
        
@@ -236,7 +239,7 @@ class BookingController extends Controller
         $AddMins  = $Duration * 60;
         while ($StartTime <= $EndTime) //Run loop
         {
-            $ReturnArray[] = date ("h:i", $StartTime).'-'.date ("h:i",$StartTime += $AddMins);
+            $ReturnArray[] = date ("h:i A", $StartTime).'-'.date ("h:i A",$StartTime += $AddMins);
         }
         return $ReturnArray;
     }
