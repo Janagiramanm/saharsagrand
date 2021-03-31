@@ -62,8 +62,8 @@ class BookingController extends Controller
        $booking->amenity_id = $request->input('bookingType');
        $booking->booking_date = $request->input('selectedDate');
        if($timeSlots != null){
-            $booking->start_time = $timeSlots['startTime'];
-            $booking->end_time = $timeSlots['endTime'];
+            $booking->start_time = date('h:i',strtotime($timeSlots['startTime']));
+            $booking->end_time = date('h:i',strtotime($timeSlots['endTime']));
        }
        $booking->user_id = $user->id;
        $booking->total_guests = $request->input('totalGuests');
