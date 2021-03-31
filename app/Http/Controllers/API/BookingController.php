@@ -186,11 +186,11 @@ class BookingController extends Controller
                             $available = true;
                             $time = explode('-',$time);
                             if($current_date == $value){
-                                      //echo strtotime($time[0])."===".$current_time."==".strtotime($time[1])."<br>";
+                                if($current_date == $value){
                                     if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
-                                        //echo "yescoming";
-                                        $available = false;
+                                      $available = false;
                                     }
+                                } 
                             } 
                             $timeslots[] = [
                                                 'startTime' => $time[0],
@@ -254,20 +254,6 @@ class BookingController extends Controller
         $StartTime    = strtotime ($StartTime); //Get Timestamp
         $EndTime      = strtotime ($EndTime); //Get Timestamp
 
-       
-
-
-        // echo 'diff=>'.$diff =  $carbon->toDateString(); 
-        // echo 'diff=>'.$diff =  $carbon->diffInDays($date); 
-        // $date = Carbon::parse($date);
-        // $now = Carbon::now();
-        // echo 'diff==>'.$diff = $date->diffInDays($now);
-        // echo 'Current Date ='. $current_date."====".$date."<br>";
-
-        //    $datee = $date->;
-        //   if($datee == $current_date){
-        //       echo 'YEESS';
-        //   }
         $AddMins  = $Duration * 60;
         while ($StartTime <= $EndTime) //Run loop
         {
