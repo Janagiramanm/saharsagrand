@@ -172,17 +172,30 @@ class BookingController extends Controller
             ->where('booking_date','=',$value)
             ->get();
 
+            $carbon = Carbon::now();
+            $current_date =  $carbon->format('Y-m-d');
+            $current_time = strtotime($carbon->format('h:i A'));
+            
+
 
             if($bookings->isEmpty()){
                
                 if(!$isFullDayEvent){
                         unset($timeslots);
                         foreach($timeSlots as $timeKey => $time){
+                            $available = true;
                             $time = explode('-',$time);
+                            if($current_date == $value){
+                                      //echo strtotime($time[0])."===".$current_time."==".strtotime($time[1])."<br>";
+                                    if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
+                                        //echo "yescoming";
+                                        $available = false;
+                                    }
+                            } 
                             $timeslots[] = [
                                                 'startTime' => $time[0],
                                                 'endTime'=>$time[1],
-                                                'available'=> true,
+                                                'available'=> $available,
                                                 'maxPersonsAllowed'=> $availablePerson,
                                                 'currentPersonsBooked'=> 0
                             ];
@@ -203,6 +216,11 @@ class BookingController extends Controller
                                     }else{
                                         $available = false;
                                     }
+                                    if($current_date == $value){
+                                        if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
+                                          $available = false;
+                                        }
+                                    } 
                                     
                                     $availPerson = $availablePerson - $booking->total_guests;
                                     $timeslots[] = [
@@ -235,11 +253,25 @@ class BookingController extends Controller
         $ReturnArray = array ();// Define output
         $StartTime    = strtotime ($StartTime); //Get Timestamp
         $EndTime      = strtotime ($EndTime); //Get Timestamp
-    
+
+       
+
+
+        // echo 'diff=>'.$diff =  $carbon->toDateString(); 
+        // echo 'diff=>'.$diff =  $carbon->diffInDays($date); 
+        // $date = Carbon::parse($date);
+        // $now = Carbon::now();
+        // echo 'diff==>'.$diff = $date->diffInDays($now);
+        // echo 'Current Date ='. $current_date."====".$date."<br>";
+
+        //    $datee = $date->;
+        //   if($datee == $current_date){
+        //       echo 'YEESS';
+        //   }
         $AddMins  = $Duration * 60;
         while ($StartTime <= $EndTime) //Run loop
         {
-            $ReturnArray[] = date ("h:i A", $StartTime).'-'.date ("h:i A",$StartTime += $AddMins);
+                $ReturnArray[] = date ("h:i A", $StartTime).'-'.date ("h:i A",$StartTime += $AddMins);
         }
         return $ReturnArray;
     }
