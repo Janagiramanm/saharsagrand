@@ -30,7 +30,8 @@ class HomeController extends Controller
     {
         $carbon = Carbon::now();
         $booking_date =  $carbon->format('Y-m-d');
-        $users = User::where('type','!=','superadmin')->get();
+        $users = User::where('type','!=','superadmin')
+                ->where('mobile_verified_at', '!=', "")->get();
         $bookings = Booking::where('booking_date','=',$booking_date)->get();
         return view('home',compact(['users','bookings']));
     }
