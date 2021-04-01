@@ -172,6 +172,10 @@ class BookingController extends Controller
             ->where('booking_date','=',$value)
             ->get();
 
+            // echo '<pre>';
+            // print_r($bookings);
+            //exit;
+
             $carbon = Carbon::now();
             $current_date =  $carbon->format('Y-m-d');
             $current_time = strtotime($carbon->format('h:i A'));
@@ -211,16 +215,17 @@ class BookingController extends Controller
                                     $time = explode('-',$time);
                                     $start_time = substr($booking->start_time, 0, 5);
                                     $end_time = substr($booking->end_time, 0, 5);
-                                    if($start_time != $time[0] && $end_time != $time[1]){
+                                    
+                                    if($start_time != date('h:i',strtotime($time[0])) && $end_time != date('h:i',strtotime($time[1]))){
                                         $available = true;
                                     }else{
                                         $available = false;
                                     }
-                                    // if($current_date == $value){
-                                    //     if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
-                                    //       $available = false;
-                                    //     }
-                                    // } 
+                                    if($current_date == $value){
+                                        if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
+                                          $available = false;
+                                        }
+                                    } 
                                     
                                     $availPerson = $availablePerson - $booking->total_guests;
                                     $timeslots[] = [
