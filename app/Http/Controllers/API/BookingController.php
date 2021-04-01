@@ -51,7 +51,7 @@ class BookingController extends Controller
         if($isBookingExist){
             return response()->json( [
                 'status' => 0,
-                'message' => 'Already booked this amenity today.',
+                'message' => 'Already booked this amenity ' .$request->input('selectedDate'),
              ],409);
         }
 
@@ -185,13 +185,13 @@ class BookingController extends Controller
                         foreach($timeSlots as $timeKey => $time){
                             $available = true;
                             $time = explode('-',$time);
+                            
                             if($current_date == $value){
-                                if($current_date == $value){
-                                    if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
-                                      $available = false;
-                                    }
-                                } 
+                                if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
+                                    $available = false;
+                                }
                             } 
+                           
                             $timeslots[] = [
                                                 'startTime' => $time[0],
                                                 'endTime'=>$time[1],
@@ -216,11 +216,11 @@ class BookingController extends Controller
                                     }else{
                                         $available = false;
                                     }
-                                    if($current_date == $value){
-                                        if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
-                                          $available = false;
-                                        }
-                                    } 
+                                    // if($current_date == $value){
+                                    //     if ($current_time > strtotime($time[0]) && $current_time  > strtotime($time[1])  ) {
+                                    //       $available = false;
+                                    //     }
+                                    // } 
                                     
                                     $availPerson = $availablePerson - $booking->total_guests;
                                     $timeslots[] = [
